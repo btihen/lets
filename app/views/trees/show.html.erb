@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plot name:</strong>
+  <%= @tree.plot_name %>
+</p>
+
+<p>
+  <strong>Species code:</strong>
+  <%= @tree.species_code %>
+</p>
+
+<p>
+  <strong>Circumfrence bh cm:</strong>
+  <%= @tree.circumfrence_bh_cm %>
+</p>
+
+<p>
+  <strong>Elevation meters:</strong>
+  <%= @tree.elevation_meters %>
+</p>
+
+<p>
+  <strong>Measurement date:</strong>
+  <%= @tree.measurement_date %>
+</p>
+
+<%= link_to 'Edit', edit_tree_path(@tree) %> |
+<%= link_to 'Back', trees_path %>

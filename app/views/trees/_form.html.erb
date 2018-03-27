@@ -1,0 +1,42 @@
+<%= form_with(model: tree, local: true) do |form| %>
+  <% if tree.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tree.errors.count, "error") %> prohibited this tree from being saved:</h2>
+
+      <ul>
+      <% tree.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :plot_name %>
+    <%= form.text_field :plot_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :species_code %>
+    <%= form.text_field :species_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :circumfrence_bh_cm %>
+    <%= form.number_field :circumfrence_bh_cm %>
+  </div>
+
+  <div class="field">
+    <%= form.label :elevation_meters %>
+    <%= form.number_field :elevation_meters %>
+  </div>
+
+  <div class="field">
+    <%= form.label :measurement_date %>
+    <%= form.date_select :measurement_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
