@@ -69,6 +69,6 @@ class TreesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tree_params
-      params.require(:tree).permit(:plot_name, :species_code, :circumfrence_bh_cm, :elevation_meters, :measurement_date)
+      params.require(:tree).permit(:plot_name, :plot_latitude, :plot_longitude, :species, :circumfrence_cm, :measurement_date)
     end
 end

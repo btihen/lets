@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_27_161044) do
+ActiveRecord::Schema.define(version: 2018_03_28_165751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "trees", force: :cascade do |t|
     t.string "plot_name"
-    t.string "species_code"
-    t.integer "circumfrence_bh_cm"
-    t.integer "elevation_meters"
-    t.date "measurement_date"
+    t.decimal "plot_latitude", precision: 10, scale: 7, null: false
+    t.decimal "plot_longitude", precision: 10, scale: 7, null: false
+    t.string "species", null: false
+    t.integer "circumfrence_cm", null: false
+    t.date "measurement_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["plot_latitude", "plot_longitude"], name: "index_trees_on_plot_latitude_and_plot_longitude"
   end
 
 end
