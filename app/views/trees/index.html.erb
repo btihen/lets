@@ -5,12 +5,12 @@
 <table>
   <thead>
     <tr>
-      <th>Plot name</th>
-      <th>Plot latitude</th>
-      <th>Plot longitude</th>
-      <th>Species code</th>
-      <th>Circumfrence bh cm</th>
+      <th>subquadrat</th>
+      <th>Tree number</th>
+      <th>Species</th>
+      <th>Circumfrence cm</th>
       <th>Measurement date</th>
+      <th>Plot</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,12 +18,12 @@
   <tbody>
     <% @trees.each do |tree| %>
       <tr>
-        <td><%= tree.plot_name %></td>
-        <td><%= tree.plot_latitude %></td>
-        <td><%= tree.plot_longitude %></td>
+        <td><%= tree.subquadrat %></td>
+        <td><%= tree.tree_number %></td>
         <td><%= tree.species %></td>
         <td><%= tree.circumfrence_cm %></td>
         <td><%= tree.measurement_date %></td>
+        <td><%= tree.plot %></td>
         <td><%= link_to 'Show', tree %></td>
         <td><%= link_to 'Edit', edit_tree_path(tree) %></td>
         <td><%= link_to 'Destroy', tree, method: :delete, data: { confirm: 'Are you sure?' } %></td>

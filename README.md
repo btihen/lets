@@ -9,6 +9,16 @@ http://lets-study.ch/lets-day-resources/measurement-protocols/plot-layout-proces
 
 https://docs.google.com/spreadsheets/d/1BsWKkM5g7P61u5PH2lzHftrtuqCwGOGtQYU8SHVJHrk/edit?ts=5aba4fee#gid=1235084934
 
+```
+# data munging
+
+# remove "°" - degree symbol
+cat LETS_Master_Data.csv | cut -d',' -f1,7-9 | sort | uniq | sed 's/°//g' > LETS_Plots_Data.csv
+
+# remove decimals & "+" from data
+cat LETS_Master_Data.csv | cut -d',' -f1-5,10 | sed 's/\.[0-9],/,/g' | sed 's/\+//' > LETS_Tree_Data.csv
+```
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

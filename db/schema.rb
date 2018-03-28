@@ -10,21 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_28_165751) do
+ActiveRecord::Schema.define(version: 2018_03_28_182943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "trees", force: :cascade do |t|
-    t.string "plot_name"
-    t.decimal "plot_latitude", precision: 10, scale: 7, null: false
-    t.decimal "plot_longitude", precision: 10, scale: 7, null: false
-    t.string "species", null: false
-    t.integer "circumfrence_cm", null: false
-    t.date "measurement_date", null: false
+  create_table "plots", force: :cascade do |t|
+    t.string "plot_name", null: false
+    t.string "plot_code", null: false
+    t.integer "elevation_m", null: false
+    t.decimal "latitude", precision: 12, scale: 8, null: false
+    t.decimal "longitude", precision: 12, scale: 8, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["plot_latitude", "plot_longitude"], name: "index_trees_on_plot_latitude_and_plot_longitude"
+    t.index ["latitude", "longitude"], name: "index_plots_on_latitude_and_longitude"
   end
 
+  create_table "trees", force: :cascade do |t|
+    t.string "subquadrat"
+    t.integer "tree_number"
+    t.string "species", null: false
+    t.integer "circumfrence_cm"
+    t.date "measurement_date", null: false
+    t.bigint "plot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circumfrence_cm"], name: "index_trees_on_circumfrence_cm"
+    t.index ["measurement_date"], name: "index_trees_on_measurement_date"
+    t.index ["plot_id"], name: "index_trees_on_plot_id"
+    t.index ["species"], name: "index_trees_on_species"
+  end
+
+  add_foreign_key "trees", "plots"
 end

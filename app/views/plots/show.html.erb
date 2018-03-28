@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plot name:</strong>
+  <%= @plot.plot_name %>
+</p>
+
+<p>
+  <strong>Plot code:</strong>
+  <%= @plot.plot_code %>
+</p>
+
+<p>
+  <strong>elevation_m:</strong>
+  <%= @plot.elevation_m %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @plot.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @plot.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_plot_path(@plot) %> |
+<%= link_to 'Back', plots_path %>

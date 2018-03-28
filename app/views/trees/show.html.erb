@@ -1,33 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Plot name:</strong>
-  <%= @tree.plot_name %>
+  <strong>subquadrat:</strong>
+  <%= @tree.subquadrat %>
 </p>
 
 <p>
-  <strong>Plot latitude:</strong>
-  <%= @tree.plot_latitude %>
+  <strong>Tree number:</strong>
+  <%= @tree.tree_number %>
 </p>
 
 <p>
-  <strong>Plot longitude:</strong>
-  <%= @tree.plot_longitude %>
-</p>
-
-<p>
-  <strong>Species code:</strong>
+  <strong>Species:</strong>
   <%= @tree.species %>
 </p>
 
 <p>
-  <strong>Circumfrence bh cm:</strong>
+  <strong>Circumfrence cm:</strong>
   <%= @tree.circumfrence_cm %>
 </p>
 
 <p>
   <strong>Measurement date:</strong>
   <%= @tree.measurement_date %>
+</p>
+
+<p>
+  <strong>Plot:</strong>
+  <%= @tree.plot %>
 </p>
 
 <%= link_to 'Edit', edit_tree_path(@tree) %> |

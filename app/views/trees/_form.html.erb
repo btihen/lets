@@ -12,18 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :plot_name %>
-    <%= form.text_field :plot_name %>
+    <%= form.label :subquadrat %>
+    <%= form.text_field :subquadrat %>
   </div>
 
   <div class="field">
-    <%= form.label :plot_latitude %>
-    <%= form.text_field :plot_latitude %>
-  </div>
-
-  <div class="field">
-    <%= form.label :plot_longitude %>
-    <%= form.text_field :plot_longitude %>
+    <%= form.label :tree_number %>
+    <%= form.number_field :tree_number %>
   </div>
 
   <div class="field">
@@ -39,6 +34,11 @@
   <div class="field">
     <%= form.label :measurement_date %>
     <%= form.date_select :measurement_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plot_id %>
+    <%= form.text_field :plot_id %>
   </div>
 
   <div class="actions">
