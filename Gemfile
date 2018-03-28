@@ -7,6 +7,14 @@ ruby '2.5.0'
 gem 'rails', '~> 5.2.0.rc2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
+# use geo data
+# http://climber2002.github.io/blog/2014/05/18/postgis-and-google-maps-in-rails-part-1/
+# gem 'activerecord-postgis-adapter'
+# rails db:gis:setup
+# gem 'geokit-rails'
+# Generate the configuration initializer:
+# $ rails g geokit_rails:install
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
