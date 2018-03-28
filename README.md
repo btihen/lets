@@ -1,5 +1,16 @@
 # README
 
+## TODO:
+
+* add bootstrap (make a little prettier)
+* provide home page
+* export csv of data
+* sample lessons on data analysis
+* allow column sorts on tree data
+* show a basic analysis
+  - tree count at altitude by species
+  - tree circumfrence at altitude by species
+
 ### collection protocol
 
 http://lets-study.ch/lets-day-resources/measurement-protocols/plot-layout-process/

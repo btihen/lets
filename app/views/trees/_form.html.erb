@@ -1,7 +1,8 @@
 <%= form_with(model: tree, local: true) do |form| %>
   <% if tree.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(tree.errors.count, "error") %> prohibited this tree from being saved:</h2>
+      <h2><%= pluralize(tree.errors.count, "error") %>
+        prohibited this tree from being saved:</h2>
 
       <ul>
       <% tree.errors.full_messages.each do |message| %>
@@ -13,7 +14,8 @@
 
   <div class="field">
     <%= form.label :plot %>
-    <%= form.collection_select :plot_id, Plot.order(:plot_code), :id, :plot_code, include_blank: true %>
+    <%= form.collection_select :plot_id, Plot.order(:plot_code),
+                                :id, :plot_code, include_blank: true %>
   </div>
 
   <div class="field">
