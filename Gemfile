@@ -7,6 +7,11 @@ ruby '2.5.0'
 gem 'rails', '~> 5.2.0.rc2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
+
+# add some beauty
+gem 'bootstrap', '~> 4.0'
+gem 'jquery-rails'
+
 # use geo data
 # http://climber2002.github.io/blog/2014/05/18/postgis-and-google-maps-in-rails-part-1/
 # gem 'activerecord-postgis-adapter'

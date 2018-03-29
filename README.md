@@ -3,8 +3,12 @@
 ## TODO:
 
 * add bootstrap (make a little prettier)
-* provide home page
+* make landing page
+* push to heroku with data
+* add FactoryBot & basic tests
 * export csv of data
+* add paging
+* add speed (pre-loading)
 * sample lessons on data analysis
 * allow column sorts on tree data
 * show a basic analysis
