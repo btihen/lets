@@ -1,0 +1,42 @@
+<%= form_with(model: tree_plot, local: true) do |form| %>
+  <% if tree_plot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tree_plot.errors.count, "error") %> prohibited this tree_plot from being saved:</h2>
+
+      <ul>
+      <% tree_plot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :plot_name %>
+    <%= form.text_field :plot_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plot_code %>
+    <%= form.text_field :plot_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :elevation_m %>
+    <%= form.number_field :elevation_m %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

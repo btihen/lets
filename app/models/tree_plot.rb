@@ -1,0 +1,2 @@
+class TreePlot < ApplicationRecord
+end
