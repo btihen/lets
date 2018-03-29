@@ -3,7 +3,7 @@
 ## TODO:
 
 Features
-* push to heroku with data
+* remove edit, etc if not logged in
 * add some formatting beauty (margins and headers)
 * show a basic analysis (publicly available)
   - tree count at altitude by species
@@ -473,4 +473,9 @@ rails c
 # https://stackoverflow.com/questions/4316940/create-a-devise-user-from-ruby-console
 Admin.create!(email: "btihen@gmail.com", :name: "Bill Tihen", password: "secret", password_confirmation: "secret")
 exit
+```
+
+push data to heroku
+```bash
+heroku pg:backups:restore --app lets-data 'https://github.com/btihen/lets/blob/master/db/data/lets_sql_data.dump?raw=true' DATABASE_URL
 ```

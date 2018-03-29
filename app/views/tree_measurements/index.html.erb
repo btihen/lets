@@ -37,9 +37,11 @@
         <td><%= tree_measurement.tree_plot.latitude %></td>
         <td><%= tree_measurement.tree_plot.longitude %></td>
         <td><%= tree_measurement.measurement_date %></td>
-        <td><%= link_to 'Show', tree_measurement %></td>
-        <td><%= link_to 'Edit', edit_tree_measurement_path(tree_measurement) %></td>
-        <td><%= link_to 'Destroy', tree_measurement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Show', tree_measurement %></td>
+          <td><%= link_to 'Edit', edit_tree_measurement_path(tree_measurement) %></td>
+          <td><%= link_to 'Destroy', tree_measurement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
