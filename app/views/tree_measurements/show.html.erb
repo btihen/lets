@@ -22,12 +22,12 @@
 
 <p>
   <strong>Tree specy:</strong>
-  <%= @tree_measurement.tree_specy %>
+  <%= @tree_measurement.tree_specy.species_code %>
 </p>
 
 <p>
   <strong>Tree plot:</strong>
-  <%= @tree_measurement.tree_plot %>
+  <%= @tree_measurement.tree_plot.plot_code %>
 </p>
 
 <%= link_to 'Edit', edit_tree_measurement_path(@tree_measurement) %> |
