@@ -2,13 +2,11 @@
 
 ## TODO:
 
-* add bootstrap (make a little prettier)
 * make landing page
 * push to heroku with data
 * add FactoryBot & basic tests
 * export csv of data
 * add paging
-* add speed (pre-loading)
 * sample lessons on data analysis
 * allow column sorts on tree data
 * show a basic analysis
@@ -46,18 +44,24 @@ cat LETS_Master_Data.csv | cut -d',' -f1-5,10 | sed 's/\.[0-9],/,/g' | sed 's/\+
 
 ### Build Models
 
+```bash
 rails new lets --database=postgresql
+```
 
 # add postgres extensions
 #########################
+
+```ruby
 class AddExtensions < ActiveRecord::Migration[5.2]
   def change
     enable_extension :citext
     # enable_extension :postgis
   end
 end
-
+```
 # now setup the database
+
+```bash
 rails db:create
 rails db:migrate
 
@@ -65,7 +69,9 @@ rails db:migrate
 rails g scaffold tree_plot plot_name:string plot_code:citext \
                       elevation_m:integer \
                       latitude:decimal longitude:decimal
+```
 
+```ruby
 # update tree_plot db migration to be:
 class CreateTreePlots < ActiveRecord::Migration[5.2]
   def change
@@ -82,11 +88,16 @@ class CreateTreePlots < ActiveRecord::Migration[5.2]
     add_index :tree_plots, [:latitude, :longitude]
   end
 end
+```
 
+```bash
 # now add the data to the database (start rails console)
 rails db:migrate
 rails c
+```
 # COPY THE FOLLOWING INTO THE CONSOLE
+
+```ruby
 require 'csv'
 csv_plot_data = File.read(Rails.root.join('db', 'data', 'LETS_Tree_Plots.csv'))
 csv_plot = CSV.parse(csv_plot_data, :headers => true, :encoding => 'ISO-8859-1')
@@ -106,13 +117,17 @@ end
 puts "There are now #{TreePlot.count} plots"
 # to leave type
 exit
-
+```
 
 # create tree_species db table
 ##############################
+
+```bash
 rails g scaffold tree_species species_name:string species_code:citext \
                       foilage_type:citext foilage_strategy:citext seed_type:citext
+```
 
+```ruby
 # adjust migration (add index)
 class CreateTreeSpecies < ActiveRecord::Migration[5.2]
   def change
@@ -128,10 +143,14 @@ class CreateTreeSpecies < ActiveRecord::Migration[5.2]
     add_index :tree_species, :species_code, unique: true
   end
 end
-
+```
+```bash
 # now load the database
 rails db:migrate
 rails c
+```
+
+```ruby
 # copy into the console
 require 'csv'
 csv_species_data = File.read(Rails.root.join('db', 'data', 'LETS_Tree_Species.csv'))
@@ -162,15 +181,20 @@ csv_species.each do |row|
 end
 puts "There are now #{TreeSpecy.count} tree species"
 exit
+```
 
 # TREE measurements
 ###################
+```bash
 rails g scaffold tree_measurement circumfrence_cm:integer \
                       measurement_date:date \
                       subquadrat:citext \
                       tree_number:integer \
                       tree_specy:references tree_plot:references
+```
+
 # adjust db migrations
+```ruby
 class CreateTreeMeasurements < ActiveRecord::Migration[5.2]
   def change
     create_table :tree_measurements do |t|
@@ -192,11 +216,17 @@ class CreateTreeMeasurements < ActiveRecord::Migration[5.2]
                                   name: 'unique_tree_entries'
   end
 end
+```
 
 # import data
+```bash
 rails db:migrate
 rails c
+```
+
 # copy the following code:
+
+```ruby
 require 'csv'
 csv_tree_data = File.read(Rails.root.join('db', 'data', 'LETS_Tree_Measurements.csv'))
 csv_tree = CSV.parse(csv_tree_data, :headers => true, :encoding => 'ISO-8859-1')
@@ -216,13 +246,12 @@ csv_tree.each do |row|
 end
 puts "There are now #{TreeMeasurement.count} tree measurements"
 exit
-
-
 ```
 
-```ruby
 # adjust index page (to look like spreadsheet)
 #####
+```html
+# app/views/tree_measurements/index.html.erb
 <p id="notice"><%= notice %></p>
 
 <h1>Tree Measurements</h1>
@@ -268,9 +297,12 @@ exit
 <br>
 
 <%= link_to 'New Tree Measurement', new_tree_measurement_path %>
+```
+
 ##########
 # adjust show page for clarity
-##
+```html
+# app/views/tree_measurements/show.html.erb
 <p>
   <strong>Tree specy:</strong>
   <%= @tree_measurement.tree_specy.species_code %>
@@ -280,8 +312,11 @@ exit
   <strong>Tree plot:</strong>
   <%= @tree_measurement.tree_plot.plot_code %>
 </p>
+```
 ##########
 # fix tree_measurement input forms
+```html
+# app/views/tree_measurements/_form.html.erb
 <div class="field">
   <%= form.label :tree_plot_id %>
   <%= form.collection_select :tree_plot_id, TreePlot.order(:plot_code),
@@ -294,25 +329,78 @@ exit
                               :id, :species_code, include_blank: true %>
 </div>
 ```
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+### Speed tree measurements with all data
 
-* Ruby version
+```ruby
+# pre-load related data
+def index
+  @tree_measurements = TreeMeasurement.includes(:tree_plot).
+                                        includes(:tree_specy).all
+end
+```
 
-* System dependencies
+### Add CSV & JSON export
 
-* Configuration
+```ruby
+# app/models/tree_measurement.rb
+require 'csv'
 
-* Database creation
+class TreeMeasurement < ApplicationRecord
+  belongs_to :tree_specy
+  belongs_to :tree_plot
 
-* Database initialization
+  def tree_plot_code
+    tree_plot.plot_code
+  end
+  def tree_species_code
+    tree_specy.species_code
+  end
+  def tree_foilage_strategy
+    tree_specy.foilage_strategy
+  end
+  def tree_elevation_m
+    tree_plot.elevation_m
+  end
+  def tree_latitude
+    tree_plot.latitude
+  end
+  def tree_longitude
+    tree_plot.longitude
+  end
+  def self.to_csv( options={headers: true} )
+    attributes = %w{  tree_plot_code tree_species_code tree_foilage_strategy
+                      subquadrat tree_number circumfrence_cm
+                      tree_elevation_m tree_latitude tree_longitude
+                      measurement_date }
+    CSV.generate(options) do |csv|
+      csv << attributes
+      all.each do |tree|
+        csv << attributes.map{ |attr| tree.send(attr) }
+      end
+    end
+  end
+end
+```
+change the index method in the controller to:
+```ruby
+# app/controllers/tree_measurements_controller.rb
+def index
+  @tree_measurements = TreeMeasurement.includes(:tree_plot).
+                                        includes(:tree_specy).all
+  respond_to do |format|
+    format.html
+    format.json
+    format.csv { send_data @tree_measurements.to_csv,
+                      filename: "lets_tree_measurements-#{Date.today}.csv" }
+  end
+end
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+add the following links to the index page (just below the title):
+```html
+<h5>
+  <%= link_to 'CSV Download', tree_measurements_path(format: :csv) %> |
+  <%= link_to 'JSON Download', tree_measurements_path(format: :json) %>
+</h5>
+```

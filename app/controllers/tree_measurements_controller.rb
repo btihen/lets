@@ -7,6 +7,12 @@ class TreeMeasurementsController < ApplicationController
   def index
     @tree_measurements = TreeMeasurement.includes(:tree_plot).
                                           includes(:tree_specy).all
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { send_data @tree_measurements.to_csv,
+                        filename: "lets_tree_measurements-#{Date.today}.csv" }
+    end
   end
 
   # GET /tree_measurements/1
