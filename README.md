@@ -2,19 +2,21 @@
 
 ## TODO:
 
-Features
-* remove edit, etc if not logged in
+FEATURES BASICS:
 * add some formatting beauty (margins and headers)
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
+* add top bar with signout & signin
+
+FEATURES Extras:
 * allow nested attributes (for new trees and plots)
 * add cocoon for nested form on tree_measurements entry
 * sample lessons on data analysis
 * add paging on index page?
 * add sortable columns on index page?
 
-testing
+TESTS:
 * add FactoryBot
 * add authorization tests
 * add data validation and tests
