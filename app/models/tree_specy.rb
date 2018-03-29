@@ -1,0 +1,2 @@
+class TreeSpecy < ApplicationRecord
+end

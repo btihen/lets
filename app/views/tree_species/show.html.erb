@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Species name:</strong>
+  <%= @tree_specy.species_name %>
+</p>
+
+<p>
+  <strong>Species code:</strong>
+  <%= @tree_specy.species_code %>
+</p>
+
+<p>
+  <strong>Leaf type:</strong>
+  <%= @tree_specy.foilage_type %>
+</p>
+
+<p>
+  <strong>Leaf strategy:</strong>
+  <%= @tree_specy.foilage_strategy %>
+</p>
+
+<p>
+  <strong>Seed type:</strong>
+  <%= @tree_specy.seed_type %>
+</p>
+
+<%= link_to 'Edit', edit_tree_specy_path(@tree_specy) %> |
+<%= link_to 'Back', tree_species_path %>

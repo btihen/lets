@@ -1,0 +1,42 @@
+<%= form_with(model: tree_specy, local: true) do |form| %>
+  <% if tree_specy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tree_specy.errors.count, "error") %> prohibited this tree_specy from being saved:</h2>
+
+      <ul>
+      <% tree_specy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :species_name %>
+    <%= form.text_field :species_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :species_code %>
+    <%= form.text_field :species_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :foilage_type %>
+    <%= form.text_field :foilage_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :foilage_strategy %>
+    <%= form.text_field :foilage_strategy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seed_type %>
+    <%= form.text_field :seed_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

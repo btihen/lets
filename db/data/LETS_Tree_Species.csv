@@ -1,0 +1,46 @@
+species_code,foilage_strategy
+Aspen,Deciduous
+B,Deciduous
+BA,Deciduous
+Birch,Deciduous
+Broad-leaved Lime,Deciduous
+CH,Deciduous
+Dead,Unknown
+EA,Deciduous
+EB Budburst,Deciduous
+EB,Deciduous
+EH,Deciduous
+EY,Conifer
+FB,Deciduous
+FM,Deciduous
+HA,Deciduous
+HB,Deciduous
+Holly,Deciduous
+L,Deciduous
+LA,unknown
+LD,Deciduous
+LI,Deciduous
+Larch,Conifer
+MA,Unknown
+Maple,Deciduous
+NM,Deciduous
+NP,Deciduous
+NS,Conifer
+RO,Deciduous
+SB,Deciduous
+SF,Conifer
+SM,Deciduous
+SO,Deciduous
+SP,Conifer
+ST,Unknown
+Small-leaved Lime,Deciduous
+Spruce Bush,Conifer
+Spruce,Conifer
+U,Unknown
+UC,Conifer
+UD,Deciduous
+Unknown,Unknown
+WA,Deciduous
+WB,Deciduous
+WE,Deciduous
+WF,Deciduous
