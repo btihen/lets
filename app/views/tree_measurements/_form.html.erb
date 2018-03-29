@@ -12,6 +12,18 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :tree_plot_id %>
+    <%= form.collection_select :tree_plot_id, TreePlot.order(:plot_code),
+                                :id, :plot_code, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tree_specy_id %>
+    <%= form.collection_select :tree_specy_id, TreeSpecy.order(:species_code),
+                                :id, :species_code, include_blank: true %>
+  </div>
+
+  <div class="field">
     <%= form.label :circumfrence_cm %>
     <%= form.number_field :circumfrence_cm %>
   </div>
@@ -29,16 +41,6 @@
   <div class="field">
     <%= form.label :tree_number %>
     <%= form.number_field :tree_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :tree_specy_id %>
-    <%= form.text_field :tree_specy_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :tree_plot_id %>
-    <%= form.text_field :tree_plot_id %>
   </div>
 
   <div class="actions">
