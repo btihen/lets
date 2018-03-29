@@ -10,7 +10,11 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 # add some beauty
 gem 'bootstrap', '~> 4.0'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3'
+
+# add user authentication
+gem 'devise', '~> 4.4'
+# rails generate devise:install
 
 # use geo data
 # http://climber2002.github.io/blog/2014/05/18/postgis-and-google-maps-in-rails-part-1/

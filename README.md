@@ -2,22 +2,26 @@
 
 ## TODO:
 
-* make landing page
-* make basic user login
-* allow authenticated user to access edit pages
-* allow non-authenticated user to access landing and tree_measurement index
+Features
 * push to heroku with data
-* add FactoryBot
-* add authorization tests
-* add data validation and tests
+* add some formatting beauty
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
 * allow nested attributes (for new trees and plots)
 * add cocoon for nested form on tree_measurements entry
 * sample lessons on data analysis
-* add paging on index page
-* add sortable columns on index page
+* add paging on index page?
+* add sortable columns on index page?
+
+testing
+* add FactoryBot
+* add authorization tests
+* add data validation and tests
+* Allow admin profile edit page (& password change)
+* test landing/lesson page (publicly available)
+* test edit pages need (authentication)
+
 
 ### collection protocol
 
@@ -411,4 +415,62 @@ add the following links to the index page (just below the title):
   <%= link_to 'CSV Download', tree_measurements_path(format: :csv) %> |
   <%= link_to 'JSON Download', tree_measurements_path(format: :json) %>
 </h5>
+```
+
+### allow edit by restricted users - only index for public
+
+```ruby
+# Gemfile
+gem 'devise'
+```
+```bash
+bundle install
+rails generate devise:install
+# Some setup you must do manually if you haven't yet:
+#
+#   1. Ensure you have defined default url options in your environments files. Here
+#      is an example of default_url_options appropriate for a development environment
+#      in config/environments/development.rb:
+#
+#        config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+#
+#      In production, :host should be set to the actual host of your application.
+#
+#   2. Ensure you have defined root_url to *something* in your config/routes.rb.
+#      For example:
+#
+#        root to: "tree_measurements#index"
+#
+#   3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+#      For example:
+#
+#        <p class="notice"><%= notice %></p>
+#        <p class="alert"><%= alert %></p>
+
+rails generate devise admin
+rails db:migrate
+rails g devise:views admins
+```
+
+add restrictions:
+```ruby
+# apps/controllers/application_controller.rb
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  before_action :authenticate_admin!
+end
+```
+and exception for index page:
+```ruby
+# apps/controllers/tree_measurements_controller.rb
+class TreeMeasurementsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index]
+```
+
+make a user to test with:
+```ruby
+rails c
+# https://stackoverflow.com/questions/4316940/create-a-devise-user-from-ruby-console
+Admin.create!(email: "btihen@gmail.com", :name: "Bill Tihen", password: "secret", password_confirmation: "secret")
+exit
 ```
