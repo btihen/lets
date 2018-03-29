@@ -3,25 +3,33 @@
 ## TODO:
 
 * make landing page
+* make basic user login
+* allow authenticated user to access edit pages
+* allow non-authenticated user to access landing and tree_measurement index
 * push to heroku with data
-* add FactoryBot & basic tests
-* export csv of data
-* add paging
-* sample lessons on data analysis
-* allow column sorts on tree data
-* show a basic analysis
+* add FactoryBot
+* add authorization tests
+* add data validation and tests
+* show a basic analysis (publicly available)
   - tree count at altitude by species
-  - tree circumfrence at altitude by species
+  - tree circumference at altitude by species
+* allow nested attributes (for new trees and plots)
+* add cocoon for nested form on tree_measurements entry
+* sample lessons on data analysis
+* add paging on index page
+* add sortable columns on index page
 
 ### collection protocol
 
 http://lets-study.ch/lets-day-resources/measurement-protocols/plot-layout-process/
 
 
-### build data Sets
+### Original (start) Data
 
 https://docs.google.com/spreadsheets/d/1BsWKkM5g7P61u5PH2lzHftrtuqCwGOGtQYU8SHVJHrk/edit?ts=5aba4fee#gid=1235084934
 
+
+### build data Sets from original data
 ```bash
 # data munging
 
