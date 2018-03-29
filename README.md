@@ -4,7 +4,7 @@
 
 Features
 * push to heroku with data
-* add some formatting beauty
+* add some formatting beauty (margins and headers)
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
