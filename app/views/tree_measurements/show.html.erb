@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Circumfrence cm:</strong>
+  <%= @tree_measurement.circumfrence_cm %>
+</p>
+
+<p>
+  <strong>Measurement date:</strong>
+  <%= @tree_measurement.measurement_date %>
+</p>
+
+<p>
+  <strong>Subquadrat:</strong>
+  <%= @tree_measurement.subquadrat %>
+</p>
+
+<p>
+  <strong>Tree number:</strong>
+  <%= @tree_measurement.tree_number %>
+</p>
+
+<p>
+  <strong>Tree specy:</strong>
+  <%= @tree_measurement.tree_specy %>
+</p>
+
+<p>
+  <strong>Tree plot:</strong>
+  <%= @tree_measurement.tree_plot %>
+</p>
+
+<%= link_to 'Edit', edit_tree_measurement_path(@tree_measurement) %> |
+<%= link_to 'Back', tree_measurements_path %>
