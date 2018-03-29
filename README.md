@@ -217,11 +217,77 @@ exit
 ```
 
 ```ruby
-# fix input forms
+# adjust index page (to look like spreadsheet)
+#####
+<p id="notice"><%= notice %></p>
+
+<h1>Tree Measurements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tree Plot</th>
+      <th>Tree Specy</th>
+      <th>Tree Foilage Strategy</th>
+      <th>Tree Subquadrat</th>
+      <th>Tree Number</th>
+      <th>Tree Circumfrence (cm)</th>
+      <th>Tree Elevation (m)</th>
+      <th>Tree Latitude</th>
+      <th>Tree Longitude</th>
+      <th>Tree Measurement Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tree_measurements.each do |tree_measurement| %>
+      <tr>
+        <td><%= tree_measurement.tree_plot.plot_code %></td>
+        <td><%= tree_measurement.tree_specy.species_code %></td>
+        <td><%= tree_measurement.tree_specy.foilage_strategy %></td>
+        <td><%= tree_measurement.subquadrat %></td>
+        <td><%= tree_measurement.tree_number %></td>
+        <td><%= tree_measurement.circumfrence_cm %></td>
+        <td><%= tree_measurement.tree_plot.elevation_m %></td>
+        <td><%= tree_measurement.tree_plot.latitude %></td>
+        <td><%= tree_measurement.tree_plot.longitude %></td>
+        <td><%= tree_measurement.measurement_date %></td>
+        <td><%= link_to 'Show', tree_measurement %></td>
+        <td><%= link_to 'Edit', edit_tree_measurement_path(tree_measurement) %></td>
+        <td><%= link_to 'Destroy', tree_measurement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tree Measurement', new_tree_measurement_path %>
+##########
+# adjust show page for clarity
+##
+<p>
+  <strong>Tree specy:</strong>
+  <%= @tree_measurement.tree_specy.species_code %>
+</p>
+
+<p>
+  <strong>Tree plot:</strong>
+  <%= @tree_measurement.tree_plot.plot_code %>
+</p>
+##########
+# fix tree_measurement input forms
 <div class="field">
-  <%= form.label :plot %>
-  <%= form.collection_select :plot_id, Plot.order(:plot_code),
+  <%= form.label :tree_plot_id %>
+  <%= form.collection_select :tree_plot_id, TreePlot.order(:plot_code),
                               :id, :plot_code, include_blank: true %>
+</div>
+
+<div class="field">
+  <%= form.label :tree_specy_id %>
+  <%= form.collection_select :tree_specy_id, TreeSpecy.order(:species_code),
+                              :id, :species_code, include_blank: true %>
 </div>
 ```
 This README would normally document whatever steps are necessary to get the
