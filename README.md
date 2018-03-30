@@ -1,5 +1,11 @@
 # LETS README
 
+## app at:
+
+* https://lets-analyze.herokuapp.com/
+or
+* https://lets-data.herokuapp.com/
+
 ## TODO:
 
 **FEATURES BASICS:**
@@ -69,8 +75,7 @@ cat LETS_Master_Data.csv | cut -d',' -f1-5,10 | sed 's/\.[0-9],/,/g' | sed 's/\+
 rails new lets --database=postgresql
 ```
 
-# add postgres extensions
-#########################
+#### add postgres extensions
 
 ```ruby
 class AddExtensions < ActiveRecord::Migration[5.2]
@@ -80,7 +85,7 @@ class AddExtensions < ActiveRecord::Migration[5.2]
   end
 end
 ```
-# now setup the database
+**now setup the database**
 
 ```bash
 rails db:create
@@ -91,6 +96,7 @@ rails g scaffold tree_plot plot_name:string plot_code:citext \
                       elevation_m:integer \
                       latitude:decimal longitude:decimal
 ```
+#### Setup Plot DB
 
 ```ruby
 # update tree_plot db migration to be:
@@ -116,7 +122,7 @@ end
 rails db:migrate
 rails c
 ```
-# COPY THE FOLLOWING INTO THE CONSOLE
+**COPY THE FOLLOWING INTO THE CONSOLE**
 
 ```ruby
 require 'csv'
@@ -140,9 +146,8 @@ puts "There are now #{TreePlot.count} plots"
 exit
 ```
 
-# create tree_species db table
-##############################
-
+#### create tree_species db table
+**Model**
 ```bash
 rails g scaffold tree_species species_name:string species_code:citext \
                       foilage_type:citext foilage_strategy:citext seed_type:citext
@@ -204,8 +209,8 @@ puts "There are now #{TreeSpecy.count} tree species"
 exit
 ```
 
-# TREE measurements
-###################
+#### TREE measurements
+**build model**
 ```bash
 rails g scaffold tree_measurement circumfrence_cm:integer \
                       measurement_date:date \
@@ -214,7 +219,7 @@ rails g scaffold tree_measurement circumfrence_cm:integer \
                       tree_specy:references tree_plot:references
 ```
 
-# adjust db migrations
+**adjust db migrations**
 ```ruby
 class CreateTreeMeasurements < ActiveRecord::Migration[5.2]
   def change
@@ -239,14 +244,12 @@ class CreateTreeMeasurements < ActiveRecord::Migration[5.2]
 end
 ```
 
-# import data
+**import data**
 ```bash
 rails db:migrate
 rails c
 ```
-
-# copy the following code:
-
+**run the import - copy the following code:**
 ```ruby
 require 'csv'
 csv_tree_data = File.read(Rails.root.join('db', 'data', 'LETS_Tree_Measurements.csv'))
@@ -269,8 +272,8 @@ puts "There are now #{TreeMeasurement.count} tree measurements"
 exit
 ```
 
-# adjust index page (to look like spreadsheet)
-#####
+#### adjust index page (to look like spreadsheet)
+
 ```html
 # app/views/tree_measurements/index.html.erb
 <p id="notice"><%= notice %></p>
