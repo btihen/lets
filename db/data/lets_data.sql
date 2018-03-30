@@ -44,32 +44,6 @@ COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings
 
 SET search_path = public, pg_catalog;
 
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- Name: admins; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE admins (
-    id bigint NOT NULL,
-    name character varying,
-    email citext DEFAULT ''::citext NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip inet,
-    last_sign_in_ip inet,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
 --
 -- Name: admins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
@@ -82,12 +56,9 @@ CREATE SEQUENCE admins_id_seq
     CACHE 1;
 
 
---
--- Name: admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
+SET default_tablespace = '';
 
-ALTER SEQUENCE admins_id_seq OWNED BY admins.id;
-
+SET default_with_oids = false;
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
@@ -217,13 +188,6 @@ ALTER SEQUENCE tree_species_id_seq OWNED BY tree_species.id;
 
 
 --
--- Name: admins id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY admins ALTER COLUMN id SET DEFAULT nextval('admins_id_seq'::regclass);
-
-
---
 -- Name: tree_measurements id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -242,15 +206,6 @@ ALTER TABLE ONLY tree_plots ALTER COLUMN id SET DEFAULT nextval('tree_plots_id_s
 --
 
 ALTER TABLE ONLY tree_species ALTER COLUMN id SET DEFAULT nextval('tree_species_id_seq'::regclass);
-
-
---
--- Data for Name: admins; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY admins (id, name, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at) FROM stdin;
-1	Bill Tihen	btihen@gmail.com	$2a$11$7aP2YxFEOEoLmXXGJrckj.H7uq95XwIJvKuQ9qUc/JVyQnMd5qeL.	\N	\N	\N	1	2018-03-29 12:27:32.637306	2018-03-29 12:27:32.637306	127.0.0.1	127.0.0.1	2018-03-29 12:26:23.412226	2018-03-29 12:27:32.638726
-\.
 
 
 --
@@ -2341,14 +2296,6 @@ SELECT pg_catalog.setval('tree_species_id_seq', 45, true);
 
 
 --
--- Name: admins admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY admins
-    ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
-
-
---
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2386,20 +2333,6 @@ ALTER TABLE ONLY tree_plots
 
 ALTER TABLE ONLY tree_species
     ADD CONSTRAINT tree_species_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_admins_on_email; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_admins_on_email ON admins USING btree (email);
-
-
---
--- Name: index_admins_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_admins_on_reset_password_token ON admins USING btree (reset_password_token);
 
 
 --

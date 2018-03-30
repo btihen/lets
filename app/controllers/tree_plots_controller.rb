@@ -1,4 +1,6 @@
 class TreePlotsController < ApplicationController
+  
+  before_action :authenticate_admin!, except: [:index]
   before_action :set_tree_plot, only: [:show, :edit, :update, :destroy]
 
   # GET /tree_plots

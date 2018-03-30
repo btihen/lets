@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lets</title>
+    <title>LETS Data</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,11 +12,82 @@
   </head>
 
   <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag :div, value, class: "flash #{key}" %>
-    <% end %>
-    <!-- <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p> -->
-    <%= yield %>
+    <!-- Static navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">LETS Analyze</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Analysis
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Species Density by Altitude by Year</a>
+              <a class="dropdown-item" href="#">Species Density by Altitude by Species</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Tree Circumfrence by Altitude by Year</a>
+              <a class="dropdown-item" href="#">Tree Circumfrence by Altitude by Species</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Raw Data
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Tree Data', tree_measurements_path(format: :html), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Tree Plots", {controller: "tree_plots", action: "index"}, class: "dropdown-item" %>
+              <%= link_to "Tree Species", {controller: "tree_species", action: "index"}, class: "dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="http://lets-study.ch/">About</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Login</a>
+          </li>
+        </ul>
+        <!--
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+      </div>
+    </nav> <!-- Static Nav bar -->
+
+    <div class="container">
+      
+      <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: "flash #{key}" %>
+      <% end %>
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
+
+      <br>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>LETS Analyze</h1>
+        <p>
+          This site hosts the data and provides data analysis instruction for
+          the LETS Study project, a citizen science project sponsored by LAS
+          (Leysin American School).
+        </p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="http://lets-study.ch/"
+              role="button">LETS Study &raquo;</a>
+        </p>
+      </div>
+
+      <%= yield %>
+
+    </div> <!-- /container -->
+
+
   </body>
 </html>

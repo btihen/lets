@@ -22,9 +22,11 @@
         <td><%= tree_plot.elevation_m %></td>
         <td><%= tree_plot.latitude %></td>
         <td><%= tree_plot.longitude %></td>
-        <td><%= link_to 'Show', tree_plot %></td>
-        <td><%= link_to 'Edit', edit_tree_plot_path(tree_plot) %></td>
-        <td><%= link_to 'Destroy', tree_plot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Show', tree_plot %></td>
+          <td><%= link_to 'Edit', edit_tree_plot_path(tree_plot) %></td>
+          <td><%= link_to 'Destroy', tree_plot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Tree Plot', new_tree_plot_path %>
+<% if admin_signed_in? %>
+  <%= link_to 'New Tree Plot', new_tree_plot_path %>
+<% end %>

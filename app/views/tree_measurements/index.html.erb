@@ -49,4 +49,6 @@
 
 <br>
 
-<%= link_to 'New Tree Measurement', new_tree_measurement_path %>
+<% if admin_signed_in? %>
+  <%= link_to 'New Tree Measurement', new_tree_measurement_path %>
+<% end %>

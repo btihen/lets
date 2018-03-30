@@ -473,11 +473,41 @@ make a user to test with:
 ```ruby
 rails c
 # https://stackoverflow.com/questions/4316940/create-a-devise-user-from-ruby-console
-Admin.create!(email: "btihen@gmail.com", :name: "Bill Tihen", password: "secret", password_confirmation: "secret")
+Admin.create!(email: "example@gmail.com", :name: "First Last", password: "secret", password_confirmation: "secret")
 exit
 ```
 
 push data to heroku
 ```bash
+# get / dump dev database (compressed for heroku)
+pg_dump -Fc --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.dump
+# get / dump human readable database
+pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.sql
+# restore dev database to heroku deployed app (needs to use compressed dump)
 heroku pg:backups:restore --app lets-data 'https://github.com/btihen/lets/blob/master/db/data/lets_sql_data.dump?raw=true' DATABASE_URL
 ```
+
+add users using the console:
+```ruby
+Admin.create!(email: "example@gmail.com", :name: "First Last", password: "secret", password_confirmation: "secret")
+```
+
+# graph tree distribution (in a transect) use a kite graph (traditional by species at altitued (dynamic by year?) & select a single species and x is year and altitudes is vertical)
+# graph tree diagrams using a ?Bubble? graph - bubble size proportional to tree diameter
+
+examples/articles of a kite graph at:
+* http://ib.bioninja.com.au/options/option-c-ecology-and-conser/c1-species-and-communities/species-distribution.html
+* transect mapping (kite diagrams) for density and counts - https://www.youtube.com/watch?v=_yKtAHhTF50
+* https://www.youtube.com/watch?v=Qk9keR_wyvY - animal distritution
+
+* Kite Diagram in R - https://stackoverflow.com/questions/22201025/create-kite-diagram-in-r
+
+* Kite Diagram in Excel - http://bluesquarething.co.uk/geography/kite.htm
+* https://www.geoib.com/graphs--charts.html
+- options: https://en.wikipedia.org/wiki/JavaScript_graphics_library
+* plotty.js - https://plot.ly/javascript/ (looks easy and focused on graping data) - 2D density plot example at: https://plot.ly/javascript/2d-density-plots/
+* chartjs - simple, elegant and responsive (with animation) - http://www.chartjs.org/
+* plotly.js (does all we need - but expensive) - https://github.com/plotly/plotly.js/ - built to simplify d3
+* dash - https://github.com/plotly/dash
+* anychart.js - https://www.anychart.com/features/#chart-types - https://docs.anychart.com/Basic_Charts/Heat_Map_Chart (license?)
+* d3.js - https://github.com/d3/d3/wiki/Gallery - the motion chart might be useful
