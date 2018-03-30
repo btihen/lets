@@ -57,10 +57,14 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right"
                                               aria-labelledby="navbarDropdown">
-                <%= link_to "Profile", current_admin_path, class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <%= link_to "Change Password", edit_admin_password_path,
+                <%= link_to "My Profile", admin_path(current_admin),
                                                 class: "dropdown-item" %>
+                <%= link_to "Change Password", change_passwd_path,
+                                                class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Manage Admins", admins_path,
+                                                class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
                 <%= link_to 'Logout', destroy_admin_session_path,
                               method: "delete", class: "dropdown-item" %>
               </div>
@@ -84,11 +88,7 @@
 
     <div class="container">
 
-      <% flash.each do |key, value| %>
-        <%= content_tag :div, value, class: "flash #{key}" %>
-      <% end %>
-      <!-- <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p> -->
+      <%= flash_messages %>
 
       <br>
 
