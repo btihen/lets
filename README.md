@@ -9,25 +9,27 @@ or
 ## TODO:
 
 **EDUCATIONAL TODOS:**
+* add base / home page
+* sample lessons on data analysis
 * add analysis instructions - so kids can do by hand
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
 
 **Extra EDUCATIONAL TODOS:**
+* add site photos?
 * add species photos?
-* add species links to learn more
-* add site photos
-* time based animations of graphs
+* add species info links?
+* add auto-generated graphs?
+* time based animations of graphs?
 
 **Extra FEATURES:**
-* allow nested attributes (for new trees and plots)
-* add cocoon for nested form on tree_measurements entry
-* sample lessons on data analysis
 * add paging on index page?
 * add sortable columns on index page?
+* allow nested attributes (for new trees and plots)?
+* add cocoon for nested form on tree_measurements entry?
 
-**TESTS:**
+**TECH TESTS:**
 * add FactoryBot
 * add authorization tests
 * add data validation and tests
