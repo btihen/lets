@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LETS Data</title>
+    <title>LETS Analyze</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,7 +14,7 @@
   <body>
     <!-- Static navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">LETS Analyze</a>
+      <a class="navbar-brand" href="/home">LETS Analyze</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -42,18 +42,37 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to 'Tree Data', tree_measurements_path(format: :html), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Tree Plots", {controller: "tree_plots", action: "index"}, class: "dropdown-item" %>
-              <%= link_to "Tree Species", {controller: "tree_species", action: "index"}, class: "dropdown-item" %>
+              <%= link_to "Tree Plots", tree_plots_path(format: :html), class: "dropdown-item" %>
+              <%= link_to "Tree Species", tree_species_path(format: :html), class: "dropdown-item" %>
             </div>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="http://lets-study.ch/">About</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
-          </li>
+          <% if admin_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                  role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                <%= current_admin.name %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right"
+                                              aria-labelledby="navbarDropdown">
+                <%= link_to "Profile", current_admin_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Change Password", edit_admin_password_path,
+                                                class: "dropdown-item" %>
+                <%= link_to 'Logout', destroy_admin_session_path,
+                              method: "delete", class: "dropdown-item" %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <a class="nav-link active" href="http://lets-study.ch/">About</a>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Login', new_admin_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
         </ul>
         <!--
         <form class="form-inline my-2 my-lg-0">
@@ -72,19 +91,6 @@
       <p class="alert"><%= alert %></p> -->
 
       <br>
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>LETS Analyze</h1>
-        <p>
-          This site hosts the data and provides data analysis instruction for
-          the LETS Study project, a citizen science project sponsored by LAS
-          (Leysin American School).
-        </p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="http://lets-study.ch/"
-              role="button">LETS Study &raquo;</a>
-        </p>
-      </div>
 
       <%= yield %>
 
