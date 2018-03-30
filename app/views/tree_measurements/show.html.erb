@@ -30,5 +30,7 @@
   <%= @tree_measurement.tree_plot.plot_code %>
 </p>
 
-<%= link_to 'Edit', edit_tree_measurement_path(@tree_measurement) %> |
+<% if admin_signed_in? %>
+  <%= link_to 'Edit', edit_tree_measurement_path(@tree_measurement) %> |
+<% end %>
 <%= link_to 'Back', tree_measurements_path %>

@@ -25,5 +25,7 @@
   <%= @tree_plot.longitude %>
 </p>
 
-<%= link_to 'Edit', edit_tree_plot_path(@tree_plot) %> |
+<% if admin_signed_in? %>
+  <%= link_to 'Edit', edit_tree_plot_path(@tree_plot) %> |
+<% end %>
 <%= link_to 'Back', tree_plots_path %>

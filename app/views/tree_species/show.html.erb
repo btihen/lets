@@ -25,5 +25,7 @@
   <%= @tree_specy.seed_type %>
 </p>
 
-<%= link_to 'Edit', edit_tree_specy_path(@tree_specy) %> |
+<% if admin_signed_in? %>
+  <%= link_to 'Edit', edit_tree_specy_path(@tree_specy) %> |
+<% end %>
 <%= link_to 'Back', tree_species_path %>
