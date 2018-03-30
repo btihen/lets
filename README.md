@@ -8,21 +8,19 @@ or
 
 ## TODO:
 
-**FEATURES BASICS:**
-* add data table beauty
+**EDUCATIONAL TODOS:**
+* add analysis instructions - so kids can do by hand
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
-* add top bar with signout & signin
 
-**EDUCATIONAL TODOS:**
+**Extra EDUCATIONAL TODOS:**
 * add species photos?
 * add species links to learn more
-* add map of plots to jumbotron
 * add site photos
-* add analysis instructions - so kids can do by hand
+* time based animations of graphs
 
-**FEATURES Extras:**
+**Extra FEATURES:**
 * allow nested attributes (for new trees and plots)
 * add cocoon for nested form on tree_measurements entry
 * sample lessons on data analysis

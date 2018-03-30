@@ -57,9 +57,9 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right"
                                               aria-labelledby="navbarDropdown">
-                <%= link_to "My Profile", admin_path(current_admin),
+                <%= link_to "My Profile", my_profile_path,
                                                 class: "dropdown-item" %>
-                <%= link_to "Change Password", change_passwd_path,
+                <%= link_to "Change Password", my_passwd_path,
                                                 class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to "Manage Admins", admins_path,

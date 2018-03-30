@@ -23,7 +23,11 @@ class AdminsController < ApplicationController
   def edit
   end
 
-  def change_passwd
+  def my_passwd
+    @admin = current_admin
+  end
+
+  def my_profile
     @admin = current_admin
   end
 

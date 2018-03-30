@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :tree_species
   resources :tree_plots
   resources :admins
-  get 'change_passwd', to: "admins#change_passwd"
+  get 'my_passwd',  to: "admins#my_passwd"
+  get 'my_profile', to: "admins#my_profile"
 
   root to: "static_pages#home"
 end
