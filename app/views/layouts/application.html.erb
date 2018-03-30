@@ -28,9 +28,11 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Species Density by Altitude by Year</a>
               <a class="dropdown-item" href="#">Species Density by Altitude by Species</a>
+              <a class="dropdown-item" href="#">Species Density Analysis (Kite / Density & Heat Maps)</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Tree Circumfrence by Altitude by Year</a>
               <a class="dropdown-item" href="#">Tree Circumfrence by Altitude by Species</a>
+              <a class="dropdown-item" href="#">Visual Tree Circumfrence Analysis (Bubble Chart)</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -62,7 +64,7 @@
     </nav> <!-- Static Nav bar -->
 
     <div class="container">
-      
+
       <% flash.each do |key, value| %>
         <%= content_tag :div, value, class: "flash #{key}" %>
       <% end %>
