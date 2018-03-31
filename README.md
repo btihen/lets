@@ -9,12 +9,15 @@ or
 ## TODO:
 
 **EDUCATIONAL TODOS:**
-* add base / home page
+* add content to base page
 * sample lessons on data analysis
 * add analysis instructions - so kids can do by hand
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
+* sample r code
+* link to graphical r
+* sample r code that can mine data from lets-analyze
 
 **Extra EDUCATIONAL TODOS:**
 * add site photos?
@@ -497,23 +500,23 @@ pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > 
 heroku pg:backups:restore --app lets-data 'https://github.com/btihen/lets/blob/master/db/data/lets_sql_data.dump?raw=true' DATABASE_URL
 ```
 
-add users using the console:
+## add users using the console:
 ```ruby
 Admin.create!(email: "example@gmail.com", :name: "First Last", password: "secret", password_confirmation: "secret")
 ```
-
-# graph tree distribution (in a transect) use a kite graph (traditional by species at altitued (dynamic by year?) & select a single species and x is year and altitudes is vertical)
-# graph tree diagrams using a ?Bubble? graph - bubble size proportional to tree diameter
+## ANALYSIS
+*  graph tree distribution (in a transect) use a kite graph (traditional by species at altitued (dynamic by year?) & select a single species and x is year and altitudes is vertical)
+*  graph tree diagrams using a ?Bubble? graph - bubble size proportional to tree diameter
 
 examples/articles of a kite graph at:
 * http://ib.bioninja.com.au/options/option-c-ecology-and-conser/c1-species-and-communities/species-distribution.html
 * transect mapping (kite diagrams) for density and counts - https://www.youtube.com/watch?v=_yKtAHhTF50
 * https://www.youtube.com/watch?v=Qk9keR_wyvY - animal distritution
-
 * Kite Diagram in R - https://stackoverflow.com/questions/22201025/create-kite-diagram-in-r
-
 * Kite Diagram in Excel - http://bluesquarething.co.uk/geography/kite.htm
 * https://www.geoib.com/graphs--charts.html
+
+## Web Analysis Options (JS Graphing Options)
 - options: https://en.wikipedia.org/wiki/JavaScript_graphics_library
 * plotty.js - https://plot.ly/javascript/ (looks easy and focused on graping data) - 2D density plot example at: https://plot.ly/javascript/2d-density-plots/
 * chartjs - simple, elegant and responsive (with animation) - http://www.chartjs.org/
