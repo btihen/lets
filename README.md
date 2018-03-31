@@ -18,6 +18,13 @@ or
 * sample r code
 * link to graphical r
 * sample r code that can mine data from lets-analyze
+* installing R (mac and windows) https://www.andrewheiss.com/blog/2012/04/17/install-r-rstudio-r-commander-windows-osx/
+* R package for mac: http://cran.us.r-project.org/
+* Visual R for mac: https://www.rstudio.com/products/rstudio/download/#download
+* R server for linux: https://cran.rstudio.com/bin/linux/ubuntu/README.html (repo config) & https://www.rstudio.com/products/rstudio/download-server/ (server install after repo config)
+* DataAnalysis Instruction (some of it free) - https://www.datacamp.com/onboarding
+
+* kite graph article with R - https://rpubs.com/thoughtfulbloke/kitegraph
 
 **Extra EDUCATIONAL TODOS:**
 * add site photos?
