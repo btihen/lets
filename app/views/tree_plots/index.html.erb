@@ -17,9 +17,9 @@
     <tr>
       <th>Plot name</th>
       <th>Plot code</th>
-      <th>Elevation m</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
+      <th>Plot Elevation (m)</th>
+      <th>Plot Latitude</th>
+      <th>Plot Longitude</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -28,7 +28,7 @@
     <% @tree_plots.each do |tree_plot| %>
       <tr>
         <td><%= tree_plot.plot_name %></td>
-        <td><%= tree_plot.plot_code %></td>
+        <td><%= tree_plot.plot_code.to_s.upcase %></td>
         <td><%= tree_plot.elevation_m %></td>
         <td><%= tree_plot.latitude %></td>
         <td><%= tree_plot.longitude %></td>

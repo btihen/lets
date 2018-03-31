@@ -25,10 +25,13 @@ or
 * add species info links?
 * add auto-generated graphs?
 * time based animations of graphs?
+* geographical analysis / features?
 
 **Extra FEATURES:**
 * add paging on index page?
 * add sortable columns on index page?
+* helper method for code display (upcase)
+* helper methods for name display (capitalize)
 * allow nested attributes (for new trees and plots)?
 * add cocoon for nested form on tree_measurements entry?
 

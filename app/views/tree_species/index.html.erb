@@ -5,11 +5,11 @@
 <table class="table table-striped">
   <thead class="table-info">
     <tr>
-      <th>Species name</th>
-      <th>Species code</th>
-      <th>Leaf type</th>
-      <th>Leaf strategy</th>
-      <th>Seed type</th>
+      <th>Species Name</th>
+      <th>Species Code</th>
+      <th>Foilage Type</th>
+      <th>Foliage Strategy</th>
+      <th>Seed Type</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,8 +17,8 @@
   <tbody>
     <% @tree_species.each do |tree_specy| %>
       <tr>
-        <td><%= tree_specy.species_name %></td>
-        <td><%= tree_specy.species_code %></td>
+        <td><%= tree_specy.species_name.to_s.capitalize %></td>
+        <td><%= tree_specy.species_code.to_s.upcase %></td>
         <td><%= tree_specy.foilage_type %></td>
         <td><%= tree_specy.foilage_strategy %></td>
         <td><%= tree_specy.seed_type %></td>
