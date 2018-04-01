@@ -534,3 +534,214 @@ examples/articles of a kite graph at:
 * dash - https://github.com/plotly/dash
 * anychart.js - https://www.anychart.com/features/#chart-types - https://docs.anychart.com/Basic_Charts/Heat_Map_Chart (license?)
 * d3.js - https://github.com/d3/d3/wiki/Gallery - the motion chart might be useful
+
+
+
+## EPLORING SQL for Data Analysis
+
+# https://blog.bigbinary.com/2016/03/24/support-for-left-outer-joins-in-rails-5.html
+# get every unique altitude
+altitudes = TreePlot.distinct.pluck(:elevation_m).sort
+# get each uniqe species
+species = TreeSpecy.distinct
+# get every unique year
+# https://stackoverflow.com/questions/9624601/activerecord-find-by-year-day-or-month-on-a-date-field
+# https://stackoverflow.com/questions/29028049/find-unique-months-and-years-from-date
+dates = TreeMeasurement.distinct.pluck(:measurement_date).sort
+
+# sum the number of species at each altitude for each species - for a given year
+# return table:
+# Elevation | Species 1 | Species 2
+#     0     |     0     |     5
+#    500    |     2     |     3
+#   1000    |     4     |     0
+# ideally group by year!
+select tree_plots.plot_code, tree_plots.elevation_m,
+tree_measurements.measurement_date, tree_measurements.tree_specy_id
+from tree_plots
+left join tree_measurements on tree_plots.id = tree_measurements.tree_plot_id
+order by tree_plots.elevation_m, tree_measurements.tree_specy_id;
+# plot_code | elevation_m | measurement_date | tree_specy_id
+# -----------+-------------+------------------+---------------
+# ttfp      |           0 | 2015-10-01       |            27
+# ttfp      |           0 | 2015-10-01       |            27
+# ttfp      |           0 | 2015-10-01       |            27
+# ttfp      |           0 | 2015-10-01       |            27
+# ttfp      |           0 | 2015-10-01       |            27
+# ttfp      |           0 | 2015-10-01       |            27
+# ttfp      |           0 | 2015-10-01       |            34
+# ttfp      |           0 | 2015-10-01       |            36
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            10
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+# lafp      |         542 | 2017-10-10       |            12
+
+select tree_plots.plot_code, tree_plots.elevation_m, count(tree_measurements.tree_specy_id)
+from tree_plots
+left join tree_measurements on tree_plots.id = tree_measurements.tree_plot_id
+group by tree_plots.elevation_m, tree_measurements.measurement_date, tree_measurements.tree_specy_id
+order by tree_plots.elevation_m, tree_measurements.measurement_date;
+#  plot_code | elevation_m | count
+# -----------+-------------+-------
+#  ttfp      |           0 |     8
+#  lafp      |         542 |    33
+#  pdfp      |         667 |   177
+#  refp      |         933 |    94
+#  vdfp      |        1000 |    22
+#  lrfp      |        1116 |   194
+#  dpfp      |        1205 |   129
+#  lsfp      |        1213 |   155
+#  bgfp      |        1270 |   167
+#  stfp      |        1277 |   162
+#  crfp      |        1362 |   135
+#  brfp2     |        1419 |    56
+#  brfp1     |        1419 |   103
+#  befp      |        1478 |   139
+#  befp2     |        1478 |    36
+#  befp1     |        1478 |    36
+#  bpfp      |        1703 |   152
+#  sofp      |        1844 |   112
+#  rifp      |        1902 |    39
+
+# https://www.w3schools.com/sql/sql_join_left.asp
+# https://www.w3schools.com/sql/sql_count_avg_sum.asp
+# https://www.w3schools.com/sql/sql_groupby.asp
+select tree_plots.plot_code, tree_plots.elevation_m,
+tree_measurements.measurement_date, tree_measurements.tree_specy_id,
+count(tree_measurements.tree_specy_id)
+from tree_plots
+left join tree_measurements
+on tree_plots.id = tree_measurements.tree_plot_id
+group by tree_plots.plot_code, tree_plots.elevation_m, tree_measurements.measurement_date,
+tree_measurements.tree_specy_id
+order by tree_plots.elevation_m, tree_measurements.measurement_date, tree_measurements.tree_specy_id;
+# plot_code | elevation_m | measurement_date | tree_specy_id | count
+# -----------+-------------+------------------+---------------+-------
+# ttfp      |           0 | 2015-10-01       |            27 |     6
+# ttfp      |           0 | 2015-10-01       |            34 |     1
+# ttfp      |           0 | 2015-10-01       |            36 |     1
+# lafp      |         542 | 2017-10-10       |            10 |    13
+# lafp      |         542 | 2017-10-10       |            12 |     8
+# lafp      |         542 | 2017-10-10       |            30 |     8
+# lafp      |         542 | 2017-10-10       |            39 |     4
+# pdfp      |         667 | 2015-05-01       |             5 |     1
+# pdfp      |         667 | 2015-05-01       |             8 |     3
+# pdfp      |         667 | 2015-05-01       |            10 |     8
+# pdfp      |         667 | 2015-05-01       |            30 |     4
+# pdfp      |         667 | 2015-05-01       |            31 |     2
+# pdfp      |         667 | 2015-05-01       |            35 |     1
+# pdfp      |         667 | 2015-05-01       |            40 |     7
+# pdfp      |         667 | 2015-05-01       |            41 |     2
+# pdfp      |         667 | 2015-10-01       |             8 |     8
+# pdfp      |         667 | 2015-10-01       |            27 |     1
+# pdfp      |         667 | 2015-10-01       |            30 |    15
+# pdfp      |         667 | 2015-10-01       |            39 |    11
+# pdfp      |         667 | 2015-10-01       |            40 |     3
+# pdfp      |         667 | 2015-10-01       |            41 |    17
+# pdfp      |         667 | 2016-05-01       |            10 |    15
+# pdfp      |         667 | 2016-05-01       |            27 |     4
+# pdfp      |         667 | 2016-05-01       |            30 |    17
+# pdfp      |         667 | 2016-05-01       |            33 |     4
+# pdfp      |         667 | 2016-10-11       |             3 |     3
+# pdfp      |         667 | 2016-10-11       |            10 |     4
+# pdfp      |         667 | 2016-10-11       |            12 |     1
+# pdfp      |         667 | 2016-10-11       |            21 |     1
+
+
+# https://www.w3schools.com/sql/sql_join_left.asp
+# https://www.w3schools.com/sql/sql_count_avg_sum.asp
+# https://www.w3schools.com/sql/sql_groupby.asp
+# https://stackoverflow.com/questions/10195451/sql-inner-join-with-3-tables
+select tree_plots.plot_code, tree_plots.elevation_m,
+tree_measurements.measurement_date,
+tree_species.species_code,
+count(tree_measurements.tree_specy_id) as species_plot_count
+from tree_plots
+left join tree_measurements
+on tree_plots.id = tree_measurements.tree_plot_id
+inner join tree_species
+on tree_measurements.tree_specy_id = tree_species.id
+group by tree_plots.plot_code, tree_plots.elevation_m, tree_measurements.measurement_date,
+tree_species.species_code
+order by tree_plots.elevation_m, tree_measurements.measurement_date,
+tree_species.species_code;
+#  plot_code | elevation_m | measurement_date |   species_code    | species_density
+# -----------+-------------+------------------+-------------------+-----------------
+#  ttfp      |           0 | 2015-10-01       | ns                |               6
+#  ttfp      |           0 | 2015-10-01       | spruce bush       |               1
+#  ttfp      |           0 | 2015-10-01       | st                |               1
+#  lafp      |         542 | 2017-10-10       | eb                |              13
+#  lafp      |         542 | 2017-10-10       | ey                |               8
+#  lafp      |         542 | 2017-10-10       | sf                |               8
+#  lafp      |         542 | 2017-10-10       | uc                |               4
+#  pdfp      |         667 | 2015-05-01       | broad-leaved lime |               1
+#  pdfp      |         667 | 2015-05-01       | ea                |               3
+#  pdfp      |         667 | 2015-05-01       | eb                |               8
+#  pdfp      |         667 | 2015-05-01       | sf                |               4
+#  pdfp      |         667 | 2015-05-01       | sm                |               2
+#  pdfp      |         667 | 2015-05-01       | small-leaved lime |               1
+#  pdfp      |         667 | 2015-05-01       | ud                |               7
+#  pdfp      |         667 | 2015-05-01       | unknown           |               2
+#  pdfp      |         667 | 2015-10-01       | ea                |               8
+#  pdfp      |         667 | 2015-10-01       | ns                |               1
+#  pdfp      |         667 | 2015-10-01       | sf                |              15
+#  pdfp      |         667 | 2015-10-01       | uc                |              11
+#  pdfp      |         667 | 2015-10-01       | ud                |               3
+#  pdfp      |         667 | 2015-10-01       | unknown           |              17
+#  pdfp      |         667 | 2016-05-01       | eb                |              15
+#  pdfp      |         667 | 2016-05-01       | ns                |               4
+#  pdfp      |         667 | 2016-05-01       | sf                |              17
+#  pdfp      |         667 | 2016-05-01       | sp                |               4
+#  pdfp      |         667 | 2016-10-11       | ba                |               3
+#  pdfp      |         667 | 2016-10-11       | eb                |               4
+#  pdfp      |         667 | 2016-10-11       | ey                |               1
+#  pdfp      |         667 | 2016-10-11       | li                |               1
+#  pdfp      |         667 | 2016-10-11       | ns                |               5
+#  pdfp      |         667 | 2016-10-11       | sf                |              16
+#  pdfp      |         667 | 2016-10-11       | uc                |               1
+#  pdfp      |         667 | 2016-10-11       | wa                |               3
+#  pdfp      |         667 | 2017-10-10       | uc                |              13
+#  pdfp      |         667 | 2017-10-10       | ud                |               7
+
+# https://stackoverflow.com/questions/2337510/ruby-can-i-write-multi-line-string-with-no-concatenation
+# https://stackoverflow.com/questions/14824453/rails-raw-sql-example
+# sql = "Select * from ... your sql query here"
+# sql = %{
+# SELECT user, name
+# FROM users
+# WHERE users.id = #{var}
+# LIMIT #{var2}
+# }
+sql = %{
+SELECT tree_plots.plot_code, tree_plots.elevation_m,
+tree_measurements.measurement_date,
+tree_species.species_code,
+COUNT(tree_measurements.tree_specy_id) as species_plot_count
+FROM tree_plots
+LEFT JOIN tree_measurements
+ON tree_plots.id = tree_measurements.tree_plot_id
+INNER JOIN tree_species
+ON tree_measurements.tree_specy_id = tree_species.id
+GROUP ON by tree_plots.plot_code, tree_plots.elevation_m,
+tree_measurements.measurement_date, tree_species.species_code
+ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
+tree_species.species_code
+}
+records_array = ActiveRecord::Base.connection.execute(sql)
