@@ -1,6 +1,6 @@
 <h1>Transect Analysis <small>using Kite Graphs</small></h1>
 
-<!-- Tabs Navigation -->
+<!-- Navigation Tabs -->
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-kite-tab" data-toggle="pill"
@@ -23,15 +23,29 @@
       Longitudinal Study
     </a>
   </li>
-</ul>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-r-tab" data-toggle="pill"
+        href="#pills-r" role="tab" aria-controls="pills-r"
+        aria-selected="false">
+      Using R
+    </a>
+  </li>
+</ul>  <!-- end navigation tabs -->
 
 <!-- Content of Tabs -->
 <div class="tab-content" id="pills-tabContent">
 
-  <!-- Kite Graph Contents -->
+  <!-- Kite Graph Instructions -->
   <div class="tab-pane fade show active" id="pills-kite" role="tabpanel"
         aria-labelledby="pills-kite-tab">
     <div class="jumbotron">
+      <h3>
+        Making a Kite Graph <small>yourself</small>
+      </h3>
+      <p>
+        <strong>Kite Graphs</strong> are easy to create <em>(and the data
+        preparation is also straight forward)</em>.
+      </p>
       <h4>Step 1 - Organize Data</h4>
       <p>
         Create a spreadsheet with the headers and a average species per plot at
@@ -140,8 +154,18 @@
           </li>
         </ol>
       </p>
+      <h4>More Details</h4>
+      <p>
+        A nice video explaining Kite Graphs in more detail can be found at:
+        <a href="https://www.youtube.com/watch?v=_yKtAHhTF50" target="_blank">
+          How to make a Kite Graph
+        </a>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/_yKtAHhTF50" allowfullscreen></iframe>
+        </div>
+      </p>
     </div>
-  </div>
+  </div> <!-- End Kite Graph Instructions -->
 
   <!-- Transect Altitude Example -->
   <div class="tab-pane fade" id="pills-altitude" role="tabpanel"
@@ -207,7 +231,7 @@
             </pre>
       </p>
     </div>
-  </div>
+  </div> <!-- End Altitude Example -->
 
   <!-- Longitudinal Example -->
   <div class="tab-pane fade" id="pills-longitudinal" role="tabpanel"
@@ -270,177 +294,24 @@
         comparison graph over time.
       </p>
     </div>
-  </div>
+  </div> <!-- End Longitudinal Example -->
 
-</div>
+  <!-- R Instructions -->
+  <div class="tab-pane fade" id="pills-r" role="tabpanel"
+        aria-labelledby="pills-r-tab">
+    <div class="jumbotron">
+      <h2>Using R <small>for Kite Graphs</small> </h2>
+      <p>
+        <a href="https://rpubs.com/thoughtfulbloke/kitegraph" target="_blank">
+          R-Pubs Kite Graphs
+        </a>
 
-<!--
-<div class="jumbotron">
-  <h1>Transect Analysis</h1>
-  <h2>Species Denisty (at a given time)</h2>
-  <h4>Step 1 - Organize Data</h4>
-  <p>
-    Create a spreadsheet with the headers and a average species per plot at
-    each alititude (for a given year).
-    <br>
-    <b></b>
-    <pre>
-      LETS Species Density in year 2017
-      <code>
-        | Altitude | Species 1 | Species 2 | Species 3 |
-        |      0   |     0     |     0     |     0     |
-        |    500   |     2     |     4     |     0     |
-        |   1000   |     3     |     6     |     2     |
-        |   1250   |     4     |     5     |     5     |
-        |   1500   |     3     |     3     |     7     |
-        |   1650   |     0     |     2     |     8     |
-        |   1850   |     0     |     0     |     6     |
-        |   2000   |     0     |     0     |     3     |
-      </code>
-    </pre>
-  </p>
-  <h4>Create the Kite Chart</h4>
-  <p>
-    <ol>
-      <li>
-        Find the largest density for each plant leave half of that
-        (plus one - if needed) draw a center (0) line for each species:
-        <pre>
-          LETS Species Density in year 2017
-          <code>
-          |
-          |
-Species 1 | -----------------------------------------
-          |
-          |
+        Other helpful links:
+        Installing Graphical R: https://www.rstudio.com/products/rstudio/download/#download
+        Kite Graph ideas (stackoverflow): https://stackoverflow.com/questions/22201025/create-kite-diagram-in-r
+      </p>
+    </div>
+  </div> <!-- End R Example -->
 
-          |
-          |
-          |
-Species 2 | ------------------------------------------
-          |
-          |
-          |
 
-          |
-          |
-          |
-          |
-Species 3 | ------------------------------------------
-          |
-          |
-          |
-          |
-------------------------------------------------------
-Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
-  meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
-              0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                0 0 0 0 0 0 0 0 0 0 0
-          </code>
-        </pre>
-      </li>
-      <li>
-        At each altitude make an appropriate mark on each side of the center
-        line half the max away from the center line
-        <em>(the total discance of the two marks is the density at that alititude)</em>
-        <pre>
-          LETS Species Density in year 2017
-          <code>
-          |           *        *     *
-          | *
-Species 1 |-2---------3--------4-----3----0--0---0--0-
-          | *         *              *
-          |                    *
-
-          |                    *     *
-          |           *                   *
-          |                                  *
-Species 2 |-0---------4--------6-----5----3--2---0--0-
-          |                               *  *
-          |           *              *
-          |                    *
-
-          |                               *  *
-          |                          *           *
-          |                    *                    *
-          |
-Species 3 |-0---------0--------4-----5----7--8---6--3-
-          |                                         *
-          |                    *     *
-          |                               *      *
-          |                                  *
-------------------------------------------------------
-Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
-  meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
-              0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                0 0 0 0 0 0 0 0 0 0 0
-          </code>
-        </pre>
-      </li>
-      <li>
-        now simply connect the dots for each species (and ideally color in the
-        "kite" - with a different color for each species).  One generated in R
-        looks like:
-        <br>
-        TODO: include an image
-      </li>
-    </ol>
-  </p>
-  <h2>Species Denisty over time <small>Longitudinal Study</small></h2>
-  <p>
-   longitudinal study can also be done with a kite
-    graph by collecting the data from one species over various years, ie:
-    <pre>
-      Species Density changes for species from 2005-2015
-      <code>
-        | Altitude | year 2005 | year 2010 | year 2015 |
-        |      0   |     0     |     0     |     0     |
-        |    500   |     2     |     4     |     0     |
-        |   1000   |     3     |     6     |     2     |
-        |   1250   |     4     |     5     |     5     |
-        |   1500   |     3     |     3     |     7     |
-        |   1650   |     0     |     2     |     8     |
-        |   1850   |     0     |     0     |     6     |
-        |   2000   |     0     |     0     |     3     |
-      </code>
-    </pre>
-    resulting in a grapht that would look like:
-    <pre>
-      Species Density changes for species from 2005-2015
-      <code>
-          |           *        *     *
-          | *
-Year 2005 |-2---------3--------4-----3----0--0---0--0-
-          | *         *              *
-          |                    *
-
-          |                    *     *
-          |           *                   *
-          |                                  *
-Year 2010 |-0---------4--------6-----5----3--2---0--0-
-          |                               *  *
-          |           *              *
-          |                    *
-
-          |                               *  *
-          |                          *           *
-          |                    *                    *
-          |
-Year 2015 |-0---------0--------4-----5----7--8---6--3-
-          |                                         *
-          |                    *     *
-          |                               *      *
-          |                                  *
-------------------------------------------------------
-Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
-meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
-          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                            0 0 0 0 0 0 0 0 0 0 0
-      </code>
-    </pre>
-    <strong>NOTE:</strong> an interesting <em>(but more difficult to program way
-    to represent a longitudinal study)</em> would be to animate the species
-    comparison graph over time.
-  </p>
-</div>
--->
+</div>   <!-- end of Content Tabs -->

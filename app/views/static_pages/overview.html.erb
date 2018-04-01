@@ -1,59 +1,172 @@
 <!-- Main component for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <h1>Transect Analysis Overview</h1>
-  <h3>Species Density</h3>
-  <p>
-    There are several ways to represent species density over a transect.
-    These include:
-    <ul>
-      <li>
-        <strong>kite graphs</strong> -- vary the width of the of a line
-        representing the species count at that spot in the transect.
-        <em>(the wider line corresponds to more plants seen in the same area,
-        thus higher density)</em>.  <strong>This method will be explained in
-        details as it is relatively easy to do by hand.</strong>
-        This method also estimates population density between measurement
-        locations (often a valid assumption).  The other graphing methods show
-        the actual measuments (also sometimes important).
+<h1>Environment Species Studied</h1>
+
+<!-- Navigation Tabs -->
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-collect-tab" data-toggle="pill"
+        href="#pills-collect" role="tab" aria-controls="pills-collect"
+        aria-selected="false">
+      Data Collection
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-analyze-tab" data-toggle="pill"
+      href="#pills-analyze" role="tab" aria-controls="pills-analyze"
+      aria-selected="true">
+    Data Analysis
+    </a>
+  </li>
+</ul>  <!-- end navigation tabs -->
+
+
+<!-- Content of Tabs -->
+<div class="tab-content" id="pills-tabContent">
+
+  <!-- Data Collection -->
+  <div class="tab-pane fade show active" id="pills-collect" role="tabpanel"
+        aria-labelledby="pills-collect-tab">
+
+    <div class="jumbotron">
+      <h4>Species Data Collection</h4>
+      <p>
+        LETS intends to study the species and their distribution at various
+        alititudes over time.  This is a south facing slope from Aigle
+        Switzerland (~350 m elevation) through the town of Leysin Switzerland
+        (~1250-1650 m elevation) up to the top of these local mountains Berneuse
+        & Tour di Äi (~2000 m elevation).
+      </p>
+      <p>
+        This study uses the transect method to study the various tree species.
+        The plots are 30m2 and sub-divided into 9 subquadrats (each 10m2).
+        For more details visit:
+        <a href="http://lets-study.ch/" target="_blank">LETS Study</a>
+      </p>
+      <p>
+        When studying species and ditribution there are many aspects of Ecology
+        that affect Distribution.  These include:
+        <ul>
+          <li>Soil pH</li>
+          <li>Temperature</li>
+          <li>Light Intensity</li>
+          <li>Water Availability</li>
+          <li>...</li>
+        </ul>
+        The following video provides a nice overview of Ecology influences and
+        speices sampling (density measurements):
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item"
+                  src="https://www.youtube.com/embed/gLzY8FPJcfM"
+                  allowfullscreen></iframe>
+        </div>
+      </p>
+      <p>
+        To measure species Distribution there are a variety of methods --
+        depending on size, and intent of the study.  This study uses <thead>
+        transect methodology to study species at different altitudes over
+        time.
         <br>
-        <b>TODO: show image</b>
-      </li>
-      <li>
-        <strong>density plots</strong> -- vary the number of dots in a given
-        spot of the transect, thus visually representing the species density,
-        <em>(more dots = higher density)</em>
+        Transects study organisms over a line (in many cases only a few meters,
+        when studying a transition area).  In our case, the transect is many
+        kilometers, from the valley floor to the mountain top.  Along this
+        line we have study plots.
         <br>
-        <b>TODO: show image</b>
-      </li>
-      <li>
-        <strong>bubble graphs</strong> -- vary the size of the bubble based on
-        the density observed at that location,
-        <em>(darker tones = higher density)</em> - this might be the best way
-        to represent tree size.
+        The following video nicely explains transect data collection:
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item"
+                  src="https://www.youtube.com/embed/xQKYjeAue7M"
+                  allowfullscreen></iframe>
+        </div>
+      </p>
+      <p>
+        Depending on the Environment there are a variety of ways to collect
+        species data (other than transect plots and counting individual trees).
+        In some cases, like studying mosses - the percent of the plot area is
+        used.  In other cases, especially smaller areas where a detailed
+        environmental study will be done - random plots are used to study
+        a single environment (such as a field or river bed).
         <br>
-        <b>TODO: show image</b>
-      </li>
-      <li>
-        <strong>heat graphs</strong> -- vary the tone base on density,
-        <em>(darker tones = higher density)</em>
+        Here are some videos to explore generally how species density is
+        studied & the various techniques used to do those studies:
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item"
+                  src="https://www.youtube.com/embed/UDp3I07Wcrg"
+                  allowfullscreen></iframe>
+        </div>
         <br>
-        <b>TODO: show image</b>
-      </li>
-    </ul>
-  </p>
-  <h3>Tree Growth</h3>
-  <p>
-    It is possible to graph tree circumfrence similarly to species density,
-    however, for that to be a valid representation of the data - all sites
-    would need to be of equal age.  A better way to study this data is to
-    compare yearly circumfrence changes, representing growth rates. This is
-    probably most easily done by averaging the growth rate at each location
-    and using a line graph to show the yearly changes.
-    <br>
-    <strong>Growth rates are strongly influenced by each year's weather.
-    It is important to compare this to the year's temperature, rain fall,
-    etc.</strong>
-    <br>
-    <b>TODO: figure out good analysis</b>
-  </p>
-</div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <b>Species Sampling Methods</b>
+          <iframe class="embed-responsive-item"
+                  src="https://www.youtube.com/embed/52fykMU0ojY"
+                  allowfullscreen>
+          </iframe>
+        </div>
+      </p>
+    </div>
+  </div>  <!-- end of collection -->
+
+  <!-- Kite Graph Instructions -->
+  <div class="tab-pane fade" id="pills-analyze" role="tabpanel"
+        aria-labelledby="pills-analyze-tab-tab">
+
+    <div class="jumbotron">
+      <h1>Transect Analysis Overview</h1>
+      <h3>Species Density</h3>
+      <p>
+        There are several ways to represent species density over a transect.
+        These include:
+        <ul>
+          <li>
+            <strong>kite graphs</strong> -- vary the width of the of a line
+            representing the species count at that spot in the transect.
+            <em>(the wider line corresponds to more plants seen in the same area,
+            thus higher density)</em>.  <strong>This method will be explained in
+            details as it is relatively easy to do by hand.</strong>
+            This method also estimates population density between measurement
+            locations (often a valid assumption).  The other graphing methods show
+            the actual measuments (also sometimes important).
+            <br>
+            <b>TODO: show image</b>
+          </li>
+          <li>
+            <strong>density plots</strong> -- vary the number of dots in a given
+            spot of the transect, thus visually representing the species density,
+            <em>(more dots = higher density)</em>
+            <br>
+            <b>TODO: show image</b>
+          </li>
+          <li>
+            <strong>bubble graphs</strong> -- vary the size of the bubble based on
+            the density observed at that location,
+            <em>(darker tones = higher density)</em> - this might be the best way
+            to represent tree size.
+            <br>
+            <b>TODO: show image</b>
+          </li>
+          <li>
+            <strong>heat graphs</strong> -- vary the tone base on density,
+            <em>(darker tones = higher density)</em>
+            <br>
+            <b>TODO: show image</b>
+          </li>
+        </ul>
+      </p>
+      <h3>Tree Growth</h3>
+      <p>
+        It is possible to graph tree circumfrence similarly to species density,
+        however, for that to be a valid representation of the data - all sites
+        would need to be of equal age.  A better way to study this data is to
+        compare yearly circumfrence changes, representing growth rates. This is
+        probably most easily done by averaging the growth rate at each location
+        and using a line graph to show the yearly changes.
+        <br>
+        <strong>Growth rates are strongly influenced by each year's weather.
+        It is important to compare this to the year's temperature, rain fall,
+        etc.</strong>
+        <br>
+        <b>TODO: figure out good analysis</b>
+      </p>
+    </div>
+  </div>  <!-- end of analysis -->
+
+</div>    <!-- end of content -->
