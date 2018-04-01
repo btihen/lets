@@ -8,24 +8,33 @@ class StaticPagesController < ApplicationController
   end
 
   # Transect Data Collection
-  def data_collection
+  def collect_data
   end
 
   # Transect Data Analysis
-  def data_analysis
+  def analyze_data
   end
 
   # explain how to make Kite Graphs
-  def kite_graphs
+  def graph_data
   end
 
-  def density
+  def species_elevation
   end
 
-  def species
+  def species_longitudinal
   end
 
-  def growth
+  def species_animated
+  end
+
+  def growth_elevation
+  end
+
+  def growth_longitudinal
+  end
+
+  def growth_animated
   end
 
 end
