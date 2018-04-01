@@ -1,63 +1,341 @@
-<!-- Main component for a primary marketing message or call to action -->
+<h1>Transect Analysis <small>using Kite Graphs</small></h1>
+
+<!-- Tabs Navigation -->
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-kite-tab" data-toggle="pill"
+        href="#pills-kite" role="tab" aria-controls="pills-kite"
+        aria-selected="false">
+      Kite Graphs
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-alititude-tab" data-toggle="pill"
+      href="#pills-altitude" role="tab" aria-controls="pills-alititude"
+      aria-selected="true">
+    Altitude Study
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-longitudinal-tab" data-toggle="pill"
+        href="#pills-longitudinal" role="tab" aria-controls="pills-longitudinal"
+        aria-selected="false">
+      Longitudinal Study
+    </a>
+  </li>
+</ul>
+
+<!-- Content of Tabs -->
+<div class="tab-content" id="pills-tabContent">
+
+  <!-- Kite Graph Contents -->
+  <div class="tab-pane fade show active" id="pills-kite" role="tabpanel"
+        aria-labelledby="pills-kite-tab">
+    <div class="jumbotron">
+      <h4>Step 1 - Organize Data</h4>
+      <p>
+        Create a spreadsheet with the headers and a average species per plot at
+        each alititude (for a given year).
+        <br>
+        <b></b>
+        <pre>
+          LETS Species Density in year 2017
+          <code>
+            | Altitude | Species 1 | Species 2 | Species 3 |
+            |      0   |     0     |     0     |     0     |
+            |    500   |     2     |     4     |     0     |
+            |   1000   |     3     |     6     |     2     |
+            |   1250   |     4     |     5     |     5     |
+            |   1500   |     3     |     3     |     7     |
+            |   1650   |     0     |     2     |     8     |
+            |   1850   |     0     |     0     |     6     |
+            |   2000   |     0     |     0     |     3     |
+          </code>
+        </pre>
+      </p>
+      <h4>Step 2 - Create the Kite Chart</h4>
+      <p>
+        <ol>
+          <li>
+            Find the largest density for each plant leave half of that
+            (plus one - if needed) draw a center (0) line for each species:
+            <pre>
+              LETS Species Density in year 2017
+              <code>
+              |
+              |
+    Species 1 | -----------------------------------------
+              |
+              |
+
+              |
+              |
+              |
+    Species 2 | ------------------------------------------
+              |
+              |
+              |
+
+              |
+              |
+              |
+              |
+    Species 3 | ------------------------------------------
+              |
+              |
+              |
+              |
+    ------------------------------------------------------
+    Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+      meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                    0 0 0 0 0 0 0 0 0 0 0
+              </code>
+            </pre>
+          </li>
+          <li>
+            At each altitude make an appropriate mark on each side of the center
+            line half the max away from the center line
+            <em>(the total discance of the two marks is the density at that alititude)</em>
+            <pre>
+              LETS Species Density in year 2017
+              <code>
+              |           *        *     *
+              | *
+    Species 1 |-2---------3--------4-----3----0--0---0--0-
+              | *         *              *
+              |                    *
+
+              |                    *     *
+              |           *                   *
+              |                                  *
+    Species 2 |-0---------4--------6-----5----3--2---0--0-
+              |                               *  *
+              |           *              *
+              |                    *
+
+              |                               *  *
+              |                          *           *
+              |                    *                    *
+              |
+    Species 3 |-0---------0--------4-----5----7--8---6--3-
+              |                                         *
+              |                    *     *
+              |                               *      *
+              |                                  *
+    ------------------------------------------------------
+    Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+      meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                    0 0 0 0 0 0 0 0 0 0 0
+              </code>
+            </pre>
+          </li>
+          <li>
+            now simply connect the dots for each species (and ideally color in the
+            "kite" - with a different color for each species).  One generated in R
+            looks like:
+            <br>
+            TODO: include an image
+          </li>
+        </ol>
+      </p>
+    </div>
+  </div>
+
+  <!-- Transect Altitude Example -->
+  <div class="tab-pane fade" id="pills-altitude" role="tabpanel"
+    aria-labelledby="pills-alititude-tab">
+
+    <div class="jumbotron">
+      <h2>Species Denisty Comparison <small>(at a given time)</small></h2>
+      <h4>Prepare the Data</h4>
+      <p>
+        Create a spreadsheet with the headers and a average species per plot at
+        each alititude (for a given year).
+        <br>
+        <b></b>
+        <pre>
+          LETS Species Density in year 2017
+          <code>
+            | Altitude | Species 1 | Species 2 | Species 3 |
+            |      0   |     0     |     0     |     0     |
+            |    500   |     2     |     4     |     0     |
+            |   1000   |     3     |     6     |     2     |
+            |   1250   |     4     |     5     |     5     |
+            |   1500   |     3     |     3     |     7     |
+            |   1650   |     0     |     2     |     8     |
+            |   1850   |     0     |     0     |     6     |
+            |   2000   |     0     |     0     |     3     |
+          </code>
+        </pre>
+      </p>
+      <h4>Resulting Kite Chart</h4>
+      <p>
+            <pre>
+              Species Density Comparison in year 2017
+              <code>
+              |           *        *     *
+              | *
+    Species 1 |-2---------3--------4-----3----0--0---0--0-
+              | *         *              *
+              |                    *
+
+              |                    *     *
+              |           *                   *
+              |                                  *
+    Species 2 |-0---------4--------6-----5----3--2---0--0-
+              |                               *  *
+              |           *              *
+              |                    *
+
+              |                               *  *
+              |                          *           *
+              |                    *                    *
+              |
+    Species 3 |-0---------0--------4-----5----7--8---6--3-
+              |                                         *
+              |                    *     *
+              |                               *      *
+              |                                  *
+    ------------------------------------------------------
+    Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+      meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                    0 0 0 0 0 0 0 0 0 0 0
+              </code>
+            </pre>
+      </p>
+    </div>
+  </div>
+
+  <!-- Longitudinal Example -->
+  <div class="tab-pane fade" id="pills-longitudinal" role="tabpanel"
+        aria-labelledby="pills-longitudinal-tab">
+    <div class="jumbotron">
+      <h2>Species Denisty over time <small>Longitudinal Study</small></h2>
+      <p>
+       longitudinal study can also be done with a kite
+        graph by collecting the data from one species over various years, ie:
+        <pre>
+          Species Density changes for species from 2005-2015
+          <code>
+            | Altitude | year 2005 | year 2010 | year 2015 |
+            |      0   |     0     |     0     |     0     |
+            |    500   |     2     |     4     |     0     |
+            |   1000   |     3     |     6     |     2     |
+            |   1250   |     4     |     5     |     5     |
+            |   1500   |     3     |     3     |     7     |
+            |   1650   |     0     |     2     |     8     |
+            |   1850   |     0     |     0     |     6     |
+            |   2000   |     0     |     0     |     3     |
+          </code>
+        </pre>
+        resulting in a grapht that would look like:
+        <pre>
+          Species Density changes for species from 2005-2015
+          <code>
+              |           *        *     *
+              | *
+    Year 2005 |-2---------3--------4-----3----0--0---0--0-
+              | *         *              *
+              |                    *
+
+              |                    *     *
+              |           *                   *
+              |                                  *
+    Year 2010 |-0---------4--------6-----5----3--2---0--0-
+              |                               *  *
+              |           *              *
+              |                    *
+
+              |                               *  *
+              |                          *           *
+              |                    *                    *
+              |
+    Year 2015 |-0---------0--------4-----5----7--8---6--3-
+              |                                         *
+              |                    *     *
+              |                               *      *
+              |                                  *
+    ------------------------------------------------------
+    Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+    meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+              0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                0 0 0 0 0 0 0 0 0 0 0
+          </code>
+        </pre>
+        <strong>NOTE:</strong> an interesting <em>(but more difficult to program way
+        to represent a longitudinal study)</em> would be to animate the species
+        comparison graph over time.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!--
 <div class="jumbotron">
-  <h1>Kite Graphs Explained</h1>
-  <h3>Step 1 - Organize Data</h3>
+  <h1>Transect Analysis</h1>
+  <h2>Species Denisty (at a given time)</h2>
+  <h4>Step 1 - Organize Data</h4>
   <p>
     Create a spreadsheet with the headers and a average species per plot at
-    each alititude (for a given year).  Longitudinal (over time) is a more
-    advanced (second) topic.
+    each alititude (for a given year).
     <br>
-    <b>Species Density in a 30m2 area</b>
+    <b></b>
     <pre>
+      LETS Species Density in year 2017
       <code>
         | Altitude | Species 1 | Species 2 | Species 3 |
-        |      0   |     0     |     5     |     0     |
-        |    500   |     3     |     6     |     0     |
-        |   1000   |     4     |     6     |     2     |
+        |      0   |     0     |     0     |     0     |
+        |    500   |     2     |     4     |     0     |
+        |   1000   |     3     |     6     |     2     |
         |   1250   |     4     |     5     |     5     |
-        |   1500   |     3     |     2     |     7     |
-        |   1650   |     2     |     0     |     8     |
+        |   1500   |     3     |     3     |     7     |
+        |   1650   |     0     |     2     |     8     |
         |   1850   |     0     |     0     |     6     |
         |   2000   |     0     |     0     |     3     |
       </code>
     </pre>
   </p>
-  <h3>Create the Kite Chart</h3>
+  <h4>Create the Kite Chart</h4>
   <p>
     <ol>
       <li>
         Find the largest density for each plant leave half of that
         (plus one - if needed) draw a center (0) line for each species:
         <pre>
+          LETS Species Density in year 2017
           <code>
-            |
-            |
-  Species 1 | -----------------------------------------------------------
-            |
-            |
-            
-            |
-            |
-            |
-  Species 2 | -----------------------------------------------------------
-            |
-            |
-            |
+          |
+          |
+Species 1 | -----------------------------------------
+          |
+          |
 
-            |
-            |
-            |
-            |
-  Species 3 | -----------------------------------------------------------
-            |
-            |
-            |
-            |
-  -----------------------------------------------------------------------
-  Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
-    meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
-                0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0
+          |
+          |
+          |
+Species 2 | ------------------------------------------
+          |
+          |
+          |
+
+          |
+          |
+          |
+          |
+Species 3 | ------------------------------------------
+          |
+          |
+          |
+          |
+------------------------------------------------------
+Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+  meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+              0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                0 0 0 0 0 0 0 0 0 0 0
           </code>
         </pre>
       </li>
@@ -66,68 +344,103 @@
         line half the max away from the center line
         <em>(the total discance of the two marks is the density at that alititude)</em>
         <pre>
+          LETS Species Density in year 2017
           <code>
-            |   *
-            |
-  Species 1 |-0-3-------------------------------------------------------
-            |   *
-            |
+          |           *        *     *
+          | *
+Species 1 |-2---------3--------4-----3----0--0---0--0-
+          | *         *              *
+          |                    *
 
-            | * *
-            |
-            |
-  Species 2 |-5-6-------------------------------------------------------
-            |
-            | *
-            |   *
+          |                    *     *
+          |           *                   *
+          |                                  *
+Species 2 |-0---------4--------6-----5----3--2---0--0-
+          |                               *  *
+          |           *              *
+          |                    *
 
-            |
-            |
-            |
-            |
-  Species 3 |-0-0-------------------------------------------------------
-            |
-            |
-            |
-            |
-  -----------------------------------------------------------------------
-  Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
-    meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
-                0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0
+          |                               *  *
+          |                          *           *
+          |                    *                    *
+          |
+Species 3 |-0---------0--------4-----5----7--8---6--3-
+          |                                         *
+          |                    *     *
+          |                               *      *
+          |                                  *
+------------------------------------------------------
+Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+  meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+              0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                0 0 0 0 0 0 0 0 0 0 0
           </code>
         </pre>
       </li>
+      <li>
+        now simply connect the dots for each species (and ideally color in the
+        "kite" - with a different color for each species).  One generated in R
+        looks like:
+        <br>
+        TODO: include an image
+      </li>
     </ol>
+  </p>
+  <h2>Species Denisty over time <small>Longitudinal Study</small></h2>
+  <p>
+   longitudinal study can also be done with a kite
+    graph by collecting the data from one species over various years, ie:
     <pre>
+      Species Density changes for species from 2005-2015
       <code>
-
-
-        Species 1 | -----------------------------------------------------------
-
-
-
-
-
-        Species 2 | -----------------------------------------------------------
-
-
-
-
-
-
-
-        Species 3 | -----------------------------------------------------------
-
-
-
-
-        -----------------------------------------------------------------------
-        Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
-          meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
-                      0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                        0 0 0 0 0 0 0 0 0 0 0
+        | Altitude | year 2005 | year 2010 | year 2015 |
+        |      0   |     0     |     0     |     0     |
+        |    500   |     2     |     4     |     0     |
+        |   1000   |     3     |     6     |     2     |
+        |   1250   |     4     |     5     |     5     |
+        |   1500   |     3     |     3     |     7     |
+        |   1650   |     0     |     2     |     8     |
+        |   1850   |     0     |     0     |     6     |
+        |   2000   |     0     |     0     |     3     |
       </code>
     </pre>
+    resulting in a grapht that would look like:
+    <pre>
+      Species Density changes for species from 2005-2015
+      <code>
+          |           *        *     *
+          | *
+Year 2005 |-2---------3--------4-----3----0--0---0--0-
+          | *         *              *
+          |                    *
+
+          |                    *     *
+          |           *                   *
+          |                                  *
+Year 2010 |-0---------4--------6-----5----3--2---0--0-
+          |                               *  *
+          |           *              *
+          |                    *
+
+          |                               *  *
+          |                          *           *
+          |                    *                    *
+          |
+Year 2015 |-0---------0--------4-----5----7--8---6--3-
+          |                                         *
+          |                    *     *
+          |                               *      *
+          |                                  *
+------------------------------------------------------
+Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                            0 0 0 0 0 0 0 0 0 0 0
+      </code>
+    </pre>
+    <strong>NOTE:</strong> an interesting <em>(but more difficult to program way
+    to represent a longitudinal study)</em> would be to animate the species
+    comparison graph over time.
   </p>
 </div>
+-->
