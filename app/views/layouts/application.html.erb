@@ -15,44 +15,67 @@
     <!-- Static navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/home">LETS Analyze</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Analysis Intro
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+              Transects Intro
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/overview">Intro to Biological Transect Analysis</a>
-              <a class="dropdown-item" href="/kite">Kite Graph Instruction</a>
+              <a class="dropdown-item" href="/design">Transect Design</a>
+              <a class="dropdown-item" href="/collect">Data Collection</a>
+              <a class="dropdown-item" href="/analyze">Data Analysis</a>
+              <a class="dropdown-item" href="/graph">Visual Analysis</a>
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+              Processed Data
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">
+                Distribution by Elevation (given Year)
+              </a>
+              <a class="dropdown-item" href="#">
+                Distribution by Elevation (over Time)
+              </a>
+              <a class="dropdown-item disabled" href="#">
+                Distribution by Elevation (Animated over Time)
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item disabled" href="#">
+                Growth Rate by Elevation over Time
+              </a>
+              <a class="dropdown-item disabled" href="#">
+                Growth Rates by Elevation (Animated over Time)
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
               Raw Data
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to 'Tree Data', tree_measurements_path(format: :html), class: "dropdown-item" %>
+              <%= link_to 'Tree Data', tree_measurements_path(format: :html),
+                    class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Tree Plots", tree_plots_path(format: :html), class: "dropdown-item" %>
-              <%= link_to "Tree Species", tree_species_path(format: :html), class: "dropdown-item" %>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              LETS Results
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item disabled" href="#">Species Density Animation</a>
-              <a class="dropdown-item" href="#">Species Density by Altitude by Year</a>
-              <a class="dropdown-item" href="#">Species Density by Altitude by Species</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item disabled" href="#">Tree Circumfrence Animation</a>
-              <a class="dropdown-item disabled" href="#">Tree Circumfrence by Altitude by Year</a>
-              <a class="dropdown-item disabled" href="#">Tree Circumfrence by Altitude by Species</a>
+              <%= link_to "Tree Plots", tree_plots_path(format: :html),
+                    class: "dropdown-item" %>
+              <%= link_to "Tree Species", tree_species_path(format: :html),
+                    class: "dropdown-item" %>
             </div>
           </li>
         </ul>
@@ -80,7 +103,9 @@
             </li>
           <% else %>
             <li class="nav-item">
-              <a class="nav-link active" href="http://lets-study.ch/">About</a>
+              <a class="nav-link active" href="http://lets-study.ch/">
+                LETS Study
+              </a>
             </li>
             <li class="nav-item">
               <%= link_to 'Login', new_admin_session_path, class: "nav-link" %>

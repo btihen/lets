@@ -7,12 +7,16 @@ class StaticPagesController < ApplicationController
   def home
   end
 
-  # Transect Analysis Overview
-  def overview
+  # Transect Data Collection
+  def data_collection
+  end
+
+  # Transect Data Analysis
+  def data_analysis
   end
 
   # explain how to make Kite Graphs
-  def kite
+  def kite_graphs
   end
 
   def density

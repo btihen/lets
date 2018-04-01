@@ -1,0 +1,172 @@
+<h1>Visual Transect Analysis</h1>
+
+<div class="jumbotron">
+
+  <p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-lg btn-primary dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        LETS Data (Processed)
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="species">Species Distribution vs Elevation</a>
+        <a class="dropdown-item" href="longitudinal">Species Distribution over Time</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item disabled" href="growth">Changes in Growth Rates</a>
+        <a class="dropdown-item disabled" href="animated">Animated Species Distribution</a>
+      </div>
+    </div>
+  </p>
+
+  <h3>Making Kite Graphs <small>Do it Yourself</small></h3>
+  <p>
+    <strong>Kite Graphs</strong> are fairly easy way to see population
+    density over a transect and are easy to create.
+    <br>
+    <em>(The data preparation is also straight forward)</em>.
+  </p>
+  <h4>Step 1 - Organize Data</h4>
+  <p>
+    Create a spreadsheet with the headers and a average species per plot at
+    each alititude (for a given year).
+    <br>
+    <b></b>
+    <pre>
+      LETS Species Density in year 2017
+      <code>
+        | Altitude | Species 1 | Species 2 | Species 3 |
+        |      0   |     0     |     0     |     0     |
+        |    500   |     2     |     4     |     0     |
+        |   1000   |     3     |     6     |     2     |
+        |   1250   |     4     |     5     |     5     |
+        |   1500   |     3     |     3     |     7     |
+        |   1650   |     0     |     2     |     8     |
+        |   1850   |     0     |     0     |     6     |
+        |   2000   |     0     |     0     |     3     |
+      </code>
+    </pre>
+  </p>
+  <h4>Step 2 - Create the Kite Chart</h4>
+  <p>
+    <ul>
+      <li>
+        Once the data is organized it's time to graph the data.
+        Here are instructions to make
+        <a href="http://best-excel-tutorial.com/56-charts/267-kite-chart"
+            target="_blank">
+          Kite Graphs with Excel
+        </a>
+      </li>
+      <li>
+        Here are instructions to make
+        <a href="https://rpubs.com/thoughtfulbloke/kitegraph"
+            target="_blank">
+          Kite Graphs with R
+        </a>
+      </li>
+      <li>
+        Below are instructions to make Kite Charts by hand <em>(good to do
+        at least once to be sure the concepts are clear).</em>  Here is a
+        video explaining all the below steps visually:
+        <a href="https://www.youtube.com/watch?v=_yKtAHhTF50"
+            target="_blank">
+          How to make a Kite Graph by Hand
+        </a>
+        <ol>
+          <li>
+            Find the largest density for each plant leave half of that
+            (plus one - if needed) draw a center (0) line for each species:
+            <pre>
+              LETS Species Density in year 2017
+              <code>
+      |
+      |
+Species 1 | -----------------------------------------
+      |
+      |
+
+      |
+      |
+      |
+Species 2 | ------------------------------------------
+      |
+      |
+      |
+
+      |
+      |
+      |
+      |
+Species 3 | ------------------------------------------
+      |
+      |
+      |
+      |
+------------------------------------------------------
+Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                            0 0 0 0 0 0 0 0 0 0 0
+              </code>
+            </pre>
+          </li>
+          <li>
+            At each altitude make an appropriate mark on each side of the center
+            line half the max away from the center line
+            <em>(the total discance of the two marks is the density at that alititude)</em>
+            <pre>
+              LETS Species Density in year 2017
+              <code>
+      |           *        *     *
+      | *
+Species 1 |-2---------3--------4-----3----0--0---0--0-
+      | *         *              *
+      |                    *
+
+      |                    *     *
+      |           *                   *
+      |                                  *
+Species 2 |-0---------4--------6-----5----3--2---0--0-
+      |                               *  *
+      |           *              *
+      |                    *
+
+      |                               *  *
+      |                          *           *
+      |                    *                    *
+      |
+Species 3 |-0---------0--------4-----5----7--8---6--3-
+      |                                         *
+      |                    *     *
+      |                               *      *
+      |                                  *
+------------------------------------------------------
+Altitude  | 0 1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2
+meters      0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0
+          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                            0 0 0 0 0 0 0 0 0 0 0
+              </code>
+            </pre>
+          </li>
+          <li>
+            now simply connect the dots for each species (and ideally color
+            in the "kite" - with a different color for each species).
+            A completed Kite graph may look like the following:
+            <br>
+            <div>
+              <img src="http://www.bbc.co.uk/staticarchive/ec2a189d7ecddde97c9de7878b547d490cc050a8.jpg">
+            </div>
+            <br>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </p>
+  <h4>Making a Kite Chart -- <small>Video Review</small></h4>
+  <p>
+    For a detailed visual review of how to make kite graphs:
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/_yKtAHhTF50" allowfullscreen></iframe>
+    </div>
+  </p>
+</div>
