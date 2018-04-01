@@ -113,41 +113,62 @@
       <h1>Transect Analysis Overview</h1>
       <h3>Species Density</h3>
       <p>
-        There are several ways to represent species density over a transect.
+        There are several ways to represent & study species density over a
+        transect.
+        <br>
         These include:
         <ul>
           <li>
-            <strong>kite graphs</strong> -- vary the width of the of a line
-            representing the species count at that spot in the transect.
-            <em>(the wider line corresponds to more plants seen in the same area,
-            thus higher density)</em>.  <strong>This method will be explained in
-            details as it is relatively easy to do by hand.</strong>
-            This method also estimates population density between measurement
-            locations (often a valid assumption).  The other graphing methods show
-            the actual measuments (also sometimes important).
+            <strong>kite graphs</strong> -- are ideal for representing multiple
+            populations along a line <em>(transect)</em>.  The width of the
+            population graph is wider at a given point along the transect where
+            the population is higher.  We will be using this method as it is
+            appropriate for our transect data.
+            <div>
+              <img src="http://www.bbc.co.uk/staticarchive/ec2a189d7ecddde97c9de7878b547d490cc050a8.jpg"
+                    alt="sample kite graph" class="img-thumbnail">
+              <a class="btn btn-lg btn-primary" href="/kite"
+                  role="button">
+                Using Kite Graphs &raquo;
+              </a>
+            </div>
             <br>
-            <b>TODO: show image</b>
           </li>
           <li>
-            <strong>density plots</strong> -- vary the number of dots in a given
-            spot of the transect, thus visually representing the species density,
-            <em>(more dots = higher density)</em>
-            <br>
-            <b>TODO: show image</b>
+            <strong>density plots</strong> -- are generally used for 2D
+            population maps -- this technique would be appropraite when using
+            plot sampling (in 2 dimensions) over a specific area.  This is also
+            generally only used to represent a single species (for readability).
+            <div>
+              <img src="https://ch.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/8430/versions/3/previews/html/facsdemo_02.png"
+                    alt="sample density plot" class="img-fluid">
+            </div>
+            To do this in R you can see this article:
+            <a href="https://stackoverflow.com/questions/32622174/plotting-population-density-map-in-r-with-geom-point">
+              Density Plot using R
+            </a>
           </li>
           <li>
-            <strong>bubble graphs</strong> -- vary the size of the bubble based on
-            the density observed at that location,
-            <em>(darker tones = higher density)</em> - this might be the best way
-            to represent tree size.
+            <strong>density plot with color</strong> -- this helps differentiate
+            the high density areas.
             <br>
-            <b>TODO: show image</b>
+            When using colors instead of tones - it is important to choose
+            colors that are meaningful and not misleading.  These graphs are
+            also often used to represent temperature in 2 dimensions.
+            <div>
+              <img src="https://ch.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/8430/versions/3/previews/html/facsdemo_03.png"
+                    alt="sample colorized density plot" class="img-fluid">
+            </div>
           </li>
           <li>
-            <strong>heat graphs</strong> -- vary the tone base on density,
-            <em>(darker tones = higher density)</em>
-            <br>
-            <b>TODO: show image</b>
+            <strong>Other Transect Maping ideas</strong> -- this vide shows
+            several methods of mapping transects (when the species in each area
+            are relatively homogeneous).
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item"
+                      src="https://www.youtube.com/embed/xBIBtxCqM-8"
+                      allowfullscreen></iframe>
+            </div>
           </li>
         </ul>
       </p>
