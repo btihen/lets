@@ -1,46 +1,24 @@
-<!-- Main component for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <h1>Transect Analysis</h1>
-  <h3>Species Density</h3>
-  <p>
-    There are several ways to represent species density over a transect.
-    These include:
-    <ul>
-      <li>
-        <strong>kite graphs</strong> -- vary the width of the of a line
-        representing the species count at that spot in the transect.
-        <em>(the wider line corresponds to more plants seen in the same area,
-        thus higher density)</em>.  <strong>This method will be explained in
-        details as it is relatively easy to do by hand.</strong>
-        This method also estimates population density between measurement
-        locations (often a valid assumption).  The other graphing methods show
-        the actual measuments (also sometimes important).
-      </li>
-      <li>
-        <strong>density plots</strong> -- vary the number of dots in a given
-        spot of the transect, thus visually representing the species density,
-        <em>(more dots = higher density)</em>
-      </li>
-      <li>
-        <strong>bubble graphs</strong> -- vary the size of the bubble based on
-        the density observed at that location,
-        <em>(darker tones = higher density)</em> - this might be the best way
-        to represent tree size.
-      </li>
-      <li>
-        <strong>heat graphs</strong> -- vary the tone base on density,
-        <em>(darker tones = higher density)</em>
-      </li>
-  </p>
-  <h3>Tree Growth Changes</h3>
-  <p>
-    It is possible to graph tree circumfrence similarly to species density,
-    however, for that to be a valid representation of the data - all sites
-    would need to be of equal age.  A better way to study this data is to
-    compare yearly circumfrence changes, representing growth rates. This is
-    probably most easily done by averaging the growth rate at each location
-    and using a line graph to show the yearly changes.  <strong>However,
-    growth rates are strongly influenced by each year's weather - so it is
-    important to compare this to the year's temperature, rain fall, etc.</strong>
-  </p>
-</div>
+<h1>Species Density by Elevation</h1>
+
+<table  class="table table-sm table-striped">
+  <thead class="table-info">
+    <tr>
+      <th>Tree Plot</th>
+      <th>Elevation</th>
+      <th>Measurement Date</th>
+      <th>Species Code</th>
+      <th>Species Count per Quadrant</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @species_elevation.each do |row| %>
+      <tr>
+        <td><%= row.plot_code.to_s.upcase %></td>
+        <td><%= row.elevation_m %></td>
+        <td><%= row.measurement_date %></td>
+        <td><%= row.species_code.to_s.capitalize %></td>
+        <td><%= row.species_plot_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
