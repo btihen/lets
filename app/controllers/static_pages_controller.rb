@@ -106,7 +106,13 @@ class StaticPagesController < ApplicationController
           temp.species_code;
     }
 
-    # convert above into desired spreadsheet format (if possible)
+
+    # convert above into desired spreadsheet format (USING CROSSTAB & tablefunc extension)
+    # http://www.vertabelo.com/blog/technical-articles/creating-pivot-tables-in-postgresql-using-the-crosstab-function
+    # https://www.compose.com/articles/metrics-maven-creating-pivot-tables-in-postgresql-using-crosstab/
+    # https://stackoverflow.com/questions/3002499/postgresql-crosstab-query/11751905#11751905
+    # https://stackoverflow.com/questions/20618323/create-a-pivot-table-with-postgresql
+    # https://gist.github.com/romansklenar/8086496
     sql4 = %{
       SELECT elevation_m, extract(year from measurement_date) AS year, species_code,
           CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
