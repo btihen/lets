@@ -20,6 +20,10 @@ class StaticPagesController < ApplicationController
   end
 
   def species_elevation
+
+    # good sql resource:
+    # http://www.dofactory.com/sql/select-distinct
+
     @altitudes = TreePlot.distinct.pluck(:elevation_m).sort
     @species = TreeSpecy.distinct.pluck(:species_code).sort
     @dates = TreeMeasurement.distinct.pluck(:measurement_date).sort
