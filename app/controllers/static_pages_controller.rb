@@ -38,6 +38,7 @@ class StaticPagesController < ApplicationController
     #             tree_species.species_code")
 
     # this works
+    # sums tree count per plot by measurement date
     sql = %{
       SELECT tree_plots.plot_code, tree_plots.elevation_m,
         tree_measurements.measurement_date,
@@ -53,6 +54,84 @@ class StaticPagesController < ApplicationController
       ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
         tree_species.species_code;
     }
+
+    # https://stackoverflow.com/questions/22715130/mysql-nested-query-and-group-by
+    # https://stackoverflow.com/questions/36320861/convert-decimal-number-to-int-sql
+    # average density by date (input of first sql into second sum)
+    sql2 = %{
+      SELECT elevation_m, measurement_date, species_code,
+          CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+        FROM (
+          SELECT tree_plots.plot_code, tree_plots.elevation_m,
+            tree_measurements.measurement_date,
+            tree_species.species_code,
+            COUNT(tree_measurements.tree_specy_id) as species_plot_count
+          FROM tree_plots
+            INNER JOIN tree_measurements
+              ON tree_plots.id = tree_measurements.tree_plot_id
+            INNER JOIN tree_species
+              ON tree_measurements.tree_specy_id = tree_species.id
+          GROUP BY tree_plots.plot_code, tree_plots.elevation_m,
+            tree_measurements.measurement_date, tree_species.species_code
+          ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
+            tree_species.species_code
+        ) as temp
+        GROUP BY temp.elevation_m, temp.measurement_date, temp.species_code
+        ORDER BY temp.elevation_m, temp.measurement_date, temp.species_code;
+    }
+
+    # average by year
+    # https://stackoverflow.com/questions/17492167/group-query-results-by-month-and-year-in-postgresql
+    sql3 = %{
+      SELECT elevation_m, extract(year from measurement_date) AS year, species_code,
+          CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+        FROM (
+          SELECT tree_plots.plot_code, tree_plots.elevation_m,
+            tree_measurements.measurement_date,
+            tree_species.species_code,
+            COUNT(tree_measurements.tree_specy_id) as species_plot_count
+          FROM tree_plots
+            INNER JOIN tree_measurements
+              ON tree_plots.id = tree_measurements.tree_plot_id
+            INNER JOIN tree_species
+              ON tree_measurements.tree_specy_id = tree_species.id
+          GROUP BY tree_plots.plot_code, tree_plots.elevation_m,
+            tree_measurements.measurement_date, tree_species.species_code
+          ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
+            tree_species.species_code
+        ) as temp
+        GROUP BY temp.elevation_m, extract(year from temp.measurement_date),
+          temp.species_code
+        ORDER BY temp.elevation_m, extract(year from temp.measurement_date),
+          temp.species_code;
+    }
+
+    # convert above into desired spreadsheet format (if possible)
+    sql4 = %{
+      SELECT elevation_m, extract(year from measurement_date) AS year, species_code,
+          CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+        FROM (
+          SELECT tree_plots.plot_code, tree_plots.elevation_m,
+            tree_measurements.measurement_date,
+            tree_species.species_code,
+            COUNT(tree_measurements.tree_specy_id) as species_plot_count
+          FROM tree_plots
+            INNER JOIN tree_measurements
+              ON tree_plots.id = tree_measurements.tree_plot_id
+            INNER JOIN tree_species
+              ON tree_measurements.tree_specy_id = tree_species.id
+          GROUP BY tree_plots.plot_code, tree_plots.elevation_m,
+            tree_measurements.measurement_date, tree_species.species_code
+          ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
+            tree_species.species_code
+        ) as temp
+        GROUP BY temp.elevation_m, extract(year from temp.measurement_date),
+          temp.species_code
+        ORDER BY temp.elevation_m, extract(year from temp.measurement_date),
+          temp.species_code;
+    }
+
+
     @species_elevation = ActiveRecord::Base.connection.execute(sql)
     # @species_elevation.each{ |s| puts s.inspect }
     # using raw sql queries
