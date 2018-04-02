@@ -17,6 +17,8 @@ gem 'jquery-rails', '~> 4.3'
 gem 'devise', '~> 4.4'
 # rails generate devise:install
 
+gem 'pivot_table', '~> 1.0'
+
 # use geo data
 # http://climber2002.github.io/blog/2014/05/18/postgis-and-google-maps-in-rails-part-1/
 # gem 'activerecord-postgis-adapter'
@@ -67,6 +69,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails'
 end
 
 
