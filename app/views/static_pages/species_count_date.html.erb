@@ -1,0 +1,67 @@
+<h1>
+  Species Distribution Count by Plot
+  <br>
+  <small>for each Measurement Date</small>
+</h1>
+
+<p>
+  <a class="btn btn-lg btn-primary" href="/species_count_avg_year"
+      role="button">
+    Species Count Avg by Elevation &raquo;
+  </a>
+</p>
+
+<p>
+  The first step in preparing the raw data to graph is to summarize
+  the data by plot for each measurement date. Specifically, count the
+  number of trees for each species in each plot for each measurement date.
+  <br>
+  Take a minute and see if the data is reasonable.  Thing to consider:
+  <ol>
+    <li>
+      Are the same species found in the same plots each time?  If not why?
+    </li>
+    <li>
+      Are the same number of trees found in each plot each time?
+      Are the numbers similar?  If not why?
+    </li>
+    <li>
+      At the sites at the same altitude, are the species the same each time?
+      If not why?
+    </li>
+    <li>
+      At the sites at the same altitude, are the same or similar each time?
+      If not why?
+    </li>
+  </ol>
+  What can you conclude about this data -- before graphing it?
+  <em>
+    What would you suggest future data collectors pay attention to or note
+    while doing the measurements to improve this data set over time?
+  </em>
+</p>
+
+<strong>Download Data as CSV</strong>
+<table  class="table table-sm table-striped">
+  <thead class="table-info">
+    <tr>
+      <th>measurement_date</th>
+      <th>elevation (m)</th>
+      <th>plot_code</th>
+      <th>species_code</th>
+      <th>species_plot_count</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @species_elevation_date.each do |row| %>
+      <tr>
+        <td><%= row['measurement_date'] %></td>
+        <td><%= row['elevation_m'] %></td>
+        <td><%= row['plot_code'] %></td>
+        <td><%= row['species_code'] %></td>
+        <td><%= row['species_plot_count'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -514,7 +514,7 @@ heroku pg:backups:restore --app lets-data 'https://github.com/btihen/lets/blob/m
 
 ## add users using the console:
 ```ruby
-Admin.create!(email: "example@gmail.com", :name: "First Last", password: "secret", password_confirmation: "secret")
+Admin.create!(email: "example@gmail.com", :name: "First Last", password: "T0pSecr3t", password_confirmation: "T0pSecr3t")
 ```
 ## ANALYSIS
 *  graph tree distribution (in a transect) use a kite graph (traditional by species at altitued (dynamic by year?) & select a single species and x is year and altitudes is vertical)

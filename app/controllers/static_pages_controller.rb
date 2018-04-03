@@ -21,7 +21,11 @@ class StaticPagesController < ApplicationController
   def graph_data
   end
 
-  def species_elevation
+  def species_count_date
+    @species_elevation_date = summary_species_by_date
+  end
+
+  def species_count_avg_year
     species_by_elevation = summary_species_by_year
     # @species_elevation.each{ |s| puts s.inspect }
 
@@ -35,7 +39,6 @@ class StaticPagesController < ApplicationController
       species_pivot_by_year[year] = make_pivot_array(data)
     end
     @species_elevation_year = species_pivot_by_year
-    @species_elevation_date = summary_species_by_date
   end
 
   def species_longitudinal
