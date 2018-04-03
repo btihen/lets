@@ -512,7 +512,7 @@ pg_dump -Fc --no-acl --no-owner -h localhost -T admins -U btihen lets_developmen
 # get / dump human readable database
 pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.sql
 # restore dev database to heroku deployed app (needs to use compressed dump)
-heroku pg:backups:restore --app lets-data 'https://github.com/btihen/lets/blob/master/db/data/lets_sql_data.dump?raw=true' DATABASE_URL
+heroku pg:backups:restore --app lets-analyze 'https://github.com/btihen/lets/blob/master/db/data/lets_data.dump?raw=true' DATABASE_URL
 ```
 ## ANALYSIS
 *  graph tree distribution (in a transect) use a kite graph (traditional by species at altitued (dynamic by year?) & select a single species and x is year and altitudes is vertical)
