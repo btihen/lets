@@ -494,27 +494,25 @@ class TreeMeasurementsController < ApplicationController
   before_action :authenticate_admin!, except: [:index]
 ```
 
-make a user to test with:
+
+## add a default users using the console:
+
 ```ruby
 rails c
 # https://stackoverflow.com/questions/4316940/create-a-devise-user-from-ruby-console
-Admin.create!(email: "example@gmail.com", :name: "First Last", password: "secret", password_confirmation: "secret")
+Admin.create!(email: "example@gmail.com", name: "First Last", password: "T0pSecr3t", password_confirmation: "T0pSecr3t")
 exit
 ```
 
 push data to heroku
 ```bash
+# WITHOUT THE BASE USER
 # get / dump dev database (compressed for heroku)
 pg_dump -Fc --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.dump
 # get / dump human readable database
 pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.sql
 # restore dev database to heroku deployed app (needs to use compressed dump)
 heroku pg:backups:restore --app lets-data 'https://github.com/btihen/lets/blob/master/db/data/lets_sql_data.dump?raw=true' DATABASE_URL
-```
-
-## add users using the console:
-```ruby
-Admin.create!(email: "example@gmail.com", :name: "First Last", password: "T0pSecr3t", password_confirmation: "T0pSecr3t")
 ```
 ## ANALYSIS
 *  graph tree distribution (in a transect) use a kite graph (traditional by species at altitued (dynamic by year?) & select a single species and x is year and altitudes is vertical)
