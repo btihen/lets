@@ -228,7 +228,7 @@ exit
 rails g scaffold tree_measurement circumfrence_cm:integer \
                       measurement_date:date \
                       subquadrat:citext \
-                      tree_number:integer \
+                      tree_label:integer \
                       tree_specy:references tree_plot:references
 ```
 
@@ -240,7 +240,7 @@ class CreateTreeMeasurements < ActiveRecord::Migration[5.2]
       t.integer  :circumfrence_cm
       t.date     :measurement_date, null: false
       t.citext   :subquadrat
-      t.integer  :tree_number
+      t.integer  :tree_label
       t.references :tree_specy, foreign_key: true
       t.references :tree_plot,  foreign_key: true
 
@@ -249,7 +249,7 @@ class CreateTreeMeasurements < ActiveRecord::Migration[5.2]
     add_index :tree_measurements, :circumfrence_cm
     add_index :tree_measurements, :measurement_date
     add_index :tree_measurements, [ :tree_specy_id, :tree_plot_id,
-                                    :subquadrat, :tree_number,
+                                    :subquadrat, :tree_label,
                                     :measurement_date ],
                                   unique: true,
                                   name: 'unique_tree_entries'
@@ -270,7 +270,7 @@ csv_tree = CSV.parse(csv_tree_data, :headers => true, :encoding => 'ISO-8859-1')
 csv_tree.each do |row|
   tree = TreeMeasurement.new
   tree.subquadrat       = row['subquadrat']
-  tree.tree_number      = row['tree_number']
+  tree.tree_label      = row['tree_label']
   tree.circumfrence_cm  = row['circumfrence_cm']
   tree.measurement_date = Date.strptime(row['date'].to_s, '%m/%d/%Y')
   tree.tree_specy_id    = TreeSpecy.find_by(species_code: row['species_code']).id
@@ -317,7 +317,7 @@ exit
         <td><%= tree_measurement.tree_specy.species_code %></td>
         <td><%= tree_measurement.tree_specy.foilage_strategy %></td>
         <td><%= tree_measurement.subquadrat %></td>
-        <td><%= tree_measurement.tree_number %></td>
+        <td><%= tree_measurement.tree_label %></td>
         <td><%= tree_measurement.circumfrence_cm %></td>
         <td><%= tree_measurement.tree_plot.elevation_m %></td>
         <td><%= tree_measurement.tree_plot.latitude %></td>
@@ -407,7 +407,7 @@ class TreeMeasurement < ApplicationRecord
   end
   def self.to_csv( options={headers: true} )
     attributes = %w{  tree_plot_code tree_species_code tree_foilage_strategy
-                      subquadrat tree_number circumfrence_cm
+                      subquadrat tree_label circumfrence_cm
                       tree_elevation_m tree_latitude tree_longitude
                       measurement_date }
     CSV.generate(options) do |csv|

@@ -24,7 +24,7 @@ class TreeMeasurement < ApplicationRecord
   end
   def self.to_csv( options={headers: true} )
     attributes = %w{  tree_plot_code tree_species_code tree_foilage_strategy
-                      subquadrat tree_number circumfrence_cm
+                      subquadrat tree_label circumfrence_cm
                       tree_elevation_m tree_latitude tree_longitude
                       measurement_date }
     CSV.generate(options) do |csv|
@@ -36,7 +36,7 @@ class TreeMeasurement < ApplicationRecord
   end
   # def self.to_csv(options = {})
   #   desired_columns = %w{ tree_plot_code tree_species_code
-  #                         tree_foilage_strategy subquadrat tree_number
+  #                         tree_foilage_strategy subquadrat tree_label
   #                         circumfrence_cm tree_elevation_m tree_latitude
   #                         tree_longitude measurement_date }
   #   CSV.generate(options) do |csv|

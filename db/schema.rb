@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
-  enable_extension "tablefunc"
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -39,7 +38,7 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
     t.integer "circumfrence_cm"
     t.date "measurement_date", null: false
     t.citext "subquadrat"
-    t.integer "tree_number"
+    t.integer "tree_label"
     t.bigint "tree_specy_id"
     t.bigint "tree_plot_id"
     t.datetime "created_at", null: false
@@ -47,7 +46,7 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
     t.index ["circumfrence_cm"], name: "index_tree_measurements_on_circumfrence_cm"
     t.index ["measurement_date"], name: "index_tree_measurements_on_measurement_date"
     t.index ["tree_plot_id"], name: "index_tree_measurements_on_tree_plot_id"
-    t.index ["tree_specy_id", "tree_plot_id", "subquadrat", "tree_number", "measurement_date"], name: "unique_tree_entries", unique: true
+    t.index ["tree_specy_id", "tree_plot_id", "subquadrat", "tree_label", "measurement_date"], name: "unique_tree_entries", unique: true
     t.index ["tree_specy_id"], name: "index_tree_measurements_on_tree_specy_id"
   end
 

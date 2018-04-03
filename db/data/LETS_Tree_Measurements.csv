@@ -1,4 +1,4 @@
-plot,subquadrat,tree_number,species_code,circumfrence_cm,date
+plot,subquadrat,tree_label,species_code,circumfrence_cm,date
 LRFP,F,3,Aspen,35,5/1/2015
 LRFP,I,3,Aspen,38,5/1/2015
 LRFP,B,4,Aspen,39,5/1/2015

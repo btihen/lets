@@ -18,7 +18,7 @@ class SqlToPivotArray
       SELECT tree_plots.plot_code, tree_plots.elevation_m,
         tree_measurements.measurement_date,
         tree_species.species_code,
-        SUM(tree_measurements.tree_number) as species_plot_count
+        SUM(tree_measurements.tree_label) as species_plot_count
       FROM tree_plots
         INNER JOIN tree_measurements
           ON tree_plots.id = tree_measurements.tree_plot_id

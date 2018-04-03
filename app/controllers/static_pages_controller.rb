@@ -76,10 +76,10 @@ class StaticPagesController < ApplicationController
     # https://stackoverflow.com/questions/17492167/group-query-results-by-month-and-year-in-postgresql
 
     sql_plot_species_count = %{
-      SELECT tree_plots.plot_code, tree_plots.elevation_m,
-        tree_measurements.measurement_date,
+      SELECT tree_measurements.measurement_date,
+        tree_plots.elevation_m, tree_plots.plot_code,
         tree_species.species_code,
-        SUM(tree_measurements.tree_number) as species_plot_count
+        SUM(tree_measurements.tree_label) as species_plot_count
       FROM tree_plots
         INNER JOIN tree_measurements
           ON tree_plots.id = tree_measurements.tree_plot_id
@@ -87,7 +87,7 @@ class StaticPagesController < ApplicationController
           ON tree_measurements.tree_specy_id = tree_species.id
       GROUP BY tree_plots.plot_code, tree_plots.elevation_m,
         tree_measurements.measurement_date, tree_species.species_code
-      ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
+      ORDER BY tree_measurements.measurement_date, tree_plots.elevation_m,
         tree_species.species_code
     }
     # species_elevation = ActiveRecord::Base.connection.execute(sql_plot_species_count)
@@ -159,15 +159,15 @@ class StaticPagesController < ApplicationController
   def make_pivot_array(species_counts)
     pivot_vals = []
     # make data into a format usable by PivotTable
-    species_count.each do |hash|
+    species_counts.each do |hash|
       pivot_vals << DataRow.new( hash['elevation_m'], hash['species_code'], hash['avg_species_count'] )
     end
     # pp pivot_vals
     # configure pivot table
     pivot = PivotTable::Grid.new do |g|
       g.source_data = pivot_vals
-      g.column_name = :elevation
-      g.row_name    = :species
+      g.column_name = :species
+      g.row_name    = :elevation
       g.field_name  = :count
     end
     # build the data_grid
@@ -182,7 +182,7 @@ class StaticPagesController < ApplicationController
       # pivot_array[index] = [pivot.row_headers[index]] + pivot_array[index]
     end
     # add headers to the top of the array
-    pivot_array.unshift( ["elevation"] + pivot.row_headers )
+    pivot_array.unshift( ["elevation"] + pivot.column_headers )
   end
 
 end

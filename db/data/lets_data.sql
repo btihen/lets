@@ -90,7 +90,7 @@ CREATE TABLE tree_measurements (
     circumfrence_cm integer,
     measurement_date date NOT NULL,
     subquadrat citext,
-    tree_number integer,
+    tree_label integer,
     tree_specy_id bigint,
     tree_plot_id bigint,
     created_at timestamp without time zone NOT NULL,
@@ -234,7 +234,7 @@ COPY schema_migrations (version) FROM stdin;
 -- Data for Name: tree_measurements; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY tree_measurements (id, circumfrence_cm, measurement_date, subquadrat, tree_number, tree_specy_id, tree_plot_id, created_at, updated_at) FROM stdin;
+COPY tree_measurements (id, circumfrence_cm, measurement_date, subquadrat, tree_label, tree_specy_id, tree_plot_id, created_at, updated_at) FROM stdin;
 1	35	2015-05-01	F	3	1	11	2018-03-29 09:11:24.290883	2018-03-29 09:11:24.290883
 2	38	2015-05-01	I	3	1	11	2018-03-29 09:11:24.322608	2018-03-29 09:11:24.322608
 3	39	2015-05-01	B	4	1	11	2018-03-29 09:11:24.341513	2018-03-29 09:11:24.341513
@@ -2388,7 +2388,7 @@ CREATE UNIQUE INDEX index_tree_species_on_species_code ON tree_species USING btr
 -- Name: unique_tree_entries; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX unique_tree_entries ON tree_measurements USING btree (tree_specy_id, tree_plot_id, subquadrat, tree_number, measurement_date);
+CREATE UNIQUE INDEX unique_tree_entries ON tree_measurements USING btree (tree_specy_id, tree_plot_id, subquadrat, tree_label, measurement_date);
 
 
 --
