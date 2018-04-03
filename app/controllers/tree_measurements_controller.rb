@@ -7,8 +7,12 @@ class TreeMeasurementsController < ApplicationController
   # GET /tree_measurements
   # GET /tree_measurements.json
   def index
-    @tree_measurements = TreeMeasurement.includes(:tree_plot).
-                                          includes(:tree_specy).all
+    @tree_measurements = TreeMeasurement.includes(:tree_plot)
+                                        .includes(:tree_specy).all
+                                        .order( measurement_date: :desc,
+                                                tree_plot_id: :asc,
+                                                tree_specy_id: :desc
+                                              )
     respond_to do |format|
       format.html
       format.json

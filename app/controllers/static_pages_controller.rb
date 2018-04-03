@@ -22,7 +22,7 @@ class StaticPagesController < ApplicationController
   end
 
   def species_elevation
-    species_by_elevation = get_sql_summary_species_data()
+    species_by_elevation = summary_species_by_year
     # @species_elevation.each{ |s| puts s.inspect }
 
     # sort sql by year
@@ -34,7 +34,8 @@ class StaticPagesController < ApplicationController
     species_by_year.each do |year, data|
       species_pivot_by_year[year] = make_pivot_array(data)
     end
-    @species_elevation = species_pivot_by_year
+    @species_elevation_year = species_pivot_by_year
+    @species_elevation_date = summary_species_by_date
   end
 
   def species_longitudinal
@@ -65,7 +66,27 @@ class StaticPagesController < ApplicationController
   end
 
   private
-  def get_sql_summary_species_data
+  def summary_species_by_date
+    sql_plot_species_count = %{
+      SELECT tree_measurements.measurement_date,
+        tree_plots.elevation_m, tree_plots.plot_code,
+        tree_species.species_code,
+        COUNT(tree_measurements.tree_specy_id) as species_plot_count
+      FROM tree_plots
+        INNER JOIN tree_measurements
+          ON tree_plots.id = tree_measurements.tree_plot_id
+        INNER JOIN tree_species
+          ON tree_measurements.tree_specy_id = tree_species.id
+      GROUP BY tree_plots.plot_code, tree_plots.elevation_m,
+        tree_measurements.measurement_date, tree_species.species_code
+      ORDER BY extract(year from tree_measurements.measurement_date) DESC,
+        tree_plots.elevation_m, tree_plots.plot_code, tree_species.species_code
+    }
+    species_elevation = ActiveRecord::Base.connection.execute(sql_plot_species_count)
+    # species_elevation.each{ |s| puts s.inspect }
+  end
+
+  def summary_species_by_year
     # good sql resource:
     # http://www.dofactory.com/sql/select-distinct
 
@@ -79,7 +100,7 @@ class StaticPagesController < ApplicationController
       SELECT tree_measurements.measurement_date,
         tree_plots.elevation_m, tree_plots.plot_code,
         tree_species.species_code,
-        SUM(tree_measurements.tree_label) as species_plot_count
+        COUNT(tree_measurements.tree_specy_id) as species_plot_count
       FROM tree_plots
         INNER JOIN tree_measurements
           ON tree_plots.id = tree_measurements.tree_plot_id
@@ -88,7 +109,7 @@ class StaticPagesController < ApplicationController
       GROUP BY tree_plots.plot_code, tree_plots.elevation_m,
         tree_measurements.measurement_date, tree_species.species_code
       ORDER BY tree_measurements.measurement_date, tree_plots.elevation_m,
-        tree_species.species_code
+        tree_plots.plot_code, tree_species.species_code
     }
     # species_elevation = ActiveRecord::Base.connection.execute(sql_plot_species_count)
     # species_elevation.each{ |s| puts s.inspect }
@@ -98,7 +119,7 @@ class StaticPagesController < ApplicationController
     # https://stackoverflow.com/questions/22715130/mysql-nested-query-and-group-by
     # https://stackoverflow.com/questions/36320861/convert-decimal-number-to-int-sql
     # avg_species_plot_meas_date = %{
-    #   SELECT elevation_m, measurement_date, species_code,
+    #   SELECT elevation_m, plot_code, measurement_date, species_code,
     #       CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
     #     FROM (
     #       SELECT tree_plots.plot_code, tree_plots.elevation_m,
@@ -115,8 +136,9 @@ class StaticPagesController < ApplicationController
     #       ORDER BY tree_plots.elevation_m, tree_measurements.measurement_date,
     #         tree_species.species_code
     #     ) as temp
-    #     GROUP BY temp.elevation_m, temp.measurement_date, temp.species_code
-    #     ORDER BY temp.elevation_m, temp.measurement_date, temp.species_code;
+    #     WHERE extract(year from temp.measurement_date) = 2016
+    #     GROUP BY temp.measurement_date, temp.elevation_m,  temp.species_code
+    #     ORDER BY temp.measurement_date, temp.elevation_m, temp.species_code;
     # }
     # avg_species_plot_measurement_date = %{
     #   SELECT elevation_m, measurement_date, species_code,

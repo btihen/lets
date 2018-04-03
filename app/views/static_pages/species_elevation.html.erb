@@ -1,6 +1,6 @@
 <h1>Species by Elevation</h1>
 
-<% @species_elevation.reverse_each do |year,data| %>
+<% @species_elevation_year.reverse_each do |year,data| %>
 
 <h3><%= year %> Data Set</h3>
   <strong>Download Data as CSV</strong>
@@ -25,5 +25,33 @@
       <% end %>
     <% end %>
   </table>
-
 <% end %>
+
+<hr>
+
+<h3>Species Count by Plot for each Measurement Date</h3>
+
+<strong>Download Data as CSV</strong>
+<table  class="table table-sm table-striped">
+  <thead class="table-info">
+    <tr>
+      <th>measurement_date</th>
+      <th>elevation (m)</th>
+      <th>plot_code</th>
+      <th>species_code</th>
+      <th>species_plot_count</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @species_elevation_date.each do |row| %>
+      <tr>
+        <td><%= row['measurement_date'] %></td>
+        <td><%= row['elevation_m'] %></td>
+        <td><%= row['plot_code'] %></td>
+        <td><%= row['species_code'] %></td>
+        <td><%= row['species_plot_count'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
