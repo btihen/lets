@@ -30,15 +30,14 @@
   What can you conclude about this viewing this data graphically?
 </p>
 
+<h6><%= link_to 'CSV Download',
+                species_count_avg_year_path(format: :csv) %></h6>
+
 <hr witdh="5">
 
 <% @species.each do |year,data_grid| %>
 
   <h3><%= year %> Data Set</h3>
-
-  <!-- <h6>Download <%= year %> Data as CSV</h6> -->
-  <h6><%= link_to 'CSV Download',
-                        species_count_avg_year_path(format: :csv) %></h6>
 
   <table  class="table table-sm table-striped">
     <% data_grid.each_with_index do |row,index| %>
