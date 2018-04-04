@@ -22,7 +22,15 @@ class StaticPagesController < ApplicationController
   end
 
   def species_count_date
-    @species_elevation_date = summary_species_by_date
+    @species = summary_species_by_date
+    respond_to do |format|
+      format.html
+      # format.json
+      format.csv {send_data SqlToCsv.new(@species).run,
+                    filename: "lets_species_count_by_date-#{Date.today}.csv"}
+      # format.csv { send_data SqlToCsv.(@species),
+      #                 filename: "lets_species_count-#{Date.today}.csv" }
+    end
   end
 
   def species_count_avg_year
@@ -38,7 +46,15 @@ class StaticPagesController < ApplicationController
     species_by_year.each do |year, data|
       species_pivot_by_year[year] = make_pivot_array(data)
     end
-    @species_elevation_year = species_pivot_by_year
+    @species = species_pivot_by_year
+    respond_to do |format|
+      format.html
+      # format.json
+      format.csv {send_data SqlToCsv.new(species_by_elevation).run,
+                    filename: "lets_species_avg_count_yearly-#{Date.today}.csv"}
+      # format.csv { send_data SqlToCsv.(@species),
+      #                 filename: "lets_species_count-#{Date.today}.csv" }
+    end
   end
 
   def species_longitudinal
@@ -166,7 +182,7 @@ class StaticPagesController < ApplicationController
         ) as temp
         GROUP BY extract(year from temp.measurement_date),
           temp.elevation_m, temp.species_code
-        ORDER BY extract(year from temp.measurement_date),
+        ORDER BY extract(year from temp.measurement_date) DESC,
           temp.elevation_m, temp.species_code
     }
     species_by_elevation = ActiveRecord::Base.connection.execute(avg_species_plot_year)
@@ -202,7 +218,7 @@ class StaticPagesController < ApplicationController
     pivot_array.each_with_index do |row, index|
       # convert data nils into 0
       pivot_array[index] = pivot_array[index].map{|r| r||0 }
-      # add the elevation to the array
+      # add the elevation to the front of the row
       pivot_array[index].unshift( pivot.row_headers[index] )
       # pivot_array[index] = [pivot.row_headers[index]] + pivot_array[index]
     end

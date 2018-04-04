@@ -17,7 +17,7 @@
   number of trees for each species in each plot for each measurement date.
   <br>
   Take a minute and see if the data is reasonable.  Thing to consider:
-  <ol>
+  <ul>
     <li>
       Are the same species found in the same plots each time?  If not why?
     </li>
@@ -33,7 +33,7 @@
       At the sites at the same altitude, are the same or similar each time?
       If not why?
     </li>
-  </ol>
+  </ul>
   What can you conclude about this data -- before graphing it?
   <em>
     What would you suggest future data collectors pay attention to or note
@@ -41,27 +41,36 @@
   </em>
 </p>
 
-<strong>Download Data as CSV</strong>
-<table  class="table table-sm table-striped">
-  <thead class="table-info">
-    <tr>
-      <th>measurement_date</th>
-      <th>elevation (m)</th>
-      <th>plot_code</th>
-      <th>species_code</th>
-      <th>species_plot_count</th>
-    </tr>
-  </thead>
+<h6><%= link_to 'CSV Download', species_count_date_path(format: :csv) %></h6>
 
-  <tbody>
-    <% @species_elevation_date.each do |row| %>
+<hr witdh="5">
+
+<% groups = @species.group_by{ |r| r['measurement_date'] } %>
+
+<% groups.each do |date, data_grid| %>
+
+  <h3><%= date %> Measurement Date</h3>
+
+  <table  class="table table-sm table-striped">
+    <thead class="table-info">
       <tr>
-        <td><%= row['measurement_date'] %></td>
-        <td><%= row['elevation_m'] %></td>
-        <td><%= row['plot_code'] %></td>
-        <td><%= row['species_code'] %></td>
-        <td><%= row['species_plot_count'] %></td>
+        <th>elevation (m)</th>
+        <th>Plot Code</th>
+        <th>Species Code</th>
+        <th>Species Count per Plot</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% data_grid.each do |row| %>
+        <tr>
+          <td><%= row['elevation_m'] %></td>
+          <td><%= row['plot_code'] %></td>
+          <td><%= row['species_code'] %></td>
+          <td><%= row['species_plot_count'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>

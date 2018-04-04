@@ -8,7 +8,7 @@
   see: <a href="/graph_data" target="_blank">making kite graph instructions</a>
   <br>
   Take a minute and see if the graphs and data are reasonable.  Thing to consider:
-  <ol>
+  <ul>
     <li>
       Which species have limited range?  Why?
     </li>
@@ -26,18 +26,22 @@
       Which species are mostly like to change their range as climate changes?
       Why?
     </li>
-  </ol>
+  </ul>
   What can you conclude about this viewing this data graphically?
 </p>
 
+<hr witdh="5">
 
-<% @species_elevation_year.reverse_each do |year,data| %>
+<% @species.each do |year,data_grid| %>
 
   <h3><%= year %> Data Set</h3>
 
-  <strong>Download Data as CSV</strong>
+  <!-- <h6>Download <%= year %> Data as CSV</h6> -->
+  <h6><%= link_to 'CSV Download',
+                        species_count_avg_year_path(format: :csv) %></h6>
+
   <table  class="table table-sm table-striped">
-    <% data.each_with_index do |row,index| %>
+    <% data_grid.each_with_index do |row,index| %>
       <% if index.eql? 0 %>
         <thead class="table-info">
           <tr>
