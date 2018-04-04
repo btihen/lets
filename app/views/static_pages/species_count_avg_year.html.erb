@@ -6,6 +6,10 @@
   This data can now be graphed using a kite chart to study the species
   distribution -- for kite graph species distribution graphing instructions,
   see: <a href="/graph_data" target="_blank">making kite graph instructions</a>
+  or the video:
+  <a href="https://www.youtube.com/watch?v=_yKtAHhTF50" target="_blank">
+    making kite graphs video
+  </a>
   <br>
   Take a minute and see if the graphs and data are reasonable.  Thing to consider:
   <ul>
@@ -30,15 +34,21 @@
   What can you conclude about this viewing this data graphically?
 </p>
 
-<h6><%= link_to 'CSV Download',
-                species_count_avg_year_path(format: :csv) %></h6>
+<h6>
+  <% # TODO: allow download in a cross table format (by year?) %>
+  <%= link_to 'CSV Download',
+                species_count_avg_year_path(format: :csv) %>
+  <br>
+  <small>
+    <em>(you will need to do a pivot on this csv to use for kite graphing)</em>
+  </small>
+</h6>
 
 <hr witdh="5">
 
 <% @species.each do |year,data_grid| %>
 
   <h3><%= year %> Data Set</h3>
-
   <table  class="table table-sm table-striped">
     <% data_grid.each_with_index do |row,index| %>
       <% if index.eql? 0 %>
