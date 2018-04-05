@@ -34,26 +34,29 @@ class StaticPagesController < ApplicationController
   end
 
   def species_count_avg_year
+    # get the sql species counted by plot and averaged by year
     species_by_elevation = summary_species_by_year
-    # @species_elevation.each{ |s| puts s.inspect }
-
+    #
     # sort sql by year
     species_by_year = species_by_elevation.group_by{ |r| r['year'] }
-    # pp species_by_year
 
     # convert each year of data to a pivot table
     species_pivot_by_year = {}
     species_by_year.each do |year, data|
       species_pivot_by_year[year] = make_pivot_array(data)
     end
+
     @species = species_pivot_by_year
     respond_to do |format|
       format.html
       # format.json
-      format.csv {send_data SqlToCsv.new(species_by_elevation).run,
+      # format.csv { send_data SqlToCsv.(species_pivot_by_year),
+      #               filename: "lets_species_count-#{Date.today}.csv" }
+      format.csv {send_data ArrayToCsv.( grouped_hash_to_array(@species) ),
                     filename: "lets_species_avg_count_yearly-#{Date.today}.csv"}
-      # format.csv { send_data SqlToCsv.(@species),
-      #                 filename: "lets_species_count-#{Date.today}.csv" }
+      # format.csv {send_data ArrayToCsv.new(
+      #                       grouped_hash_to_array(@species) ).run,
+      #               filename: "lets_species_avg_count_yearly-#{Date.today}.csv"}
     end
   end
 
@@ -85,6 +88,18 @@ class StaticPagesController < ApplicationController
   end
 
   private
+
+  def grouped_hash_to_array(grouped_hash)
+    array  = []
+    # species_pivot_array << ["Year"] + species_pivot_by_year.first[1][0]
+    grouped_hash.each do |year, data|
+      data.each_with_index do |row, index|
+        array << ["Year #{year}"] + row if index.eql? 0
+        array << [year] + row       unless index.eql? 0
+      end
+    end
+    array
+  end
   def summary_species_by_date
     sql_plot_species_count = %{
       SELECT tree_measurements.measurement_date,
