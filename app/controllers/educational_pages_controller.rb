@@ -1,4 +1,4 @@
-class StaticPagesController < ApplicationController
+class EducationalPagesController < ApplicationController
 
   before_action :authenticate_admin!, only: []
 
