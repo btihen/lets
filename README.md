@@ -508,7 +508,8 @@ push data to heroku
 ```bash
 # WITHOUT THE BASE USER
 # get / dump dev database (compressed for heroku)
-pg_dump -Fc --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.dump
+pg_dump -Fc --no-acl --no-owner -h localhost -U btihen lets_development > db/data/lets_data.dump
+# pg_dump -Fc --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.dump
 # get / dump human readable database
 pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.sql
 # restore dev database to heroku deployed app (needs to use compressed dump)
