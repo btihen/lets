@@ -73,7 +73,7 @@ cat LETS_Master_Data.csv | cut -d',' -f1,7-9 | sort | uniq | sed 's/°//g' > LET
 # (note2: database now has
 # * foliage_strategy (deciduous, evergreen & unknown)
 # * foliage_type (broad_leaf & needle)
-# * and seed_type (cone, unknown)
+# * and taxonomy (cone, unknown)
 cat LETS_Master_Data.csv | cut -d',' -f4,6 | sort | uniq | grep -v 'unknown,$' > LETS_Species_Data.csv
 
 # remove decimals & "+" from data
@@ -163,7 +163,7 @@ exit
 **Model**
 ```bash
 rails g scaffold tree_species species_name:string species_code:citext \
-                      foilage_type:citext foilage_strategy:citext seed_type:citext
+                      foilage_type:citext foilage_strategy:citext taxonomy:citext
 ```
 
 ```ruby
@@ -175,7 +175,7 @@ class CreateTreeSpecies < ActiveRecord::Migration[5.2]
       t.citext :species_code, null: false
       t.citext :foilage_strategy
       t.citext :foilage_type
-      t.citext :seed_type
+      t.citext :taxonomy
 
       t.timestamps
     end
@@ -200,15 +200,15 @@ csv_species.each do |row|
   species.species_code     = row['species_code'].downcase
   case row['foilage_strategy'].downcase
   when 'deciduous'
-    # species.seed_type        = ''
+    # species.taxonomy        = ''
     species.foilage_type     = 'broad leaf'
     species.foilage_strategy = 'deciduous'
   when 'conifer'
-    species.seed_type        = 'cone'
+    species.taxonomy        = 'cone'
     species.foilage_type     = 'needle'
     species.foilage_strategy = 'evergreen'
   else
-    species.seed_type        = 'unknown'
+    species.taxonomy        = 'unknown'
     species.foilage_type     = 'unknown'
     species.foilage_strategy = 'unknown'
   end

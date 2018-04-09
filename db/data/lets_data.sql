@@ -190,7 +190,7 @@ CREATE TABLE public.tree_species (
     species_code public.citext NOT NULL,
     foilage_strategy public.citext,
     foilage_type public.citext,
-    seed_type public.citext,
+    taxonomy public.citext,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2262,7 +2262,7 @@ COPY public.tree_plots (id, plot_name, plot_code, elevation_m, latitude, longitu
 -- Data for Name: tree_species; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.tree_species (id, species_name, species_code, foilage_strategy, foilage_type, seed_type, created_at, updated_at) FROM stdin;
+COPY public.tree_species (id, species_name, species_code, foilage_strategy, foilage_type, taxonomy, created_at, updated_at) FROM stdin;
 1	Aspen	aspen	deciduous	broad leaf	\N	2018-04-03 18:10:08.453756	2018-04-03 18:10:08.453756
 2	B	b	deciduous	broad leaf	\N	2018-04-03 18:10:08.476086	2018-04-03 18:10:08.476086
 3	BA	ba	deciduous	broad leaf	\N	2018-04-03 18:10:08.478884	2018-04-03 18:10:08.478884

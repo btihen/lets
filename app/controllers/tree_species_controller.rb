@@ -71,6 +71,6 @@ class TreeSpeciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tree_specy_params
-      params.require(:tree_specy).permit(:species_name, :species_code, :foilage_type, :foilage_strategy, :seed_type)
+      params.require(:tree_specy).permit(:species_name, :species_code, :foilage_type, :foilage_strategy, :taxonomy)
     end
 end

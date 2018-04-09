@@ -5,8 +5,10 @@
 <table class="table table-striped">
   <thead class="table-info">
     <tr>
-      <th>Plot name</th>
-      <th>Plot code</th>
+      <th>Plot Name</th>
+      <th>Plot Code</th>
+      <th>Plot Slope</th>
+      <th>Plot Aspect</th>
       <th>Plot Elevation (m)</th>
       <th>Plot Latitude</th>
       <th>Plot Longitude</th>
@@ -19,6 +21,8 @@
       <tr>
         <td><%= tree_plot.plot_name %></td>
         <td><%= tree_plot.plot_code.to_s.upcase %></td>
+        <td><%= tree_plot.plot_slope %></td>
+        <td><%= tree_plot.plot_aspect %></td>
         <td><%= tree_plot.elevation_m %></td>
         <td><%= tree_plot.latitude %></td>
         <td><%= tree_plot.longitude %></td>

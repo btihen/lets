@@ -9,7 +9,7 @@
       <th>Species Code</th>
       <th>Foilage Type</th>
       <th>Foliage Strategy</th>
-      <th>Seed Type</th>
+      <th>Taxonomy</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
         <td><%= tree_specy.species_code.to_s.upcase %></td>
         <td><%= tree_specy.foilage_type %></td>
         <td><%= tree_specy.foilage_strategy %></td>
-        <td><%= tree_specy.seed_type %></td>
+        <td><%= tree_specy.taxonomy %></td>
         <% if admin_signed_in? %>
           <td><%= link_to 'Show', tree_specy %></td>
           <td><%= link_to 'Edit', edit_tree_specy_path(tree_specy) %></td>

@@ -3,6 +3,8 @@ class CreateTreePlots < ActiveRecord::Migration[5.2]
     create_table :tree_plots do |t|
       t.string  :plot_name,   null: false
       t.citext  :plot_code,   null: false
+      t.integer :plot_slope
+      t.integer :plot_aspect
       t.integer :elevation_m, null: false
       t.decimal :latitude,    precision: 12, scale: 8, null: false
       t.decimal :longitude,   precision: 12, scale: 8, null: false

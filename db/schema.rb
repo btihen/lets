@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
   create_table "tree_plots", force: :cascade do |t|
     t.string "plot_name", null: false
     t.citext "plot_code", null: false
+    t.integer "plot_slope"
+    t.integer "plot_aspect"
     t.integer "elevation_m", null: false
     t.decimal "latitude", precision: 12, scale: 8, null: false
     t.decimal "longitude", precision: 12, scale: 8, null: false
@@ -67,7 +69,7 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
     t.citext "species_code", null: false
     t.citext "foilage_strategy"
     t.citext "foilage_type"
-    t.citext "seed_type"
+    t.citext "taxonomy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["species_code"], name: "index_tree_species_on_species_code", unique: true

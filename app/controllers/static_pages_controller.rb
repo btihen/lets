@@ -40,7 +40,8 @@ class StaticPagesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json  { render json: { "language" => @languages.as_json(:root => false) }.to_json }
+      format.json
+      # format.json  { render json: { "language" => @languages.as_json(:root => false) }.to_json }
       # species averaged by year in pivot table format
       format.csv {send_data Convert::ArrayToCsv.(
                                       Convert::GroupedHashToArray.(@species) ),

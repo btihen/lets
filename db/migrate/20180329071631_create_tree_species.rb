@@ -5,7 +5,7 @@ class CreateTreeSpecies < ActiveRecord::Migration[5.2]
       t.citext :species_code, null: false
       t.citext :foilage_strategy
       t.citext :foilage_type
-      t.citext :seed_type
+      t.citext :taxonomy
 
       t.timestamps
     end
