@@ -1,15 +1,8 @@
-<h1>Species Distribution Count <small>Averaged by Year</small></h1>
+<h1>
+  Species Count -- Averaged by Year
+</h1>
 
-<h3>Do your own Graph and Analysis</h3
-
-<!--
-<p>
-  <a class="btn btn-lg btn-primary" href="/tree_measurements"
-      role="button">
-    View & Analyze Raw Data Yourself &raquo;
-  </a>
-</p>
--->
+<h3><strong>Do your own</strong> Graph and Analysis</h3
 
 <p>
   This is the data counts averaged by plot each year by elevation.
@@ -48,7 +41,7 @@
 <h6>
   <% # TODO: allow download in a cross table format (by year?) %>
   <%= link_to 'CSV Download',
-                species_count_avg_year_path(format: :csv) %>
+                species_avg_by_year_path(format: :csv) %>
 </h6>
 
 <hr witdh="5">

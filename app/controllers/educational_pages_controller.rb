@@ -49,7 +49,7 @@ class EducationalPagesController < ApplicationController
     end
   end
 
-  def species_count_avg_year
+  def species_avg_by_year
     # get the sql species counted by plot and averaged by year
     species_by_elevation = SqlQueries::Species.(:yearly_avg_by_elevation )
 
