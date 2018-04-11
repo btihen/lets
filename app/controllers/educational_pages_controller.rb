@@ -37,7 +37,7 @@ class EducationalPagesController < ApplicationController
 
     # convert data sets (years) to pivot tables
     @species = data_sets_to_pivot_tables(species_by_elevation, 'measurement_date')
-    
+
     respond_to do |format|
       format.html
       format.json
@@ -66,6 +66,25 @@ class EducationalPagesController < ApplicationController
                     filename: "lets_species_avg_count_yearly-#{Date.today}.csv"}
     end
   end
+
+  def species_avg_by_decade
+    # get the sql species counted by plot and averaged by year
+    species_by_elevation = SqlQueries::Species.(:decade_avg_by_elevation )
+
+    # convert data sets (years) to pivot tables
+    @species = data_sets_to_pivot_tables(species_by_elevation, 'decade')
+
+    respond_to do |format|
+      format.html
+      format.json
+      # format.json  { render json: { "language" => @languages.as_json(:root => false) }.to_json }
+      # species averaged by year in pivot table format
+      format.csv {send_data Convert::ArrayToCsv.(
+                                      Convert::GroupedHashToArray.(@species) ),
+                    filename: "lets_species_avg_count_decade-#{Date.today}.csv"}
+    end
+  end
+
 
   def species_longitudinal
     # # get every unique altitude

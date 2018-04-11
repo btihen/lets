@@ -29,9 +29,13 @@ module SqlQueries
       when :plot_count_by_date
         sql_query = species_per_plot_count_per_date
       when :date_avg_by_elevation
-        sql_query = avg_species_per_elevation_per_date
+        sql_query = avg_species_per_elevation_by_date
       when :yearly_avg_by_elevation
-        sql_query = avg_species_per_elevation_per_year
+        sql_query = avg_species_per_elevation_by_year
+      when :decade_avg_by_elevation
+        sql_query = avg_species_per_elevation_by_decade
+      when :decade_avg_all
+        sql_query = avg_species_per_elevation_all
       else
         raise NotImplementedError
       end
@@ -58,7 +62,7 @@ module SqlQueries
       }
     end
 
-    def avg_species_per_elevation_per_date
+    def avg_species_per_elevation_by_date
       %{
         SELECT
             measurement_date,
@@ -74,7 +78,7 @@ module SqlQueries
       }
     end
 
-    def avg_species_per_elevation_per_year
+    def avg_species_per_elevation_by_year
       %{
         SELECT
             CAST(extract(year from measurement_date) AS INTEGER) AS year,
@@ -89,6 +93,67 @@ module SqlQueries
             temp.elevation_m, temp.species_code
       }
     end
+
+    def avg_species_per_elevation_by_decade
+      # https://www.postgresql.org/message-id/162867790707271230u4258b9a9re0b672e948e44684%40mail.gmail.com
+      # https://dba.stackexchange.com/questions/86274/group-by-range-of-years?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+      # %{
+      #   SELECT
+      #       filter (where year between 2015 and 2019) as range2010_2014,
+      #       filter (where year between 2020 and 2024) as range2010_2014,
+      #       filter (where year between 2025 and 2029) as range2010_2014,
+      #       elevation_m, species_code,
+      #       CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+      #     FROM (
+      #       #{species_per_plot_count_per_date}
+      #     ) as temp
+      #     GROUP BY
+      #       temp.elevation_m, temp.species_code
+      #     ORDER BY
+      #       temp.elevation_m, temp.species_code
+      # }
+      %{
+        SELECT
+            elevation_m, species_code,
+            CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+          FROM (
+            #{species_per_plot_count_per_date}
+          ) as temp
+          GROUP BY
+            temp.elevation_m, temp.species_code
+          ORDER BY
+            temp.elevation_m, temp.species_code
+      }
+      # %{
+      #   SELECT
+      #       CAST(extract(year from measurement_date) AS INTEGER) AS year,
+      #       elevation_m, species_code,
+      #       CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+      #     FROM (
+      #       #{species_per_plot_count_per_date}
+      #     ) as temp
+      #     GROUP BY extract(year from temp.measurement_date),
+      #       temp.elevation_m, temp.species_code
+      #     ORDER BY extract(year from temp.measurement_date) DESC,
+      #       temp.elevation_m, temp.species_code
+      # }
+    end
+
+    def avg_species_per_elevation_all
+      %{
+        SELECT
+            elevation_m, species_code,
+            CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
+          FROM (
+            #{species_per_plot_count_per_date}
+          ) as temp
+          GROUP BY
+            temp.elevation_m, temp.species_code
+          ORDER BY
+            temp.elevation_m, temp.species_code
+      }
+    end
+
 
     # sql resources:
     # http://www.dofactory.com/sql/select-distinct

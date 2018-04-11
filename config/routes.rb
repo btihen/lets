@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'species_count_date',  to: "educational_pages#species_count_date"
   get 'species_avg_by_date', to: "educational_pages#species_avg_by_date"
   get 'species_avg_by_year', to: "educational_pages#species_avg_by_year"
+  get 'species_avg_by_decade', to: "educational_pages#species_avg_by_decade"
   get 'species_longitudinal',to: "educational_pages#species_longitudinal"
   get 'growth_animated',     to: "educational_pages#growth_animated"
   get 'growth_elevation',    to: "educational_pages#growth_elevation"

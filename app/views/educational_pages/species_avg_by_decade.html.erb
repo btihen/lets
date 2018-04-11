@@ -1,0 +1,14 @@
+<h1>
+  Species Count -- <small>Averaged by Decade</small>
+</h1>
+
+<br>
+
+<%= render 'student_analyze_graph_instructions' %>
+
+<h6>
+  <% # TODO: allow download in a cross table format (by year?) %>
+  <%= link_to 'CSV Download', species_avg_by_decade_path(format: :csv) %>
+</h6>
+
+<%= render 'species_avg_display', species: @species %>
