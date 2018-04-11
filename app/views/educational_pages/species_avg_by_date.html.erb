@@ -1,4 +1,5 @@
-<h1>Species Distribution Count <small>Averaged by Year</small></h1>
+<h1>Species Distribution Count <small>Averaged by Measurement Date</small></h1>
+
 
 <h3>Do your own Graph and Analysis</h3
 
@@ -47,15 +48,14 @@
 
 <h6>
   <% # TODO: allow download in a cross table format (by year?) %>
-  <%= link_to 'CSV Download',
-                species_count_avg_year_path(format: :csv) %>
+  <%= link_to 'CSV Download', species_avg_by_date_path(format: :csv) %>
 </h6>
 
 <hr witdh="5">
 
-<% @species.each do |year,data_grid| %>
+<% @species.each do |date,data_grid| %>
 
-  <h3><%= year %> Data Set</h3>
+  <h3><%= date %> Data Set</h3>
   <table  class="table table-sm table-striped">
     <% data_grid.each_with_index do |row,index| %>
       <% if index.eql? 0 %>

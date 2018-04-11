@@ -28,6 +28,8 @@ module SqlQueries
       case data_request
       when :plot_count_by_date
         sql_query = species_per_plot_count_per_date
+      when :date_avg_by_elevation
+        sql_query = avg_species_per_elevation_per_date
       when :yearly_avg_by_elevation
         sql_query = avg_species_per_elevation_per_year
       else
@@ -38,7 +40,8 @@ module SqlQueries
 
     def species_per_plot_count_per_date
       %{
-        SELECT tree_measurements.measurement_date,
+        SELECT
+          tree_measurements.measurement_date,
           tree_plots.elevation_m, tree_plots.plot_code,
           tree_species.species_code,
           COUNT(tree_measurements.tree_specy_id) as species_plot_count
@@ -55,16 +58,19 @@ module SqlQueries
       }
     end
 
-    def avg_species_per_elevataion_per_date
+    def avg_species_per_elevation_per_date
       %{
-        SELECT elevation_m, measurement_date, species_code,
+        SELECT
+            measurement_date,
+            elevation_m, species_code,
             CAST(AVG(species_plot_count) AS INTEGER) AS avg_species_count
           FROM (
             #{species_per_plot_count_per_date}
           ) as temp
-          GROUP BY temp.elevation_m, temp.measurement_date, temp.species_code
-          ORDER BY tree_measurements.measurement_date DESC,
-            temp.elevation_m, temp.measurement_date, temp.species_code;
+          GROUP BY temp.measurement_date,
+            temp.elevation_m, temp.species_code
+          ORDER BY temp.measurement_date DESC,
+            temp.elevation_m, temp.species_code;
       }
     end
 
