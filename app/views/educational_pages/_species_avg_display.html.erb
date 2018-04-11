@@ -1,0 +1,28 @@
+
+<hr witdh="5">
+
+<% species.each do |group,data_grid| %>
+
+  <h3><%= group %> Data Set</h3>
+  <table  class="table table-sm table-striped">
+    <% data_grid.each_with_index do |row,index| %>
+      <% if index.eql? 0 %>
+        <thead class="table-info">
+          <tr>
+            <% row.each do |header| %>
+              <th><%= header %></th>
+            <% end %>
+          </tr>
+        </thead>
+      <% else %>
+        <tbody>
+          <tr>
+            <% row.each do |measurement| %>
+              <td><%= measurement %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>

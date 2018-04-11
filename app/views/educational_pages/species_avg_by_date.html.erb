@@ -2,71 +2,12 @@
   Species Count -- <small>Averaged by Date</small>
 </h1>
 <br>
-<h3><strong>Do your own</strong> Graph and Analysis</h3>
-<br>
-<p>
-  This is the data counts averaged by plot each year by elevation.
-  <br>
-  This data can now be graphed using a kite chart to study the species
-  distribution -- for kite graph species distribution graphing instructions,
-  see: <a href="/graph_data" target="_blank">making kite graph instructions</a>
-  or the video:
-  <a href="https://www.youtube.com/watch?v=_yKtAHhTF50" target="_blank">
-    making kite graphs video
-  </a>
-  <br>
-  Take a minute and see if the graphs and data are reasonable.  Thing to consider:
-  <ul>
-    <li>
-      Which species have limited range?  Why?
-    </li>
-    <li>
-      Which species are found every where?  Why?
-    </li>
-      <li>
-        Are these results reasonable?  Why or why not?
-      </li>
-    <li>
-      Can you see any evidence of range changes over time?
-      Why or why not?
-    </li>
-    <li>
-      Which species are mostly like to change their range as climate changes?
-      Why?
-    </li>
-  </ul>
-  What can you conclude about this viewing this data graphically?
-</p>
+
+<%= render 'student_analyze_graph_instructions' %>
 
 <h6>
   <% # TODO: allow download in a cross table format (by year?) %>
   <%= link_to 'CSV Download', species_avg_by_date_path(format: :csv) %>
 </h6>
 
-<hr witdh="5">
-
-<% @species.each do |date,data_grid| %>
-
-  <h3><%= date %> Data Set</h3>
-  <table  class="table table-sm table-striped">
-    <% data_grid.each_with_index do |row,index| %>
-      <% if index.eql? 0 %>
-        <thead class="table-info">
-          <tr>
-            <% row.each do |header| %>
-              <th><%= header %></th>
-            <% end %>
-          </tr>
-        </thead>
-      <% else %>
-        <tbody>
-          <tr>
-            <% row.each do |measurement| %>
-              <td><%= measurement %></td>
-            <% end %>
-          </tr>
-        </tbody>
-      <% end %>
-    <% end %>
-  </table>
-<% end %>
+<%= render 'species_avg_display', species: @species %>
