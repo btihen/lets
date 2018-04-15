@@ -5,19 +5,20 @@
 <h5>
   <%= link_to 'CSV Download', tree_plots_path(format: :csv) %>
   <% if admin_signed_in? %>
-    <br>
-    CSV Import:
+    <hr>
+    Import new CSV Data
     <%= form_for :tree_plots, url: tree_plots_import_csv_path,
                             multipart: true do |form| %>
-      <%= form.file_field :csv_file %>
-      <%= form.submit "Import" %>
+      <%= form.file_field :csv_file, class: "btn btn-sm btn-light" %>
+      <%= form.submit "Import", class: "btn btn-sm btn-info" %>
     <% end %>
     <small>
-      Import fields:
-      (transect_code, plot_code, plot_name, plot_slope, plot_aspect,
-      elevation_m, latitude, longitude)
+      <strong>Import fields:</strong>
+      <em>(transect_code, plot_code, plot_name, plot_slope, plot_aspect,
+      elevation_m, latitude, longitude)</em>
       -- other fields will be ignored
     </small>
+    <hr>
   <% end %>
 </h5>
 

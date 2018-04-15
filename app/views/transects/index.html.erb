@@ -5,23 +5,24 @@
 <h5>
   <%= link_to 'CSV Download', transects_path(format: :csv) %>
   <% if admin_signed_in? %>
-    <br>
-    CSV Import:
+    <hr>
+    Import new CSV Data:
     <%= form_for :transects, url: transects_import_csv_path,
                             multipart: true do |form| %>
-      <%= form.file_field :csv_file %>
-      <%= form.submit "Import" %>
+      <%= form.file_field :csv_file, class: "btn btn-sm btn-light" %>
+      <%= form.submit "Import", class: "btn btn-sm btn-info" %>
     <% end %>
     <small>
-      Import fields:
-      (transect_code, transect_name, target_slope, target_aspect)
+      <strong>Import fields:</strong>
+      <em>(transect_code, transect_name, target_slope, target_aspect)</em>
       -- other fields will be ignored
     </small>
+    <hr>
   <% end %>
 </h5>
 
 <table class="table table-striped">
-  <thead>
+  <thead class="table-info">
     <tr>
       <th class="text-center">Transect code</th>
       <th class="text-center">Transect name</th>
