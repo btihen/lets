@@ -9,6 +9,8 @@ csv_plot.each do |row|
   plot.elevation_m = row['elevation_m']
   plot.latitude    = row['latitude']
   plot.longitude   = row['longitude']
+  # only one plot for now - use transect code to lookup
+  plot.transect_id = Transect.find_by(transect_code: 'ab_lets1').id
   if plot.save
     puts "SAVED: #{plot.inspect}"
   else

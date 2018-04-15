@@ -2,14 +2,21 @@
 
 <h1>Tree Species</h1>
 
+<h5>
+  <%= link_to 'CSV Download', tree_species_path(format: :csv) %>
+  <% if admin_signed_in? %>
+    | <%= link_to 'New Tree Species CSV Uploads', new_tree_specy_path %>
+  <% end %>
+</h5>
+
 <table class="table table-striped">
   <thead class="table-info">
     <tr>
-      <th>Species Name</th>
-      <th>Species Code</th>
-      <th>Foilage Type</th>
-      <th>Foliage Strategy</th>
-      <th>Taxonomy</th>
+      <th class="text-center">Species Name</th>
+      <th class="text-center">Species Code</th>
+      <th class="text-center">Foilage Type</th>
+      <th class="text-center">Foliage Strategy</th>
+      <th class="text-center">Taxonomy</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,11 +24,11 @@
   <tbody>
     <% @tree_species.each do |tree_specy| %>
       <tr>
-        <td><%= tree_specy.species_name.to_s.capitalize %></td>
-        <td><%= tree_specy.species_code.to_s.upcase %></td>
-        <td><%= tree_specy.foilage_type %></td>
-        <td><%= tree_specy.foilage_strategy %></td>
-        <td><%= tree_specy.taxonomy %></td>
+        <td class="text-center"><%= tree_specy.species_name.to_s.capitalize %></td>
+        <td class="text-center"><%= tree_specy.species_code.to_s.upcase %></td>
+        <td class="text-center"><%= tree_specy.foilage_type %></td>
+        <td class="text-center"><%= tree_specy.foilage_strategy %></td>
+        <td class="text-center"><%= tree_specy.taxonomy %></td>
         <% if admin_signed_in? %>
           <td><%= link_to 'Show', tree_specy %></td>
           <td><%= link_to 'Edit', edit_tree_specy_path(tree_specy) %></td>

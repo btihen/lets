@@ -7,6 +7,12 @@ class TreeSpeciesController < ApplicationController
   # GET /tree_species.json
   def index
     @tree_species = TreeSpecy.all
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv {send_data @tree_species.to_csv,
+                  filename: "tree_species-#{Date.today}.csv"}
+    end
   end
 
   # GET /tree_species/1

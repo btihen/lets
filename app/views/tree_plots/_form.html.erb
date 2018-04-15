@@ -12,13 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :plot_name %>
-    <%= form.text_field :plot_name %>
+    <%= form.label :transect %>
+    <%= form.collection_select :transect_id, Transect.order(:transect_code),
+                                :id, :transect_code, include_blank: true %>
   </div>
 
   <div class="field">
     <%= form.label :plot_code %>
     <%= form.text_field :plot_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plot_name %>
+    <%= form.text_field :plot_name %>
   </div>
 
   <div class="field">

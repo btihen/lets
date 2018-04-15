@@ -4,22 +4,25 @@
 
 <h5>
   <%= link_to 'CSV Download', tree_measurements_path(format: :csv) %>
-  <!-- | <%= link_to 'JSON Download', tree_measurements_path(format: :json) %> -->
+  <% if admin_signed_in? %>
+    | <%= link_to 'New Tree Measurements CSV Upload', new_tree_measurement_path %>
+  <% end %>
 </h5>
 
-<table  class="table table-sm table-striped">
+<table class="table table-sm table-striped">
   <thead class="table-info">
     <tr>
-      <th>Tree Plot</th>
-      <th>Tree Species</th>
-      <th>Tree Foilage</th>
-      <th>Tree Subquadrat</th>
-      <th>Tree Number</th>
-      <th>Tree Circumfrence (cm)</th>
-      <th>Tree Elevation (m)</th>
-      <th>Plot Latitude</th>
-      <th>Plot Longitude</th>
-      <th>Measurement Date</th>
+      <th class="text-center">Transect</th>
+      <th class="text-center">Tree Plot</th>
+      <th class="text-center">Tree Species</th>
+      <th class="text-center">Tree Foilage</th>
+      <th class="text-center">Tree Subquadrat</th>
+      <th class="text-center">Tree Number</th>
+      <th class="text-center">Tree Circumfrence (cm)</th>
+      <th class="text-center">Tree Elevation (m)</th>
+      <th class="text-center">Plot Latitude</th>
+      <th class="text-center">Plot Longitude</th>
+      <th class="text-center">Measurement Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -27,16 +30,17 @@
   <tbody>
     <% @tree_measurements.each do |tree_measurement| %>
       <tr>
-        <td><%= tree_measurement.tree_plot.plot_code.to_s.upcase %></td>
-        <td><%= tree_measurement.tree_specy.species_code.to_s.capitalize %></td>
-        <td><%= tree_measurement.tree_specy.foilage_strategy.to_s.capitalize %></td>
-        <td><%= tree_measurement.subquadrat.to_s.upcase %></td>
-        <td><%= tree_measurement.tree_label %></td>
-        <td><%= tree_measurement.circumfrence_cm %></td>
-        <td><%= tree_measurement.tree_plot.elevation_m %></td>
-        <td><%= tree_measurement.tree_plot.latitude %></td>
-        <td><%= tree_measurement.tree_plot.longitude %></td>
-        <td><%= tree_measurement.measurement_date %></td>
+        <td class="text-center"><%= tree_measurement.transect.transect_code.to_s.upcase %></td>
+        <td class="text-center"><%= tree_measurement.tree_plot.plot_code.to_s.upcase %></td>
+        <td class="text-center"><%= tree_measurement.tree_specy.species_code.to_s.capitalize %></td>
+        <td class="text-center"><%= tree_measurement.tree_specy.foilage_strategy.to_s.capitalize %></td>
+        <td class="text-center"><%= tree_measurement.subquadrat.to_s.upcase %></td>
+        <td class="text-center"><%= tree_measurement.tree_label %></td>
+        <td class="text-center"><%= tree_measurement.circumfrence_cm %></td>
+        <td class="text-center"><%= tree_measurement.tree_plot.elevation_m %></td>
+        <td class="text-center"><%= tree_measurement.tree_plot.latitude %></td>
+        <td class="text-center"><%= tree_measurement.tree_plot.longitude %></td>
+        <td class="text-center"><%= tree_measurement.measurement_date %></td>
         <% if admin_signed_in? %>
           <td><%= link_to 'Show', tree_measurement %></td>
           <td><%= link_to 'Edit', edit_tree_measurement_path(tree_measurement) %></td>

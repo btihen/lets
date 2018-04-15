@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_29_120830) do
+ActiveRecord::Schema.define(version: 2018_04_15_085511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -32,6 +32,27 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "transect_admin_editors", force: :cascade do |t|
+    t.bigint "transect_id"
+    t.bigint "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_transect_admin_editors_on_admin_id"
+    t.index ["transect_id", "admin_id"], name: "index_transect_admin_editors_on_transect_id_and_admin_id", unique: true
+    t.index ["transect_id"], name: "index_transect_admin_editors_on_transect_id"
+  end
+
+  create_table "transects", force: :cascade do |t|
+    t.citext "transect_code"
+    t.string "transect_name"
+    t.integer "target_slope"
+    t.integer "target_aspect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transect_code"], name: "index_transects_on_transect_code", unique: true
+    t.index ["transect_name"], name: "index_transects_on_transect_name", unique: true
   end
 
   create_table "tree_measurements", force: :cascade do |t|
@@ -58,10 +79,12 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
     t.integer "elevation_m", null: false
     t.decimal "latitude", precision: 12, scale: 8, null: false
     t.decimal "longitude", precision: 12, scale: 8, null: false
+    t.bigint "transect_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latitude", "longitude"], name: "index_tree_plots_on_latitude_and_longitude"
     t.index ["plot_code"], name: "index_tree_plots_on_plot_code", unique: true
+    t.index ["transect_id"], name: "index_tree_plots_on_transect_id"
   end
 
   create_table "tree_species", force: :cascade do |t|
@@ -75,6 +98,9 @@ ActiveRecord::Schema.define(version: 2018_03_29_120830) do
     t.index ["species_code"], name: "index_tree_species_on_species_code", unique: true
   end
 
+  add_foreign_key "transect_admin_editors", "admins"
+  add_foreign_key "transect_admin_editors", "transects"
   add_foreign_key "tree_measurements", "tree_plots"
   add_foreign_key "tree_measurements", "tree_species"
+  add_foreign_key "tree_plots", "transects"
 end

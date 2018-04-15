@@ -1,2 +1,38 @@
+require 'csv'
+
 class TreePlot < ApplicationRecord
+  belongs_to :transect
+  has_many   :tree_measurements, dependent: :destroy
+
+  # http://www.mattmorgante.com/technology/csv
+  def self.import_csv(file)
+    CSV.foreach(file.path, headers: true, :encoding => 'ISO-8859-1') do |row|
+      plot = TreePlot.new
+      # lookup dependecies
+      plot.transect_id = Transect.find_by(transect_code: row['transect_code'])&.id
+      plot.plot_code   = row['plot_code'].to_s.downcase
+      plot.plot_name   = row['plot_name']
+      plot.elevation_m = row['elevation_m']
+      plot.plot_slope  = row['plot_slope']
+      plot.plot_aspect = row['plot_aspect']
+      plot.latitude    = row['latitude']
+      plot.longitude   = row['longitude']
+      plot.save
+    end
+  end
+  def self.to_csv( options={headers: true} )
+    attributes = %w{transect_code plot_code plot_name elevation_m
+                    plot_slope plot_aspect latitude longitude}
+    CSV.generate(options) do |csv|
+      csv << attributes
+      all.each do |transect|
+        csv << attributes.map{ |attr| transect.send(attr) }
+      end
+    end
+  end
+
+  def transect_code
+    transect.transect_code
+  end
+
 end

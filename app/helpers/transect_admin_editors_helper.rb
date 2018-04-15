@@ -1,0 +1,2 @@
+module TransectAdminEditorsHelper
+end

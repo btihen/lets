@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :transect_admin_editors
+  resources :transects
   get 'home',                to: "educational_pages#home"
   get 'design_study',        to: "educational_pages#design_study"
   get 'collect_data',        to: "educational_pages#collect_data"

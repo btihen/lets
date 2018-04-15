@@ -16,8 +16,8 @@ class TreeMeasurementsController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.csv { send_data @tree_measurements.to_csv,
-                        filename: "lets_tree_measurements-#{Date.today}.csv" }
+      format.csv {send_data @tree_measurements.to_csv,
+                  filename: "lets_tree_measurements-#{Date.today}.csv"}
     end
   end
 
@@ -91,6 +91,8 @@ class TreeMeasurementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tree_measurement_params
-      params.require(:tree_measurement).permit(:circumfrence_cm, :measurement_date, :subquadrat, :tree_label, :tree_specy_id, :tree_plot_id)
+      params.require(:tree_measurement).permit(:circumfrence_cm,
+        :measurement_date, :subquadrat, :tree_label, :tree_specy_id,
+        :tree_plot_id)
     end
 end

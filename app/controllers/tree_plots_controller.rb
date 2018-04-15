@@ -1,5 +1,5 @@
 class TreePlotsController < ApplicationController
-  
+
   before_action :authenticate_admin!, except: [:index]
   before_action :set_tree_plot, only: [:show, :edit, :update, :destroy]
 
@@ -7,6 +7,12 @@ class TreePlotsController < ApplicationController
   # GET /tree_plots.json
   def index
     @tree_plots = TreePlot.all
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv {send_data @tree_plots.to_csv,
+                  filename: "tree_plots-#{Date.today}.csv"}
+    end
   end
 
   # GET /tree_plots/1
@@ -71,6 +77,7 @@ class TreePlotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tree_plot_params
-      params.require(:tree_plot).permit(:plot_name, :plot_code, :elevation_m, :latitude, :longitude)
+      params.require(:tree_plot).permit(:plot_name, :plot_code, :elevation_m,
+        :latitude, :longitude, :transect_id)
     end
 end

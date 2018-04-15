@@ -23,17 +23,20 @@
 
   <div class="field">
     <%= form.label :foilage_type %>
-    <%= form.text_field :foilage_type %>
+    <%= form.collection_select :foilage_type, TreeSpecy::FOILAGE_TYPES,
+                                :to_s, :to_s, include_blank: false %>
   </div>
 
   <div class="field">
     <%= form.label :foilage_strategy %>
-    <%= form.text_field :foilage_strategy %>
+    <%= form.collection_select :foilage_strategy, TreeSpecy::FOILAGE_STRATEGIES,
+                                :to_s, :to_s, include_blank: false %>
   </div>
 
   <div class="field">
     <%= form.label :taxonomy %>
-    <%= form.text_field :taxonomy %>
+    <%= form.collection_select :taxonomy, TreeSpecy::TAXONOMIES,
+                                :to_s, :to_s, include_blank: false %>
   </div>
 
   <div class="actions">

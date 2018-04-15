@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Transect Admin Editors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transect</th>
+      <th>Admin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transect_admin_editors.each do |transect_admin_editor| %>
+      <tr>
+        <td><%= transect_admin_editor.transect %></td>
+        <td><%= transect_admin_editor.admin %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Show', transect_admin_editor %></td>
+          <td><%= link_to 'Edit', edit_transect_admin_editor_path(transect_admin_editor) %></td>
+          <td><%= link_to 'Destroy', transect_admin_editor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if admin_signed_in? %>
+  <%= link_to 'New Transect Admin Editor', new_transect_admin_editor_path %>
+<% end %>

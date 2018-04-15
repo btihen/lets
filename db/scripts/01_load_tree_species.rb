@@ -6,19 +6,25 @@ csv_species.each do |row|
   species = TreeSpecy.new
   species.species_name       = row['species_code']
   species.species_code       = row['species_code'].to_s.downcase
-  case row['foilage_strategy'].downcase
-  when 'deciduous'
-    species.taxonomy         = 'angiosperm'
-    species.foilage_type     = 'broad leaf'
-    species.foilage_strategy = 'deciduous'
-  when 'conifer'
+  if species.species_code.downcase.eql? 'la'
     species.taxonomy         = 'conifer'
     species.foilage_type     = 'needle'
-    species.foilage_strategy = 'evergreen'
+    species.foilage_strategy = 'deciduous'
   else
-    species.taxonomy         = 'unknown'
-    species.foilage_type     = 'unknown'
-    species.foilage_strategy = 'unknown'
+    case row['foilage_strategy'].downcase
+    when 'deciduous'
+      species.taxonomy         = 'angiosperm'
+      species.foilage_type     = 'broadleaf'
+      species.foilage_strategy = 'deciduous'
+    when 'conifer'
+      species.taxonomy         = 'conifer'
+      species.foilage_type     = 'needle'
+      species.foilage_strategy = 'evergreen'
+    else
+      species.taxonomy         = 'unknown'
+      species.foilage_type     = 'unknown'
+      species.foilage_strategy = 'unknown'
+    end
   end
   if species.save
     puts "SAVED: #{species.inspect}"

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Transect:</strong>
+  <%= @transect_admin_editor.transect %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @transect_admin_editor.admin %>
+</p>
+
+<%= link_to 'Edit', edit_transect_admin_editor_path(@transect_admin_editor) %> |
+<%= link_to 'Back', transect_admin_editors_path %>

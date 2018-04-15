@@ -1,0 +1,37 @@
+<%= form_with(model: transect, local: true) do |form| %>
+  <% if transect.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transect.errors.count, "error") %> prohibited this transect from being saved:</h2>
+
+      <ul>
+      <% transect.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :transect_name %>
+    <%= form.text_field :transect_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transect_code %>
+    <%= form.text_field :transect_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target_slope %>
+    <%= form.number_field :target_slope %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target_aspect %>
+    <%= form.number_field :target_aspect %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

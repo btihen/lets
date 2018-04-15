@@ -4,6 +4,8 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, # :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :email, presence: :true, uniqueness: { case_sensitive: false }
-  
+  has_many :transects, through: :transect_admin_editor
+
+  validates :email,    presence: :true, uniqueness: { case_sensitive: false }
+
 end
