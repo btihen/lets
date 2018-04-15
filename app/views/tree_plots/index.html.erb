@@ -5,7 +5,19 @@
 <h5>
   <%= link_to 'CSV Download', tree_plots_path(format: :csv) %>
   <% if admin_signed_in? %>
-    | <%= link_to 'New Tree Plots CSV Uploads', new_tree_plot_path %>
+    <br>
+    CSV Import:
+    <%= form_for :tree_plots, url: tree_plots_import_csv_path,
+                            multipart: true do |form| %>
+      <%= form.file_field :csv_file %>
+      <%= form.submit "Import" %>
+    <% end %>
+    <small>
+      Import fields:
+      (transect_code, plot_code, plot_name, plot_slope, plot_aspect,
+      elevation_m, latitude, longitude)
+      -- other fields will be ignored
+    </small>
   <% end %>
 </h5>
 
@@ -13,8 +25,8 @@
   <thead class="table-info">
     <tr>
       <th class="text-center">Transect Code</th>
-      <th class="text-center">Plot Name</th>
       <th class="text-center">Plot Code</th>
+      <th class="text-center">Plot Name</th>
       <th class="text-center">Plot Slope</th>
       <th class="text-center">Plot Aspect</th>
       <th class="text-center">Plot Elevation (m)</th>
@@ -28,8 +40,8 @@
     <% @tree_plots.each do |tree_plot| %>
       <tr>
         <td class="text-center"><%= tree_plot.transect&.transect_code %></td>
-        <td class="text-center"><%= tree_plot.plot_name %></td>
         <td class="text-center"><%= tree_plot.plot_code.to_s.upcase %></td>
+        <td class="text-center"><%= tree_plot.plot_name %></td>
         <td class="text-center"><%= tree_plot.plot_slope %></td>
         <td class="text-center"><%= tree_plot.plot_aspect %></td>
         <td class="text-center"><%= tree_plot.elevation_m %></td>

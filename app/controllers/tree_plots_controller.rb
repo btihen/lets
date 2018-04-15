@@ -3,6 +3,15 @@ class TreePlotsController < ApplicationController
   before_action :authenticate_admin!, except: [:index]
   before_action :set_tree_plot, only: [:show, :edit, :update, :destroy]
 
+  # POST /transects/import
+  def import_csv
+    import_count = TreePlot.import_csv(params[:tree_plots][:csv_file])
+    respond_to do |format|
+      format.html { redirect_to tree_plots_path,
+                    notice: "#{import_count} - New Plots Imported" }
+    end
+  end
+
   # GET /tree_plots
   # GET /tree_plots.json
   def index

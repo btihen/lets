@@ -5,21 +5,33 @@
 <h5>
   <%= link_to 'CSV Download', tree_measurements_path(format: :csv) %>
   <% if admin_signed_in? %>
-    | <%= link_to 'New Tree Measurements CSV Upload', new_tree_measurement_path %>
+    <br>
+    CSV Import <strong>SLOW!</strong>:
+    <%= form_for :tree_measurements, url: tree_measurements_import_csv_path,
+                            multipart: true do |form| %>
+      <%= form.file_field :csv_file %>
+      <%= form.submit "Import" %>
+    <% end %>
+    <small>
+      Import fields:
+      (plot_code, species_code, subquadrat, tree_label,
+      circumfrence_cm, measurement_date)
+      -- other fields will be ignored
+    </small>
   <% end %>
 </h5>
 
 <table class="table table-sm table-striped">
   <thead class="table-info">
     <tr>
-      <th class="text-center">Transect</th>
-      <th class="text-center">Tree Plot</th>
-      <th class="text-center">Tree Species</th>
+      <th class="text-center">Transect Code</th>
+      <th class="text-center">Plot Code</th>
+      <th class="text-center">Species Code</th>
       <th class="text-center">Tree Foilage</th>
       <th class="text-center">Tree Subquadrat</th>
-      <th class="text-center">Tree Number</th>
+      <th class="text-center">Tree Label</th>
       <th class="text-center">Tree Circumfrence (cm)</th>
-      <th class="text-center">Tree Elevation (m)</th>
+      <th class="text-center">Plot Elevation (m)</th>
       <th class="text-center">Plot Latitude</th>
       <th class="text-center">Plot Longitude</th>
       <th class="text-center">Measurement Date</th>

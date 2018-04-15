@@ -5,7 +5,18 @@
 <h5>
   <%= link_to 'CSV Download', transects_path(format: :csv) %>
   <% if admin_signed_in? %>
-    | <%= link_to 'New Transect CSV Upload', new_transect_path %>
+    <br>
+    CSV Import:
+    <%= form_for :transects, url: transects_import_csv_path,
+                            multipart: true do |form| %>
+      <%= form.file_field :csv_file %>
+      <%= form.submit "Import" %>
+    <% end %>
+    <small>
+      Import fields:
+      (transect_code, transect_name, target_slope, target_aspect)
+      -- other fields will be ignored
+    </small>
   <% end %>
 </h5>
 

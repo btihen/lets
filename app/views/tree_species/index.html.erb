@@ -5,15 +5,29 @@
 <h5>
   <%= link_to 'CSV Download', tree_species_path(format: :csv) %>
   <% if admin_signed_in? %>
-    | <%= link_to 'New Tree Species CSV Uploads', new_tree_specy_path %>
+    <br>
+    CSV Import:
+    <%= form_for :tree_species, url: tree_species_import_csv_path,
+                            multipart: true do |form| %>
+      <%= form.file_field :csv_file %>
+      <%= form.submit "Import" %>
+    <% end %>
+    <small>
+      <strong>Fields:</strong>
+      <em>
+        (species_code, species_name, foilage_type, foilage_strategy,
+        taxonomy)
+      </em>
+      -- other fields will be ignored
+    </small>
   <% end %>
 </h5>
 
 <table class="table table-striped">
   <thead class="table-info">
     <tr>
-      <th class="text-center">Species Name</th>
       <th class="text-center">Species Code</th>
+      <th class="text-center">Species Name</th>
       <th class="text-center">Foilage Type</th>
       <th class="text-center">Foliage Strategy</th>
       <th class="text-center">Taxonomy</th>
@@ -24,8 +38,8 @@
   <tbody>
     <% @tree_species.each do |tree_specy| %>
       <tr>
-        <td class="text-center"><%= tree_specy.species_name.to_s.capitalize %></td>
         <td class="text-center"><%= tree_specy.species_code.to_s.upcase %></td>
+        <td class="text-center"><%= tree_specy.species_name.to_s.capitalize %></td>
         <td class="text-center"><%= tree_specy.foilage_type %></td>
         <td class="text-center"><%= tree_specy.foilage_strategy %></td>
         <td class="text-center"><%= tree_specy.taxonomy %></td>

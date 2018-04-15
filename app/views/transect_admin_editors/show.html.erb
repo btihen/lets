@@ -2,12 +2,12 @@
 
 <p>
   <strong>Transect:</strong>
-  <%= @transect_admin_editor.transect %>
+  <%= @transect_admin_editor.transect.transect_code %>
 </p>
 
 <p>
   <strong>Admin:</strong>
-  <%= @transect_admin_editor.admin %>
+  <%= @transect_admin_editor.admin.email %>
 </p>
 
 <%= link_to 'Edit', edit_transect_admin_editor_path(@transect_admin_editor) %> |

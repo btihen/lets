@@ -4,6 +4,15 @@ class TreeMeasurementsController < ApplicationController
   before_action :set_tree_measurement,
                 only: [:show, :edit, :update, :destroy]
 
+  # POST /tree_measurements/import
+  def import_csv
+    import_count = TreeMeasurement.import_csv(params[:tree_measurements][:csv_file])
+    respond_to do |format|
+      format.html { redirect_to tree_measurements_path,
+                    notice: "#{import_count} - New Tree Measurements Imported" }
+    end
+  end
+
   # GET /tree_measurements
   # GET /tree_measurements.json
   def index

@@ -3,6 +3,15 @@ class TransectsController < ApplicationController
   before_action :authenticate_admin!, except: [:index]
   before_action :set_transect, only: [:show, :edit, :update, :destroy]
 
+  # POST /transects/import
+  def import_csv
+    import_count = Transect.import_csv(params[:transects][:csv_file])
+    respond_to do |format|
+      format.html { redirect_to transects_path,
+                    notice: "#{import_count} - New Transects Imported" }
+    end
+  end
+
   # GET /transects
   # GET /transects.json
   def index
@@ -10,8 +19,8 @@ class TransectsController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.csv  { send_data @transects.to_csv,
-                    filename: "transects-#{Date.today}.csv"}
+      format.csv {send_data @transects.to_csv,
+                  filename: "transects-#{Date.today}.csv"}
     end
   end
 
@@ -77,6 +86,7 @@ class TransectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transect_params
-      params.require(:transect).permit(:transect_name, :transect_code, :target_slope, :target_aspect)
+      params.require(:transect).permit( :transect_name, :transect_code,
+                                        :target_slope, :target_aspect )
     end
 end

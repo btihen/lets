@@ -3,6 +3,15 @@ class TreeSpeciesController < ApplicationController
   before_action :authenticate_admin!, except: [:index]
   before_action :set_tree_specy, only: [:show, :edit, :update, :destroy]
 
+  # POST /tree_specy/import
+  def import_csv
+    import_count = TreeSpecy.import_csv(params[:tree_species][:csv_file])
+    respond_to do |format|
+      format.html { redirect_to tree_species_path,
+                    notice: "#{import_count} - New Species Imported" }
+    end
+  end
+
   # GET /tree_species
   # GET /tree_species.json
   def index

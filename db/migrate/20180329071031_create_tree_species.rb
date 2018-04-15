@@ -10,5 +10,6 @@ class CreateTreeSpecies < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     add_index :tree_species, :species_code, unique: true
+    add_index :tree_species, :species_name, unique: true
   end
 end

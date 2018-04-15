@@ -1,0 +1,46 @@
+species_code,species_name,foilage_strategy,foilage_type,taxonomy
+aspen,Aspen,deciduous,broadleaf,angiosperm
+b,B,deciduous,broadleaf,angiosperm
+ba,BA,deciduous,broadleaf,angiosperm
+birch,Birch,deciduous,broadleaf,angiosperm
+broad-leaved lime,Broad-leaved Lime,deciduous,broadleaf,angiosperm
+ch,CH,deciduous,broadleaf,angiosperm
+dead,Dead,unknown,unknown,unknown
+ea,EA,deciduous,broadleaf,angiosperm
+eb budburst,EB Budburst,deciduous,broadleaf,angiosperm
+eb,EB,deciduous,broadleaf,angiosperm
+eh,EH,deciduous,broadleaf,angiosperm
+ey,EY,evergreen,needle,conifer
+fb,FB,deciduous,broadleaf,angiosperm
+fm,FM,deciduous,broadleaf,angiosperm
+ha,HA,deciduous,broadleaf,angiosperm
+hb,HB,deciduous,broadleaf,angiosperm
+holly,Holly,deciduous,broadleaf,angiosperm
+l,L,deciduous,broadleaf,angiosperm
+la,LA,deciduous,needle,conifer
+ld,LD,deciduous,broadleaf,angiosperm
+li,LI,deciduous,broadleaf,angiosperm
+larch,Larch,evergreen,needle,conifer
+ma,MA,unknown,unknown,unknown
+maple,Maple,deciduous,broadleaf,angiosperm
+nm,NM,deciduous,broadleaf,angiosperm
+np,NP,deciduous,broadleaf,angiosperm
+ns,NS,evergreen,needle,conifer
+ro,RO,deciduous,broadleaf,angiosperm
+sb,SB,deciduous,broadleaf,angiosperm
+sf,SF,evergreen,needle,conifer
+sm,SM,deciduous,broadleaf,angiosperm
+so,SO,deciduous,broadleaf,angiosperm
+sp,SP,evergreen,needle,conifer
+st,ST,unknown,unknown,unknown
+small-leaved lime,Small-leaved Lime,deciduous,broadleaf,angiosperm
+spruce bush,Spruce Bush,evergreen,needle,conifer
+spruce,Spruce,evergreen,needle,conifer
+u,U,unknown,unknown,unknown
+uc,UC,evergreen,needle,conifer
+ud,UD,deciduous,broadleaf,angiosperm
+unknown,Unknown,unknown,unknown,unknown
+wa,WA,deciduous,broadleaf,angiosperm
+wb,WB,deciduous,broadleaf,angiosperm
+we,WE,deciduous,broadleaf,angiosperm
+wf,WF,deciduous,broadleaf,angiosperm

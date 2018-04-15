@@ -13,13 +13,25 @@
 
   <div class="field">
     <%= form.label :transect_id %>
+    <%= form.collection_select :transect_id, Transect.order(:transect_code),
+                                :id, :transect_code, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_id %>
+    <%= form.collection_select :admin_id, Admin.order(:email),
+                                :id, :email, include_blank: true %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :transect_id %>
     <%= form.text_field :transect_id %>
   </div>
 
   <div class="field">
     <%= form.label :admin_id %>
     <%= form.text_field :admin_id %>
-  </div>
+  </div> -->
 
   <div class="actions">
     <%= form.submit %>

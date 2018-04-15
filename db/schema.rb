@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 2018_04_15_085511) do
   end
 
   create_table "tree_plots", force: :cascade do |t|
-    t.string "plot_name", null: false
     t.citext "plot_code", null: false
+    t.string "plot_name", null: false
     t.integer "plot_slope"
     t.integer "plot_aspect"
     t.integer "elevation_m", null: false
@@ -84,18 +84,20 @@ ActiveRecord::Schema.define(version: 2018_04_15_085511) do
     t.datetime "updated_at", null: false
     t.index ["latitude", "longitude"], name: "index_tree_plots_on_latitude_and_longitude"
     t.index ["plot_code"], name: "index_tree_plots_on_plot_code", unique: true
+    t.index ["plot_name"], name: "index_tree_plots_on_plot_name", unique: true
     t.index ["transect_id"], name: "index_tree_plots_on_transect_id"
   end
 
   create_table "tree_species", force: :cascade do |t|
-    t.string "species_name", null: false
     t.citext "species_code", null: false
+    t.string "species_name", null: false
     t.citext "foilage_strategy"
     t.citext "foilage_type"
     t.citext "taxonomy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["species_code"], name: "index_tree_species_on_species_code", unique: true
+    t.index ["species_name"], name: "index_tree_species_on_species_name", unique: true
   end
 
   add_foreign_key "transect_admin_editors", "admins"
