@@ -16,12 +16,11 @@ class TreeMeasurementsController < ApplicationController
   # GET /tree_measurements
   # GET /tree_measurements.json
   def index
-    @tree_measurements = TreeMeasurement.includes(:tree_plot)
-                                        .includes(:tree_specy).all
-                                        .order( measurement_date: :desc,
-                                                tree_plot_id: :asc,
-                                                tree_specy_id: :desc
-                                              )
+    @tree_measurements = TreeMeasurement.joins(:tree_plot, :tree_specy)
+                          .includes(:tree_plot, :tree_specy)
+                          .order('measurement_date desc')
+                          .references(:tree_plot)
+                          # .order('tree_plot.elevation_m asc')
     respond_to do |format|
       format.html
       format.json
@@ -51,7 +50,9 @@ class TreeMeasurementsController < ApplicationController
 
     respond_to do |format|
       if @tree_measurement.save
-        format.html { redirect_to @tree_measurement,
+        # format.html { redirect_to @tree_measurement,
+        #                       notice: 'Tree measurement was successfully created.' }
+        format.html { redirect_to tree_measurements_path,
                               notice: 'Tree measurement was successfully created.' }
         format.json { render :show, status: :created,
                               location: @tree_measurement }
@@ -68,8 +69,10 @@ class TreeMeasurementsController < ApplicationController
   def update
     respond_to do |format|
       if @tree_measurement.update(tree_measurement_params)
-        format.html { redirect_to @tree_measurement,
-                              notice: 'Tree measurement was successfully updated.' }
+        # format.html { redirect_to @tree_measurement,
+        #               notice: 'Tree measurement was successfully updated.' }
+        format.html { redirect_to tree_measurements,
+                      notice: 'Tree measurement was successfully updated.' }
         format.json { render :show, status: :ok, location: @tree_measurement }
       else
         format.html { render :edit }

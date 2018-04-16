@@ -15,7 +15,7 @@ class TreeSpeciesController < ApplicationController
   # GET /tree_species
   # GET /tree_species.json
   def index
-    @tree_species = TreeSpecy.all
+    @tree_species = TreeSpecy.all.order(species_code: :asc)
     respond_to do |format|
       format.html
       format.json
@@ -45,7 +45,8 @@ class TreeSpeciesController < ApplicationController
 
     respond_to do |format|
       if @tree_specy.save
-        format.html { redirect_to @tree_specy, notice: 'Tree specy was successfully created.' }
+        # format.html { redirect_to @tree_specy, notice: 'Tree specy was successfully created.' }
+        format.html { redirect_to tree_species_path, notice: 'Tree specy was successfully created.' }
         format.json { render :show, status: :created, location: @tree_specy }
       else
         format.html { render :new }
@@ -59,7 +60,8 @@ class TreeSpeciesController < ApplicationController
   def update
     respond_to do |format|
       if @tree_specy.update(tree_specy_params)
-        format.html { redirect_to @tree_specy, notice: 'Tree specy was successfully updated.' }
+        # format.html { redirect_to @tree_specy, notice: 'Tree specy was successfully updated.' }
+        format.html { redirect_to tree_species_path, notice: 'Tree specy was successfully updated.' }
         format.json { render :show, status: :ok, location: @tree_specy }
       else
         format.html { render :edit }

@@ -15,7 +15,7 @@ class TreePlotsController < ApplicationController
   # GET /tree_plots
   # GET /tree_plots.json
   def index
-    @tree_plots = TreePlot.all
+    @tree_plots = TreePlot.all.order(elevation_m: :asc).order(plot_code: :asc)
     respond_to do |format|
       format.html
       format.json
@@ -45,7 +45,8 @@ class TreePlotsController < ApplicationController
 
     respond_to do |format|
       if @tree_plot.save
-        format.html { redirect_to @tree_plot, notice: 'Tree plot was successfully created.' }
+        # format.html { redirect_to @tree_plot, notice: 'Tree plot was successfully created.' }
+        format.html { redirect_to tree_plots_path, notice: 'Tree plot was successfully created.' }
         format.json { render :show, status: :created, location: @tree_plot }
       else
         format.html { render :new }
@@ -59,7 +60,8 @@ class TreePlotsController < ApplicationController
   def update
     respond_to do |format|
       if @tree_plot.update(tree_plot_params)
-        format.html { redirect_to @tree_plot, notice: 'Tree plot was successfully updated.' }
+        # format.html { redirect_to @tree_plot, notice: 'Tree plot was successfully updated.' }
+        format.html { redirect_to tree_plots_path, notice: 'Tree plot was successfully updated.' }
         format.json { render :show, status: :ok, location: @tree_plot }
       else
         format.html { render :edit }
