@@ -71,6 +71,9 @@ class TransectsController < ApplicationController
   # DELETE /transects/1
   # DELETE /transects/1.json
   def destroy
+    # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#module-ActiveRecord::Associations::ClassMethods-label-Delete+or+destroy-3F
+    # @transect.transect_admin_editor.each(&:destroy)
+    @transect.tree_plots.each(&:destroy)
     @transect.destroy
     respond_to do |format|
       format.html { redirect_to transects_url, notice: 'Transect was successfully destroyed.' }

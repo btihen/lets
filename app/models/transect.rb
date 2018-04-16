@@ -1,8 +1,14 @@
 require 'csv'
 
 class Transect < ApplicationRecord
-  has_many :tree_plots, dependent: :destroy
-  has_many :admins,     through:   :transect_admin_editor
+  # nested deletes - difficult (do by hand in conrtoller)
+  # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#module-ActiveRecord::Associations::ClassMethods-label-Delete+or+destroy-3F
+  has_many :tree_plots
+  # doesn't do nested deletes on purpose (protect against probs with join tables)
+  # has_many :tree_plots, dependent: :destroy
+  has_many :tree_measurements, through: :tree_plots
+  has_many :transect_admin_editor, dependent: :destroy
+  has_many :admins,            through: :transect_admin_editor
 
   validates :transect_code, presence: true, uniqueness: true
   validates :transect_name, presence: true, uniqueness: true
