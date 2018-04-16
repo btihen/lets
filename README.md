@@ -6,12 +6,48 @@
 or
 * https://lets-data.herokuapp.com/
 
+
+## add a default users using the console:
+
+```ruby
+rails c
+# https://stackoverflow.com/questions/4316940/create-a-devise-user-from-ruby-console
+Admin.create!(email: "example@gmail.com", name: "First Last", password: "T0pSecr3t", password_confirmation: "T0pSecr3t")
+exit
+```
+
+push data to heroku
+```bash
+# WITHOUT THE BASE USER
+# get / dump dev database (compressed for heroku)
+pg_dump -Fc --no-acl --no-owner -h localhost -U btihen lets_development > db/data/lets_data.dump
+# pg_dump -Fc --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data_no_admin.dump
+# get / dump human readable database
+pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.sql
+# restore dev database to heroku deployed app (needs to use compressed dump)
+heroku pg:backups:restore --app lets-analyze 'https://github.com/btihen/lets/blob/master/db/data/lets_data.dump?raw=true' DATABASE_URL
+```
+
+
 ## TODO:
 
+**IT ToDos**
+* write tests
+
+**Basic Data Management**
+* data updates?
+* allow recursive plot deletes - with confirmation!
+* allow recursive transect delete - with confirmation!
+
+**Multi School TODOS:**
+* Handle multiple editors (permission by transect)
+* Handle selecting analysis by transect? (under what conditions)
+
 **EDUCATIONAL TODOS:**
-* add content to base page
-* sample lessons on data analysis
-* add analysis instructions - so kids can do by hand
+* add student youTube to home page
+* tune lessons for LETS grade 9/10
+* tune lessons for LETS grade 7/8 (Middle School)
+* tune lessons for LETS grade 11/12 (IB Program)?
 * show a basic analysis (publicly available)
   - tree count at altitude by species
   - tree circumference at altitude by species
