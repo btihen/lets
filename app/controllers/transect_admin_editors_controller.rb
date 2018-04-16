@@ -34,7 +34,8 @@ class TransectAdminEditorsController < ApplicationController
 
     respond_to do |format|
       if @transect_admin_editor.save
-        format.html { redirect_to @transect_admin_editor, notice: 'Transect admin editor was successfully created.' }
+        format.html { redirect_to transect_admin_editors_path, notice: 'Transect admin editor was successfully created.' }
+        # format.html { redirect_to @transect_admin_editor, notice: 'Transect admin editor was successfully created.' }
         format.json { render :show, status: :created, location: @transect_admin_editor }
       else
         format.html { render :new }
@@ -48,7 +49,8 @@ class TransectAdminEditorsController < ApplicationController
   def update
     respond_to do |format|
       if @transect_admin_editor.update(transect_admin_editor_params)
-        format.html { redirect_to @transect_admin_editor, notice: 'Transect admin editor was successfully updated.' }
+        format.html { redirect_to transect_admin_editors_path, notice: 'Transect admin editor was successfully updated.' }
+        # format.html { redirect_to @transect_admin_editor, notice: 'Transect admin editor was successfully updated.' }
         format.json { render :show, status: :ok, location: @transect_admin_editor }
       else
         format.html { render :edit }
