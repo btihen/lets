@@ -15,7 +15,7 @@ class TransectsController < ApplicationController
   # GET /transects
   # GET /transects.json
   def index
-    @transects = Transect.all
+    @transects = Transect.all.order(transect_code: :asc)
     respond_to do |format|
       format.html
       format.json
@@ -45,7 +45,8 @@ class TransectsController < ApplicationController
 
     respond_to do |format|
       if @transect.save
-        format.html { redirect_to @transect, notice: 'Transect was successfully created.' }
+        # format.html { redirect_to @transect, notice: 'Transect was successfully created.' }
+        format.html { redirect_to transects_path, notice: 'Transect was successfully created.' }
         format.json { render :show, status: :created, location: @transect }
       else
         format.html { render :new }
@@ -59,7 +60,8 @@ class TransectsController < ApplicationController
   def update
     respond_to do |format|
       if @transect.update(transect_params)
-        format.html { redirect_to @transect, notice: 'Transect was successfully updated.' }
+        # format.html { redirect_to @transect, notice: 'Transect was successfully updated.' }
+        format.html { redirect_to transects_path, notice: 'Transect was successfully updated.' }
         format.json { render :show, status: :ok, location: @transect }
       else
         format.html { render :edit }
