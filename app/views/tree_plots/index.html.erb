@@ -26,11 +26,11 @@
   <thead class="table-info">
     <tr>
       <th class="text-center">Transect Code</th>
+      <th class="text-center">Plot Elevation (m)</th>
       <th class="text-center">Plot Code</th>
       <th class="text-center">Plot Name</th>
       <th class="text-center">Plot Slope</th>
       <th class="text-center">Plot Aspect</th>
-      <th class="text-center">Plot Elevation (m)</th>
       <th class="text-center">Plot Latitude</th>
       <th class="text-center">Plot Longitude</th>
       <th colspan="3"></th>
@@ -41,11 +41,11 @@
     <% @tree_plots.each do |tree_plot| %>
       <tr>
         <td class="text-center"><%= tree_plot.transect&.transect_code %></td>
+        <td class="text-center"><%= tree_plot.elevation_m %></td>
         <td class="text-center"><%= tree_plot.plot_code.to_s.upcase %></td>
         <td class="text-center"><%= tree_plot.plot_name %></td>
         <td class="text-center"><%= tree_plot.plot_slope %></td>
         <td class="text-center"><%= tree_plot.plot_aspect %></td>
-        <td class="text-center"><%= tree_plot.elevation_m %></td>
         <td class="text-center"><%= tree_plot.latitude %></td>
         <td class="text-center"><%= tree_plot.longitude %></td>
         <% if admin_signed_in? %>

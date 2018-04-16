@@ -26,13 +26,13 @@
   <thead class="table-info">
     <tr>
       <th class="text-center">Transect Code</th>
+      <th class="text-center">Plot Elevation (m)</th>
       <th class="text-center">Plot Code</th>
       <th class="text-center">Species Code</th>
       <th class="text-center">Tree Foilage</th>
       <th class="text-center">Tree Subquadrat</th>
       <th class="text-center">Tree Label</th>
       <th class="text-center">Tree Circumfrence (cm)</th>
-      <th class="text-center">Plot Elevation (m)</th>
       <th class="text-center">Plot Latitude</th>
       <th class="text-center">Plot Longitude</th>
       <th class="text-center">Measurement Date</th>
@@ -44,13 +44,13 @@
     <% @tree_measurements.each do |tree_measurement| %>
       <tr>
         <td class="text-center"><%= tree_measurement.transect.transect_code.to_s.upcase %></td>
+        <td class="text-center"><%= tree_measurement.tree_plot.elevation_m %></td>
         <td class="text-center"><%= tree_measurement.tree_plot.plot_code.to_s.upcase %></td>
         <td class="text-center"><%= tree_measurement.tree_specy.species_code.to_s.capitalize %></td>
         <td class="text-center"><%= tree_measurement.tree_specy.foilage_strategy.to_s.capitalize %></td>
         <td class="text-center"><%= tree_measurement.subquadrat.to_s.upcase %></td>
         <td class="text-center"><%= tree_measurement.tree_label %></td>
         <td class="text-center"><%= tree_measurement.circumfrence_cm %></td>
-        <td class="text-center"><%= tree_measurement.tree_plot.elevation_m %></td>
         <td class="text-center"><%= tree_measurement.tree_plot.latitude %></td>
         <td class="text-center"><%= tree_measurement.tree_plot.longitude %></td>
         <td class="text-center"><%= tree_measurement.measurement_date %></td>
