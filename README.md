@@ -26,6 +26,8 @@ pg_dump -Fc --no-acl --no-owner -h localhost -U btihen lets_development > db/dat
 pg_dump --no-acl --no-owner -h localhost -T admins -U btihen lets_development > db/data/lets_data.sql
 # restore dev database to heroku deployed app (needs to use compressed dump)
 heroku pg:backups:restore --app lets-analyze 'https://github.com/btihen/lets/blob/master/db/data/lets_data.dump?raw=true' DATABASE_URL
+
+heroku pg:backups:restore --app lets-analyze 'https://github.com/btihen/lets/blob/master/db/data/lets_data_no_admin.dump?raw=true' DATABASE_URL
 ```
 
 
