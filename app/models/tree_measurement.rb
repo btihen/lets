@@ -3,12 +3,12 @@ require 'csv'
 class TreeMeasurement < ApplicationRecord
   belongs_to :tree_specy
   belongs_to :tree_plot
-  has_one    :transect,  through: :tree_plot
+  has_one    :transect,        through: :tree_plot
 
-  validates :tree_plot_id, uniqueness:
-                            { scope: [:tree_specy_id, :subquadrat,
-                                      :tree_label, :measurement_date]}
-
+  validates :measurement_date, presence: true
+  validates :tree_plot_id,     uniqueness:
+                                  { scope: [:tree_specy_id, :subquadrat,
+                                            :tree_label, :measurement_date]}
   # http://www.mattmorgante.com/technology/csv
   def self.import_csv(file)
     count_orig = TreeMeasurement.count

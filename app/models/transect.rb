@@ -11,7 +11,10 @@ class Transect < ApplicationRecord
   has_many :admins,            through: :transect_admin_editor
 
   validates :transect_code, presence: true, uniqueness: true
-  validates :transect_name, presence: true, uniqueness: true
+  validates :target_slope,  presence: true, numericality: {
+                                interger_only: true,
+
+                              }
 
   # http://www.mattmorgante.com/technology/csv
   def self.import_csv(file)

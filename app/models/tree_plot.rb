@@ -6,6 +6,12 @@ class TreePlot < ApplicationRecord
 
   validates :plot_code, presence: true, uniqueness: true
   validates :plot_name, presence: true, uniqueness: true
+  validates :latitude,  presence: true, numericality: {
+                                        less_than_or_equal_to:     90,
+                                        greater_than_or_equal_to: -90 }
+  validates :longitude, presence: true, numericality: {
+                                        less_than_or_equal_to:     180,
+                                        greater_than_or_equal_to: -180 }
 
   # http://www.mattmorgante.com/technology/csv
   def self.import_csv(file)
