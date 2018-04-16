@@ -11,4 +11,30 @@
   <%= link_to 'CSV Download', species_avg_by_decade_path(format: :csv) %>
 </h6>
 
-<%= render 'species_avg_display', species: @species %>
+<hr witdh="5">
+
+<% @species.each do |group,data_grid| %>
+  <% start_year = group.to_i %>
+  <h3><%= "#{start_year}-#{start_year+9}" %> Data Set</h3>
+  <table  class="table table-sm table-striped">
+    <% data_grid.each_with_index do |row,index| %>
+      <% if index.eql? 0 %>
+        <thead class="table-info">
+          <tr>
+            <% row.each do |header| %>
+              <th><%= header %></th>
+            <% end %>
+          </tr>
+        </thead>
+      <% else %>
+        <tbody>
+          <tr>
+            <% row.each do |measurement| %>
+              <td><%= measurement %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>
