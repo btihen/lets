@@ -19,7 +19,11 @@ gem 'jquery-rails', '~> 4.3'
 gem 'devise', '~> 4.4'
 # rails generate devise:install
 
+# pivot data after getting DB query
 gem 'pivot_table', '~> 1.0'
+
+# allow teachers to generate their own lessons
+gem "comfortable_mexican_sofa", "~> 2.0.0"
 
 # use geo data
 # http://climber2002.github.io/blog/2014/05/18/postgis-and-google-maps-in-rails-part-1/
