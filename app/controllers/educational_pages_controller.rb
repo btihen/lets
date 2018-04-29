@@ -1,6 +1,6 @@
 class EducationalPagesController < ApplicationController
 
-  before_action :authenticate_admin!, only: []
+  # before_action :authenticate_admin!, only: []
 
   DataRow = Struct.new(:elevation, :species, :count)
 

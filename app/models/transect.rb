@@ -12,9 +12,7 @@ class Transect < ApplicationRecord
 
   validates :transect_code, presence: true, uniqueness: true
   validates :target_slope,  presence: true, numericality: {
-                                interger_only: true,
-
-                              }
+                                interger_only: true, }
 
   # http://www.mattmorgante.com/technology/csv
   def self.import_csv(file)

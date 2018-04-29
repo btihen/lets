@@ -1,6 +1,6 @@
 class TreeSpeciesController < ApplicationController
 
-  before_action :authenticate_admin!, except: [:index]
+  # before_action :authenticate_admin!, except: [:index]
   before_action :set_tree_specy, only: [:show, :edit, :update, :destroy]
 
   # POST /tree_specy/import
